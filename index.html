@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doodle Codex</title>
+<meta name="description" content="Art direction sample for an animated pencil-doodle RPG tileset: terrain, creatures and people, played at native 10fps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* layout: sticky header with loop legend, then three labeled sprite grids,
+   each item a canvas redrawn from a shared 10fps clock against its own strip */
+:root{
+  --bg:#f3ecdc; --panel:#fffaf0; --ink:#2b2520; --sub:#6b5f4f;
+  --accent:#b5502a; --sage:#5c7a52; --line:#e1d6bc; --chip:#eadfc4;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b1812; --panel:#242019; --ink:#efe6d4; --sub:#b5a890;
+    --accent:#e0794f; --sage:#8bb07e; --line:#3a331f; --chip:#322b1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1b1812; --panel:#242019; --ink:#efe6d4; --sub:#b5a890;
+  --accent:#e0794f; --sage:#8bb07e; --line:#3a331f; --chip:#322b1d;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);}
+body{
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  padding-inline:20px;
+}
+.wrap{max-width:1180px; margin:0 auto; padding-block:28px 60px;}
+header{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:14px 22px;
+  border-bottom:2px solid var(--line); padding-bottom:16px; margin-bottom:28px;
+}
+h1{
+  font-family:'Caveat',cursive; font-weight:700; font-size:3rem;
+  margin:0; line-height:1; color:var(--accent);
+}
+.tag{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--sub);
+  background:var(--chip); border-radius:999px; padding:4px 11px;}
+.lede{
+  max-width:62ch; color:var(--sub); font-size:0.98rem; line-height:1.55;
+  margin:0 0 30px;
+}
+.lede strong{color:var(--ink)}
+section{margin-bottom:38px;}
+.sec-head{
+  display:flex; align-items:baseline; gap:10px; margin-bottom:14px;
+}
+.sec-head h2{
+  font-family:'Caveat',cursive; font-size:1.7rem; font-weight:700;
+  margin:0; color:var(--sage);
+}
+.sec-head .count{font-size:0.8rem; color:var(--sub); font-family:'IBM Plex Mono',monospace}
+.grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(118px,1fr));
+  gap:14px;
+}
+figure{
+  margin:0; background:var(--panel); border:1px solid var(--line);
+  border-radius:10px; padding:10px 8px 9px; text-align:center;
+}
+canvas{
+  image-rendering:pixelated; display:block; margin:0 auto 6px;
+  max-width:100%;
+}
+figcaption{font-size:0.82rem; font-weight:500;}
+figcaption .id{
+  display:block; font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
+  color:var(--sub); margin-top:2px;
+}
+footer{
+  margin-top:40px; padding-top:18px; border-top:1px solid var(--line);
+  font-size:0.8rem; color:var(--sub); font-family:'IBM Plex Mono',monospace;
+}
+footer a{color:var(--accent)}
+@media (max-width:480px){ h1{font-size:2.3rem} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Doodle Codex</h1>
+    <span class="tag">6 frames &middot; 10 fps &middot; loop</span>
+    <span class="tag">64px tile</span>
+    <span class="tag">936 creature strips &middot; 70 terrain tiles &middot; 12 bodies</span>
+  </header>
+
+  <p class="lede">
+    A sample of the pencil-doodle art for an animated overhead RPG tileset &mdash;
+    <strong>not</strong> the full library. Every sprite below is the real exported
+    PNG, played at its native 10fps loop: terrain tiles seamlessly, creatures and
+    people breathe in place. Picked for variety across biomes, monster tiers and
+    character roles, to show the range of art direction in one page.
+  </p>
+
+  <div id="sections"></div>
+
+  <footer>art/exports/64 &middot; rendered client-side from the shipped sprite strips, no video</footer>
+</div>
+
+<script>
+const DATA = [{"section": "TERRAIN", "label": "grass", "file": "terrain_grass.png", "id": "meadow_01"}, {"section": "TERRAIN", "label": "forest", "file": "terrain_forest.png", "id": "canopy_01"}, {"section": "TERRAIN", "label": "water", "file": "terrain_water.png", "id": "shallows_01"}, {"section": "TERRAIN", "label": "mountain", "file": "terrain_mountain.png", "id": "crags_01"}, {"section": "TERRAIN", "label": "desert", "file": "terrain_desert.png", "id": "dunes_01"}, {"section": "TERRAIN", "label": "swamp", "file": "terrain_swamp.png", "id": "bog_01"}, {"section": "TERRAIN", "label": "ice", "file": "terrain_ice.png", "id": "floe_01"}, {"section": "TERRAIN", "label": "lava", "file": "terrain_lava.png", "id": "magma_01"}, {"section": "TERRAIN", "label": "roads", "file": "terrain_roads.png", "id": "cobble_01"}, {"section": "TERRAIN", "label": "cave", "file": "terrain_cave.png", "id": "cavern_01"}, {"section": "TERRAIN", "label": "farmland", "file": "terrain_farmland.png", "id": "furrows_01"}, {"section": "TERRAIN", "label": "sand", "file": "terrain_sand.png", "id": "beach_01"}, {"section": "TERRAIN", "label": "peaks", "file": "terrain_peaks.png", "id": "summit_01"}, {"section": "TERRAIN", "label": "dirt", "file": "terrain_dirt.png", "id": "packed_01"}, {"section": "CREATURES", "label": "slime", "file": "creatures_slime.png", "id": "ooze_01"}, {"section": "CREATURES", "label": "frog", "file": "creatures_frog.png", "id": "croaker_01"}, {"section": "CREATURES", "label": "crab", "file": "creatures_crab.png", "id": "pincer_01"}, {"section": "CREATURES", "label": "rat", "file": "creatures_rat.png", "id": "vermin_01"}, {"section": "CREATURES", "label": "bat", "file": "creatures_bat.png", "id": "flitter_01"}, {"section": "CREATURES", "label": "goblin", "file": "creatures_goblin.png", "id": "sneak_01"}, {"section": "CREATURES", "label": "skeleton", "file": "creatures_skeleton.png", "id": "bones_01"}, {"section": "CREATURES", "label": "wolf", "file": "creatures_wolf.png", "id": "hunter_01"}, {"section": "CREATURES", "label": "boar", "file": "creatures_boar.png", "id": "tusker_01"}, {"section": "CREATURES", "label": "zombie", "file": "creatures_zombie.png", "id": "shambler_01"}, {"section": "CREATURES", "label": "orc", "file": "creatures_orc.png", "id": "brute_01"}, {"section": "CREATURES", "label": "spider", "file": "creatures_spider.png", "id": "weaver_01"}, {"section": "CREATURES", "label": "wraith", "file": "creatures_wraith.png", "id": "shade_01"}, {"section": "CREATURES", "label": "yeti", "file": "creatures_yeti.png", "id": "frost_01"}, {"section": "CREATURES", "label": "ogre", "file": "creatures_ogre.png", "id": "crusher_01"}, {"section": "CREATURES", "label": "dragon", "file": "creatures_dragon.png", "id": "wyrm_01"}, {"section": "PEOPLE / NPCs", "label": "hero (plate)", "file": "people_hero.png", "id": "hero . plate"}, {"section": "PEOPLE / NPCs", "label": "hero2 (ranger)", "file": "people_hero2.png", "id": "hero2 . ranger"}, {"section": "PEOPLE / NPCs", "label": "guard", "file": "people_guard.png", "id": "m_burly . guard"}, {"section": "PEOPLE / NPCs", "label": "barmaid", "file": "people_barmaid.png", "id": "f_curvy . barmaid"}, {"section": "PEOPLE / NPCs", "label": "wizard", "file": "people_wizard.png", "id": "m_lanky . wizard"}, {"section": "PEOPLE / NPCs", "label": "necromancer", "file": "people_necromancer.png", "id": "m_elder . necromancer"}, {"section": "PEOPLE / NPCs", "label": "hunter", "file": "people_hunter.png", "id": "f_athletic . hunter"}, {"section": "PEOPLE / NPCs", "label": "farmer", "file": "people_farmer.png", "id": "m_stocky . farmer"}];
+const SECTIONS = ["TERRAIN", "CREATURES", "PEOPLE / NPCs"];
+const FRAMES = 6, FPS = 10;
+
+const root = document.getElementById('sections');
+const items = []; // {canvas, img, tile, isTerrain}
+
+SECTIONS.forEach(sec => {
+  const rows = DATA.filter(d => d.section === sec);
+  const section = document.createElement('section');
+  const head = document.createElement('div');
+  head.className = 'sec-head';
+  head.innerHTML = `<h2>${sec}</h2><span class="count">${rows.length} shown</span>`;
+  section.appendChild(head);
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+  section.appendChild(grid);
+  root.appendChild(section);
+
+  rows.forEach(row => {
+    const fig = document.createElement('figure');
+    const isTerrain = sec === 'TERRAIN';
+    const cv = document.createElement('canvas');
+    const tileShown = isTerrain ? 3 : 1; // terrain tiles 3x3 to show the seam; others stand alone
+    cv.width = 64 * tileShown;
+    cv.height = 64 * tileShown;
+    // every card reads at the same box, whether it holds one sprite or a 3x3 mosaic
+    cv.style.width = '132px';
+    cv.style.height = '132px';
+    fig.appendChild(cv);
+    const cap = document.createElement('figcaption');
+    cap.textContent = row.label;
+    const idspan = document.createElement('span');
+    idspan.className = 'id';
+    idspan.textContent = row.id;
+    cap.appendChild(idspan);
+    fig.appendChild(cap);
+    grid.appendChild(fig);
+
+    const img = new Image();
+    img.src = 'assets/' + row.file;
+    items.push({canvas: cv, img, isTerrain, tileShown});
+  });
+});
+
+let frame = 0;
+function draw() {
+  for (const it of items) {
+    if (!it.img.complete || !it.img.naturalWidth) continue;
+    const fw = it.img.naturalWidth / FRAMES, fh = it.img.naturalHeight;
+    const ctx = it.canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, it.canvas.width, it.canvas.height);
+    const n = it.tileShown;
+    const cell = it.canvas.width / n;
+    for (let y = 0; y < n; y++) {
+      for (let x = 0; x < n; x++) {
+        ctx.drawImage(it.img, frame * fw, 0, fw, fh, x * cell, y * cell, cell, cell);
+      }
+    }
+  }
+}
+setInterval(() => { frame = (frame + 1) % FRAMES; draw(); }, 1000 / FPS);
+items.forEach(it => { it.img.onload = draw; });
+</script>
+</body>
+</html>
