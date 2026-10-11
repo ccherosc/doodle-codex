@@ -1,0 +1,2859 @@
+{
+ "schema": "doodle-codex.catalog/1",
+ "site": "https://ccherosc.github.io/doodle-codex/",
+ "tile": 64,
+ "animation": {
+  "frames": 6,
+  "fps": 10,
+  "layout": "horizontal strip, frame i at x = i*frame_w"
+ },
+ "facings": [
+  "down",
+  "left",
+  "right",
+  "up"
+ ],
+ "terrain": {
+  "water": {
+   "gameplay_suggested": {
+    "walkable": false,
+    "speed": 0.0,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "shallows_lilies": "lily pads, one in flower",
+    "shallows_rocks": "rocks breaking the surface",
+    "shallows_reeds": "reed beds with cattails",
+    "shallows_sandbar": "a sandbar with foam",
+    "shallows_wreck": "the ribs of a wrecked hull"
+   }
+  },
+  "lava": {
+   "gameplay_suggested": {
+    "walkable": false,
+    "speed": 0.0,
+    "hazard": "burn",
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "magma_crust": "a wide plate of cracked crust",
+    "magma_vent": "a spitting spatter cone",
+    "magma_rocks": "basalt rocks in the flow",
+    "magma_whirl": "a slow turning eddy",
+    "magma_obsidian": "blades of obsidian",
+    "magma_bones": "a charred ribcage and skull"
+   }
+  },
+  "ice": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 1.0,
+    "slippery": true,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "floe_hole": "a fishing hole with a rod",
+    "floe_drifts": "wind-carved snowdrifts",
+    "floe_rocks": "snow-capped rocks frozen in",
+    "floe_ridge": "a pressure ridge of heaved slabs"
+   }
+  },
+  "cave": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 1.0,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "cavern_crystals": "glowing crystal outcrops",
+    "cavern_stalagmites": "tall stalagmites",
+    "cavern_pool": "a still black pool with a drip",
+    "cavern_mushrooms": "glowing fungus"
+   }
+  },
+  "ash": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 0.9,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "cinders_stumps": "three charred trunks",
+    "cinders_fissure": "a glowing fissure",
+    "cinders_stones": "black standing stones with a red rune",
+    "cinders_vent": "a smoking fumarole"
+   }
+  },
+  "sand": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 0.85,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "beach_shells": "shells, a conch and a starfish",
+    "beach_driftwood": "a bleached driftwood log",
+    "beach_tidepool": "a tide pool with a starfish",
+    "beach_grass": "tussocks of marram grass"
+   }
+  },
+  "desert": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 0.8,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "dunes_cactus": "saguaros and a barrel cactus",
+    "dunes_bones": "a ribcage and a horned skull",
+    "dunes_rocks": "red sandstone outcrops",
+    "dunes_oasis": "an oasis pool with two palms",
+    "dunes_ruin": "a half-buried colonnade"
+   }
+  },
+  "swamp": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 0.6,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "bog_cattails": "tall stands of cattails",
+    "bog_snag": "a drowned dead tree",
+    "bog_lilies": "open water with lilies",
+    "bog_toadstools": "a toadstool ring and fireflies"
+   }
+  },
+  "dirt": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 1.0,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "packed_rocks": "stones, dry grass and cracks",
+    "packed_puddle": "a rain puddle",
+    "packed_ruts": "cart ruts and hoofprints",
+    "packed_scrub": "dry thorn scrub"
+   }
+  },
+  "farmland": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 0.9,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "furrows_wheat": "rows of ripe wheat",
+    "furrows_pumpkins": "a pumpkin patch",
+    "furrows_scarecrow": "a scarecrow and a crow",
+    "furrows_cabbages": "rows of cabbages"
+   }
+  },
+  "snow": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 0.75,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "snowfield_pines": "snow-laden pines",
+    "snowfield_rocks": "snow-capped boulders",
+    "snowfield_tracks": "a line of footprints",
+    "snowfield_snowman": "a snowman with a red scarf"
+   }
+  },
+  "roads": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 1.25,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "cobble_moss": "moss and weeds in the joints",
+    "cobble_worn": "a missing stone and a cracked one",
+    "cobble_puddle": "a rain puddle on the paving",
+    "cobble_leaves": "autumn leaves in the joints"
+   }
+  },
+  "grass": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 1.0,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "meadow_flowers": "three drifts of wildflowers",
+    "meadow_wild": "mixed wildflowers, clover, long grass",
+    "meadow_rocks": "field stones and toadstools",
+    "meadow_stump": "an old stump with toadstools",
+    "meadow_stones": "a ring of standing stones"
+   }
+  },
+  "forest": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 0.7,
+    "blocks_projectiles": false,
+    "blocks_sight": true
+   },
+   "variants": {
+    "canopy_pines": "a stand of conifers",
+    "canopy_autumn": "trees turning orange and gold",
+    "canopy_clearing": "a glade with a fallen log",
+    "canopy_pond": "a forest pool with a lily",
+    "canopy_deadwood": "a blighted stand of bare trees",
+    "canopy_ruin": "old stones in an overgrown glade"
+   }
+  },
+  "mountain": {
+   "gameplay_suggested": {
+    "walkable": false,
+    "speed": 0.0,
+    "blocks_projectiles": true,
+    "blocks_sight": true
+   },
+   "variants": {
+    "crags_high": "one high snow-capped summit",
+    "crags_twin": "two high peaks as a massif",
+    "crags_boulders": "a rockfall of boulders",
+    "crags_cave": "a cave mouth under a high peak",
+    "crags_tarn": "a tarn in a stone bowl"
+   }
+  },
+  "peaks": {
+   "gameplay_suggested": {
+    "walkable": false,
+    "speed": 0.0,
+    "blocks_projectiles": true,
+    "blocks_sight": true
+   },
+   "variants": {
+    "summit_spire": "one great spire",
+    "summit_glacier": "a crevassed glacier tongue",
+    "summit_cairn": "a cairn with a red pennant",
+    "summit_pines": "snow-laden pines"
+   }
+  },
+  "rock": {
+   "gameplay_suggested": {
+    "walkable": false,
+    "speed": 0.0,
+    "blocks_projectiles": true,
+    "blocks_sight": true
+   },
+   "variants": {
+    "wall_moss": "moss and grass in the hollows",
+    "wall_ore": "seams of gold ore",
+    "wall_crack": "a branching fissure",
+    "wall_crystals": "teal crystals in the face"
+   }
+  }
+ },
+ "transitions": {
+  "elevation_low_to_high": [
+   "water",
+   "lava",
+   "ice",
+   "cave",
+   "ash",
+   "sand",
+   "desert",
+   "swamp",
+   "dirt",
+   "farmland",
+   "snow",
+   "roads",
+   "grass",
+   "forest",
+   "mountain",
+   "peaks",
+   "rock"
+  ],
+  "overlay": [
+   "ash",
+   "cave",
+   "desert",
+   "dirt",
+   "farmland",
+   "forest",
+   "grass",
+   "ice",
+   "lava",
+   "mountain",
+   "peaks",
+   "roads",
+   "rock",
+   "sand",
+   "snow",
+   "swamp"
+  ],
+  "shore": [
+   "ash",
+   "cave",
+   "desert",
+   "dirt",
+   "farmland",
+   "forest",
+   "grass",
+   "ice",
+   "lava",
+   "mountain",
+   "peaks",
+   "roads",
+   "rock",
+   "sand",
+   "snow",
+   "swamp"
+  ],
+  "scorch": [
+   "ash",
+   "cave",
+   "desert",
+   "dirt",
+   "farmland",
+   "forest",
+   "grass",
+   "ice",
+   "mountain",
+   "peaks",
+   "roads",
+   "rock",
+   "sand",
+   "snow",
+   "swamp"
+  ]
+ },
+ "walls": {
+  "rock": {
+   "pieces": [
+    "single",
+    "end_w",
+    "end_s",
+    "end_n",
+    "end_e",
+    "bend_sw",
+    "corner_sw",
+    "bend_nw",
+    "corner_nw",
+    "straight_ew",
+    "corner_se",
+    "straight_ns",
+    "bend_se",
+    "corner_ne",
+    "bend_ne",
+    "edge_s",
+    "edge_w_notch_se",
+    "edge_w",
+    "edge_s_notch_nw",
+    "edge_s_notch_ne",
+    "tee_w",
+    "edge_w_notch_ne",
+    "tee_s",
+    "edge_n",
+    "edge_n_notch_sw",
+    "edge_n_notch_se",
+    "tee_n",
+    "edge_e",
+    "edge_e_notch_sw",
+    "edge_e_notch_nw",
+    "tee_e",
+    "solid",
+    "inner_sw",
+    "inner_se",
+    "solid_notch_se_sw",
+    "inner_nw",
+    "solid_notch_sw_nw",
+    "solid_notch_se_nw",
+    "solid_notch_se_sw_nw",
+    "inner_ne",
+    "solid_notch_ne_sw",
+    "solid_notch_ne_se",
+    "solid_notch_ne_se_sw",
+    "solid_notch_ne_nw",
+    "solid_notch_ne_sw_nw",
+    "solid_notch_ne_se_nw",
+    "cross"
+   ],
+   "naming": {
+    "single": "a lone pillar",
+    "end_<side>": "the <side> end of a one-cell-wide wall",
+    "straight_ns / straight_ew": "a one-cell-wide run",
+    "bend_<corner>": "a one-cell-wide wall turning; <corner> is the outside of the turn",
+    "corner_<corner>": "the <corner> corner of a solid block",
+    "edge_<side>": "the <side> edge of a solid block (edge_s shows the face)",
+    "tee_<side>": "a one-cell-wide T; <side> is the side with no branch",
+    "inner_<diagonal>": "solid, with the <diagonal> neighbour missing (an inside corner)",
+    "cross": "a one-cell-wide crossing",
+    "solid": "interior: the rock top, no edge",
+    "*_notch_<diagonals>": "the same piece with inside corners at those diagonals"
+   },
+   "inset_px": 8,
+   "face_px": 24
+  }
+ },
+ "structures": {
+  "castle": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [
+    "open"
+   ],
+   "description": "A keep behind a curtain wall, corner towers, a gatehouse, one banner."
+  },
+  "tower": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A watchtower: battered shaft, machicolated crown, one small pennant."
+  },
+  "dungeon": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A trilithon doorway into a rocky mound. Almost still; something blinks."
+  },
+  "town_hamlet": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [
+    "raided"
+   ],
+   "description": "Two dwellings and a fence. The smallest settlement that reads as one."
+  },
+  "town_crossroads": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [
+    "raided"
+   ],
+   "description": "Three buildings strung along a road: cottage, inn, barn."
+  },
+  "town_market": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [
+    "raided"
+   ],
+   "description": "A hall and three stalls under awnings. The awnings are what move."
+  },
+  "town_village": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [
+    "raided"
+   ],
+   "description": "Two rows of buildings, a well and a tree. The largest settlement."
+  },
+  "bridge": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "map",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "A humped stone bridge on two arches, seen from the side."
+  },
+  "windmill": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A whitewashed tower mill. The sails turn; nothing else does."
+  },
+  "ruins": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "What is left of a temple: a wall end, a colonnade, one lintel still up."
+  },
+  "graveyard": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "Five markers behind an iron railing, a fresh grave, and a wisp."
+  },
+  "mine": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A timbered adit into a hillside, with rails running out of it."
+  },
+  "camp": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A ridge tent and a fire. Somebody is nearby, or was a minute ago."
+  },
+  "bridge_ns": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "map",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The same stone bridge, running north to south: you look along its deck."
+  },
+  "dock": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "map",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "A plank jetty on four piles, with a rowboat tied up at the end."
+  },
+  "fence": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A run of post-and-rail, one rail slipped. The edge of somebody's field."
+  },
+  "well": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A stone well under a little roof. The bucket swings; nothing else does."
+  },
+  "signpost": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A fingerpost with two boards and a crow on top of it."
+  },
+  "castle_citadel": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [
+    "open"
+   ],
+   "description": "A sandstone citadel: one great round tower under a spire, two turrets."
+  },
+  "tower_wizard": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A mage's tower: it leans, the top is too big for it, the hat is bent."
+  },
+  "dungeon_crypt": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A little mausoleum: steps, two columns, a pediment, a way down."
+  },
+  "tree_oak": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": ""
+  },
+  "tree_pine": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": ""
+  },
+  "tree_birch": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": ""
+  },
+  "chest": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": false,
+   "states": [
+    "open"
+   ],
+   "description": "A banded chest. `open` swings the lid up and back on its rear hinge; frame 0 of `open` is the idle drawing, and an engine holds frame 5."
+  },
+  "hut": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": false,
+   "states": [
+    "open"
+   ],
+   "description": "A log hut with a door a person fits. `open` swings the door in on its left hinge; frame 0 is idle, and an engine holds frame 5 while it is open."
+  },
+  "volcano": {
+   "footprint_tiles": [
+    3,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A fire mountain, six tiles: Hellfire Island, the Firebreak Peaks."
+  },
+  "palace": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A palace of domes and minarets on its own rock, four tiles."
+  },
+  "ship": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A two-masted ship under sail, two tiles: the sea lanes of the map."
+  },
+  "stronghold": {
+   "footprint_tiles": [
+    3,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A black fortress of spires, six tiles: the Ghora'Khar Dominion."
+  },
+  "city": {
+   "footprint_tiles": [
+    3,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A walled city, six tiles: the Imperial Capital, Veylorn, LeManns."
+  },
+  "castle_ruin": {
+   "footprint_tiles": [
+    3,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "An abandoned castle on a crag, six tiles: DragonLock."
+  },
+  "bastion": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "An iron works with walls on, four tiles: Coghollow Bastion."
+  },
+  "fort": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A timber fort, four tiles: the Rogue Marches, the border states."
+  },
+  "great_tree": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A tree that is a place, four tiles: Silver Arrow Woods, Draco Forest."
+  },
+  "cave_mouth": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A cave in a rock outcrop, two tiles: the Cave of Descendants."
+  },
+  "sea_serpent": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A serpent breaking the surface, two tiles: here be monsters."
+  },
+  "stilt_village": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "Thatched huts on stilts over a marsh, two tiles: Poko, the Flooding Plains."
+  },
+  "spires": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "Needles of black glass, two tiles tall: the Obsidian Wastes, the Valley of Shadows."
+  }
+ },
+ "monsters": {
+  "slime": {
+   "tier": 1,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "split",
+    "poof"
+   ],
+   "description": "A dome of goo that squashes and stretches in place."
+  },
+  "rat": {
+   "tier": 1,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "A rat seen from the front or from behind; `_rat_side` is its profile."
+  },
+  "bat": {
+   "tier": 1,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "fly",
+    "poof"
+   ],
+   "description": "Head-on, hovering, wings beating."
+  },
+  "frog": {
+   "tier": 1,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "tongue",
+    "poof"
+   ],
+   "description": "A giant frog: all mouth, two eyes on top, and legs folded like springs."
+  },
+  "crab": {
+   "tier": 1,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "bubble",
+    "poof"
+   ],
+   "description": "A crab: a wide shell on six legs, two eyes on stalks and one claw much too big for it."
+  },
+  "imp": {
+   "tier": 1,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "A goblin's worth of devil: horns up, wings out, a tail with a coal on it."
+  },
+  "goblin": {
+   "tier": 2,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "Head too big, ears too wide, knife too eager."
+  },
+  "skeleton": {
+   "tier": 2,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "cast",
+    "poof"
+   ],
+   "description": "Bone, so it barely boils - it is the one creature nearly as still as a wall."
+  },
+  "wolf": {
+   "tier": 2,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "A wolf seen from the front or from behind; `_wolf_side` is its profile."
+  },
+  "boar": {
+   "tier": 2,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "charge",
+    "poof"
+   ],
+   "description": "A boar seen from the front or from behind; `_boar_side` is its profile."
+  },
+  "zombie": {
+   "tier": 2,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "spew",
+    "poof"
+   ],
+   "description": "A zombie: a goblin's height and nobody home. Arms out, head on one side."
+  },
+  "harpy": {
+   "tier": 2,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "fly",
+    "poof"
+   ],
+   "description": "A harpy: yellow wings, bird legs, a pale face and a shock of blue hair."
+  },
+  "beastman": {
+   "tier": 2,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "The Dominion's foot soldier: a bull's head on an orc's shoulders."
+  },
+  "orc": {
+   "tier": 3,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "Shoulders first. An orc is a goblin that got the gym membership."
+  },
+  "spider": {
+   "tier": 3,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "web",
+    "poof"
+   ],
+   "description": "Eight legs, and the legs are the whole animal."
+  },
+  "wraith": {
+   "tier": 3,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "cast",
+    "poof"
+   ],
+   "description": "A hood with nothing in it, and a hem that never reaches the ground."
+  },
+  "yeti": {
+   "tier": 3,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "roar",
+    "poof"
+   ],
+   "description": "A yeti: a tile-filling heap of white fur with a blue face set into it."
+  },
+  "golem": {
+   "tier": 3,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "A golem: stacked grey blocks, two boulder fists and a rune that is lit."
+  },
+  "ogre": {
+   "tier": 4,
+   "rank": "miniboss",
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "1x2. Twice a tile tall, and the height is the point."
+  },
+  "treant": {
+   "tier": 4,
+   "rank": "miniboss",
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "A treant: a walking trunk a tile wide and two tall, leaves for a head."
+  },
+  "dragon": {
+   "tier": 5,
+   "rank": "boss",
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "fly",
+    "fire_breath",
+    "poof"
+   ],
+   "description": "2x2. The one creature with four tiles to be drawn in."
+  },
+  "ghorakhar": {
+   "tier": 5,
+   "rank": "boss",
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "1x2. Ghora'Khar, warlord of the Unlands: a black bull in bronze."
+  },
+  "rangoskhar": {
+   "tier": 5,
+   "rank": "boss",
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "1x2. Rangos'Khar: a grey minotaur, white-maned, with an axe in both hands and horns that burn along their cracks."
+  },
+  "ramulos": {
+   "tier": 5,
+   "rank": "boss",
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "1x2. Ramulos the Lion Lord, Ghora'Khar's rival: gold over navy, a mane wider than his shoulders and a small crown lost in it."
+  },
+  "darkhorn": {
+   "tier": 5,
+   "rank": "boss",
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "cast",
+    "poof"
+   ],
+   "description": "1x2. Darkhorn, the horned sorcerer: a hood with nothing in it but two green lights, a spiked mantle, and a robe that reaches the ground."
+  },
+  "slime_elite": {
+   "tier": 1,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "split",
+    "poof"
+   ]
+  },
+  "rat_elite": {
+   "tier": 1,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "bat_elite": {
+   "tier": 1,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "fly",
+    "poof"
+   ]
+  },
+  "frog_elite": {
+   "tier": 1,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "tongue",
+    "poof"
+   ]
+  },
+  "crab_elite": {
+   "tier": 1,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "bubble",
+    "poof"
+   ]
+  },
+  "goblin_elite": {
+   "tier": 2,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "skeleton_elite": {
+   "tier": 2,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "cast",
+    "poof"
+   ]
+  },
+  "wolf_elite": {
+   "tier": 2,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "boar_elite": {
+   "tier": 2,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "charge",
+    "poof"
+   ]
+  },
+  "zombie_elite": {
+   "tier": 2,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "spew",
+    "poof"
+   ]
+  },
+  "harpy_elite": {
+   "tier": 2,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "fly",
+    "poof"
+   ]
+  },
+  "orc_elite": {
+   "tier": 3,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "spider_elite": {
+   "tier": 3,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "web",
+    "poof"
+   ]
+  },
+  "wraith_elite": {
+   "tier": 3,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "cast",
+    "poof"
+   ]
+  },
+  "yeti_elite": {
+   "tier": 3,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "roar",
+    "poof"
+   ]
+  },
+  "golem_elite": {
+   "tier": 3,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  }
+ },
+ "people": {
+  "bodies": [
+   "hero",
+   "hero2",
+   "m_lanky",
+   "m_burly",
+   "m_portly",
+   "m_stocky",
+   "m_elder",
+   "f_slender",
+   "f_athletic",
+   "f_curvy",
+   "f_stout",
+   "f_elder"
+  ],
+  "skins": [
+   "porcelain",
+   "fair",
+   "tan",
+   "brown",
+   "umber",
+   "deep",
+   "ash",
+   "sylvan",
+   "azure"
+  ],
+  "hair_colors": [
+   "black",
+   "brown",
+   "chestnut",
+   "red",
+   "blonde",
+   "grey",
+   "white"
+  ],
+  "states": [
+   "idle",
+   "walk",
+   "attack",
+   "hurt",
+   "die",
+   "shoot",
+   "cast",
+   "roll",
+   "block",
+   "dodge",
+   "cower",
+   "cheer",
+   "interact",
+   "run",
+   "flee",
+   "talk"
+  ],
+  "hero_builds": {
+   "clothes": [
+    "shirt_linen",
+    "trousers_brown",
+    "shoes",
+    "toy_sword",
+    "toy_shield"
+   ],
+   "leather": [
+    "shirt_linen",
+    "trousers_brown",
+    "jerkin_leather",
+    "boots",
+    "cap_leather",
+    "sword",
+    "buckler"
+   ],
+   "ranger": [
+    "tunic_green",
+    "leggings_leather",
+    "jerkin_ranger",
+    "boots",
+    "cloak_green",
+    "hood_green",
+    "bow"
+   ],
+   "chain": [
+    "gambeson",
+    "trousers_grey",
+    "hauberk_chain",
+    "boots",
+    "coif_chain",
+    "mace",
+    "shield_round"
+   ],
+   "knight": [
+    "gambeson",
+    "chausses_chain",
+    "hauberk_chain",
+    "boots",
+    "tabard_blue",
+    "helm_nasal",
+    "sword",
+    "shield_kite"
+   ],
+   "plate": [
+    "gambeson",
+    "greaves_plate",
+    "cuirass_plate",
+    "sabatons_plate",
+    "cloak_red",
+    "helm_great",
+    "longsword",
+    "shield_kite"
+   ],
+   "battlemage": [
+    "robe_blue",
+    "boots",
+    "mantle_mage",
+    "cape_purple",
+    "circlet_gold",
+    "staff_crystal",
+    "book"
+   ],
+   "dragon": [
+    "gambeson_red",
+    "greaves_dragon",
+    "cuirass_dragon",
+    "sabatons_dragon",
+    "cape_red",
+    "helm_dragon",
+    "sword_dragon",
+    "shield_dragon"
+   ],
+   "dark": [
+    "gambeson_black",
+    "greaves_dark",
+    "cuirass_dark",
+    "sabatons_dark",
+    "cape_tattered",
+    "helm_dark",
+    "sword_dark",
+    "shield_dark"
+   ],
+   "light": [
+    "gambeson_white",
+    "greaves_light",
+    "cuirass_light",
+    "sabatons_light",
+    "cape_white",
+    "helm_light",
+    "sword_light",
+    "shield_light"
+   ]
+  },
+  "npc_looks": {
+   "farmer": {
+    "hostile": false,
+    "items": [
+     "shirt_linen",
+     "breeches_tan",
+     "boots",
+     "hat_straw",
+     "pitchfork"
+    ]
+   },
+   "smith": {
+    "hostile": false,
+    "items": [
+     "trousers_grey",
+     "boots",
+     "apron_leather",
+     "bandana_red",
+     "hammer"
+    ]
+   },
+   "merchant": {
+    "hostile": false,
+    "items": [
+     "doublet_teal",
+     "trousers_blue",
+     "shoes",
+     "hat_feather",
+     "book"
+    ]
+   },
+   "noble": {
+    "hostile": false,
+    "items": [
+     "doublet_purple",
+     "trousers_black",
+     "boots_tall",
+     "cape_red",
+     "circlet_gold",
+     "scimitar"
+    ]
+   },
+   "guard": {
+    "hostile": false,
+    "items": [
+     "gambeson",
+     "trousers_brown",
+     "hauberk_chain",
+     "boots",
+     "tabard_red",
+     "helm_kettle",
+     "spear",
+     "shield_round"
+    ]
+   },
+   "priest": {
+    "hostile": false,
+    "items": [
+     "robe_white",
+     "sandals",
+     "circlet_gold",
+     "staff",
+     "book"
+    ]
+   },
+   "wizard": {
+    "hostile": false,
+    "items": [
+     "robe_purple",
+     "shoes",
+     "hat_wizard",
+     "staff_orb",
+     "tome_dark"
+    ]
+   },
+   "monk": {
+    "hostile": false,
+    "items": [
+     "robe_brown",
+     "sandals",
+     "hood_brown",
+     "staff"
+    ]
+   },
+   "innkeeper": {
+    "hostile": false,
+    "items": [
+     "dress_green",
+     "shoes",
+     "apron_white",
+     "headscarf_blue",
+     "lantern"
+    ]
+   },
+   "barmaid": {
+    "hostile": false,
+    "items": [
+     "blouse_white",
+     "skirt_red",
+     "shoes",
+     "apron_white"
+    ]
+   },
+   "jester": {
+    "hostile": false,
+    "items": [
+     "doublet_red",
+     "trousers_blue",
+     "shoes",
+     "cap_jester"
+    ]
+   },
+   "bard": {
+    "hostile": false,
+    "items": [
+     "tunic_red",
+     "trousers_green",
+     "boots_tall",
+     "hat_feather",
+     "cape_purple",
+     "dagger"
+    ]
+   },
+   "hunter": {
+    "hostile": false,
+    "items": [
+     "tunic_brown",
+     "leggings_leather",
+     "boots",
+     "hood_green",
+     "bow"
+    ]
+   },
+   "sage": {
+    "hostile": false,
+    "items": [
+     "robe_grey",
+     "sandals",
+     "cane",
+     "lantern"
+    ]
+   },
+   "queen": {
+    "hostile": false,
+    "items": [
+     "dress_purple",
+     "shoes",
+     "crown_gold",
+     "cape_red"
+    ]
+   },
+   "villager": {
+    "hostile": false,
+    "items": [
+     "dress_blue",
+     "shoes",
+     "headscarf_blue"
+    ]
+   },
+   "lady": {
+    "hostile": false,
+    "items": [
+     "dress_red",
+     "shoes",
+     "circlet_gold",
+     "cloak_blue"
+    ]
+   },
+   "watchman": {
+    "hostile": false,
+    "items": [
+     "tunic_blue",
+     "trousers_black",
+     "boots",
+     "cap_leather",
+     "torch",
+     "axe"
+    ]
+   },
+   "cultist": {
+    "hostile": true,
+    "items": [
+     "robe_grey",
+     "sandals",
+     "hood_black",
+     "tome_dark",
+     "dagger"
+    ]
+   },
+   "fisher": {
+    "hostile": false,
+    "items": [
+     "tunic_blue",
+     "breeches_tan",
+     "boots_tall",
+     "hat_straw",
+     "fishing_rod",
+     "basket"
+    ]
+   },
+   "miner": {
+    "hostile": false,
+    "items": [
+     "shirt_linen",
+     "trousers_grey",
+     "boots",
+     "cap_leather",
+     "pickaxe",
+     "lantern"
+    ]
+   },
+   "herbalist": {
+    "hostile": false,
+    "items": [
+     "tunic_green",
+     "skirt_green",
+     "shoes",
+     "hood_green",
+     "basket"
+    ]
+   },
+   "baker": {
+    "hostile": false,
+    "items": [
+     "blouse_white",
+     "trousers_brown",
+     "shoes",
+     "apron_white",
+     "bandana_red",
+     "sack"
+    ]
+   },
+   "shepherd": {
+    "hostile": false,
+    "items": [
+     "tunic_brown",
+     "breeches_tan",
+     "boots",
+     "cloak_brown",
+     "hat_straw",
+     "staff"
+    ]
+   },
+   "courier": {
+    "hostile": false,
+    "items": [
+     "doublet_red",
+     "trousers_grey",
+     "boots_tall",
+     "cap_leather",
+     "sack"
+    ]
+   },
+   "pilgrim": {
+    "hostile": false,
+    "items": [
+     "tunic_brown",
+     "trousers_brown",
+     "sandals",
+     "cloak_brown",
+     "hood_brown",
+     "cane",
+     "sack"
+    ]
+   },
+   "alchemist": {
+    "hostile": false,
+    "items": [
+     "robe_blue",
+     "shoes",
+     "apron_leather",
+     "hat_wizard_blue",
+     "book"
+    ]
+   },
+   "healer": {
+    "hostile": false,
+    "items": [
+     "robe_white",
+     "shoes",
+     "apron_white",
+     "headscarf_blue",
+     "basket"
+    ]
+   },
+   "captain": {
+    "hostile": false,
+    "items": [
+     "gambeson",
+     "chausses_chain",
+     "hauberk_chain",
+     "boots_tall",
+     "tabard_red",
+     "cloak_blue",
+     "helm_nasal",
+     "sword",
+     "shield_kite"
+    ]
+   },
+   "sailor": {
+    "hostile": false,
+    "items": [
+     "shirt_linen",
+     "trousers_blue",
+     "boots",
+     "bandana_red",
+     "sack"
+    ]
+   },
+   "marsh_villager": {
+    "hostile": false,
+    "items": [
+     "tunic_green",
+     "breeches_tan",
+     "sandals",
+     "hat_straw",
+     "basket"
+    ]
+   },
+   "king": {
+    "hostile": false,
+    "items": [
+     "doublet_purple",
+     "trousers_black",
+     "boots_tall",
+     "cape_red",
+     "crown_gold",
+     "longsword"
+    ]
+   },
+   "imperial_soldier": {
+    "hostile": false,
+    "items": [
+     "gambeson_white",
+     "chausses_chain",
+     "hauberk_chain",
+     "boots",
+     "tabard_blue",
+     "helm_nasal",
+     "spear",
+     "shield_kite"
+    ]
+   },
+   "pirate": {
+    "hostile": true,
+    "items": [
+     "shirt_linen",
+     "trousers_black",
+     "boots_tall",
+     "bandana_red",
+     "cape_tattered",
+     "scimitar"
+    ]
+   },
+   "dominion_soldier": {
+    "hostile": true,
+    "items": [
+     "gambeson_black",
+     "trousers_black",
+     "hauberk_chain",
+     "boots",
+     "tabard_red",
+     "helm_great",
+     "axe",
+     "shield_round"
+    ]
+   },
+   "bandit": {
+    "hostile": true,
+    "items": [
+     "tunic_brown",
+     "trousers_black",
+     "jerkin_leather",
+     "boots",
+     "hood_black",
+     "scimitar",
+     "buckler"
+    ]
+   },
+   "bandit_archer": {
+    "hostile": true,
+    "items": [
+     "tunic_brown",
+     "trousers_black",
+     "jerkin_ranger",
+     "boots",
+     "bandana_red",
+     "bow"
+    ]
+   },
+   "necromancer": {
+    "hostile": true,
+    "items": [
+     "robe_black",
+     "boots",
+     "hood_black",
+     "staff_orb",
+     "tome_dark"
+    ]
+   },
+   "deserter": {
+    "hostile": true,
+    "items": [
+     "gambeson",
+     "chausses_chain",
+     "hauberk_chain",
+     "boots",
+     "cloak_brown",
+     "coif_chain",
+     "axe",
+     "shield_round"
+    ]
+   }
+  },
+  "wardrobe_by_slot": {
+   "tabard": [
+    "apron_leather",
+    "apron_white",
+    "tabard_blue",
+    "tabard_red"
+   ],
+   "mainhand": [
+    "axe",
+    "bow",
+    "cane",
+    "dagger",
+    "fishing_rod",
+    "hammer",
+    "longsword",
+    "mace",
+    "pickaxe",
+    "pitchfork",
+    "scimitar",
+    "spear",
+    "staff",
+    "staff_crystal",
+    "staff_orb",
+    "sword",
+    "sword_dark",
+    "sword_dragon",
+    "sword_light",
+    "toy_sword"
+   ],
+   "head": [
+    "bandana_red",
+    "cap_jester",
+    "cap_leather",
+    "circlet_gold",
+    "coif_chain",
+    "crown_gold",
+    "hat_feather",
+    "hat_straw",
+    "hat_wizard",
+    "hat_wizard_blue",
+    "headscarf_blue",
+    "helm_dark",
+    "helm_dragon",
+    "helm_great",
+    "helm_kettle",
+    "helm_light",
+    "helm_nasal",
+    "hood_black",
+    "hood_brown",
+    "hood_green"
+   ],
+   "offhand": [
+    "basket",
+    "book",
+    "buckler",
+    "lantern",
+    "sack",
+    "shield_dark",
+    "shield_dragon",
+    "shield_kite",
+    "shield_light",
+    "shield_round",
+    "tome_dark",
+    "torch",
+    "toy_shield"
+   ],
+   "torso": [
+    "blouse_white",
+    "doublet_purple",
+    "doublet_red",
+    "doublet_teal",
+    "dress_blue",
+    "dress_green",
+    "dress_purple",
+    "dress_red",
+    "gambeson",
+    "gambeson_black",
+    "gambeson_red",
+    "gambeson_white",
+    "robe_black",
+    "robe_blue",
+    "robe_brown",
+    "robe_grey",
+    "robe_purple",
+    "robe_white",
+    "shirt_linen",
+    "tunic_blue",
+    "tunic_brown",
+    "tunic_green",
+    "tunic_red"
+   ],
+   "feet": [
+    "boots",
+    "boots_tall",
+    "sabatons_dark",
+    "sabatons_dragon",
+    "sabatons_light",
+    "sabatons_plate",
+    "sandals",
+    "shoes"
+   ],
+   "legs": [
+    "breeches_tan",
+    "chausses_chain",
+    "greaves_dark",
+    "greaves_dragon",
+    "greaves_light",
+    "greaves_plate",
+    "leggings_leather",
+    "skirt_blue",
+    "skirt_green",
+    "skirt_red",
+    "trousers_black",
+    "trousers_blue",
+    "trousers_brown",
+    "trousers_green",
+    "trousers_grey"
+   ],
+   "cloak": [
+    "cape_purple",
+    "cape_red",
+    "cape_tattered",
+    "cape_white",
+    "cloak_blue",
+    "cloak_brown",
+    "cloak_green",
+    "cloak_red"
+   ],
+   "armor": [
+    "cuirass_dark",
+    "cuirass_dragon",
+    "cuirass_light",
+    "cuirass_plate",
+    "hauberk_chain",
+    "jerkin_leather",
+    "jerkin_ranger",
+    "mantle_mage"
+   ]
+  }
+ },
+ "ui": [
+  "panel",
+  "button",
+  "button_hover",
+  "button_pressed",
+  "frame"
+ ],
+ "loot": [
+  "gold",
+  "gem_ruby",
+  "gem_sapphire",
+  "gem_emerald",
+  "drop_sword",
+  "drop_axe"
+ ],
+ "fx": [
+  "arrow",
+  "bolt",
+  "firebolt",
+  "spark"
+ ],
+ "icons": {
+  "tabard": [
+   "apron_leather",
+   "apron_white",
+   "tabard_blue",
+   "tabard_red"
+  ],
+  "mainhand": [
+   "axe",
+   "bow",
+   "cane",
+   "dagger",
+   "fishing_rod",
+   "hammer",
+   "longsword",
+   "mace",
+   "pickaxe",
+   "pitchfork",
+   "scimitar",
+   "spear",
+   "staff",
+   "staff_crystal",
+   "staff_orb",
+   "sword",
+   "sword_dark",
+   "sword_dragon",
+   "sword_light",
+   "toy_sword"
+  ],
+  "head": [
+   "bandana_red",
+   "cap_jester",
+   "cap_leather",
+   "circlet_gold",
+   "coif_chain",
+   "crown_gold",
+   "hat_feather",
+   "hat_straw",
+   "hat_wizard",
+   "hat_wizard_blue",
+   "headscarf_blue",
+   "helm_dark",
+   "helm_dragon",
+   "helm_great",
+   "helm_kettle",
+   "helm_light",
+   "helm_nasal",
+   "hood_black",
+   "hood_brown",
+   "hood_green"
+  ],
+  "offhand": [
+   "basket",
+   "book",
+   "buckler",
+   "lantern",
+   "sack",
+   "shield_dark",
+   "shield_dragon",
+   "shield_kite",
+   "shield_light",
+   "shield_round",
+   "tome_dark",
+   "torch",
+   "toy_shield"
+  ],
+  "torso": [
+   "blouse_white",
+   "doublet_purple",
+   "doublet_red",
+   "doublet_teal",
+   "dress_blue",
+   "dress_green",
+   "dress_purple",
+   "dress_red",
+   "gambeson",
+   "gambeson_black",
+   "gambeson_red",
+   "gambeson_white",
+   "robe_black",
+   "robe_blue",
+   "robe_brown",
+   "robe_grey",
+   "robe_purple",
+   "robe_white",
+   "shirt_linen",
+   "tunic_blue",
+   "tunic_brown",
+   "tunic_green",
+   "tunic_red"
+  ],
+  "feet": [
+   "boots",
+   "boots_tall",
+   "sabatons_dark",
+   "sabatons_dragon",
+   "sabatons_light",
+   "sabatons_plate",
+   "sandals",
+   "shoes"
+  ],
+  "legs": [
+   "breeches_tan",
+   "chausses_chain",
+   "greaves_dark",
+   "greaves_dragon",
+   "greaves_light",
+   "greaves_plate",
+   "leggings_leather",
+   "skirt_blue",
+   "skirt_green",
+   "skirt_red",
+   "trousers_black",
+   "trousers_blue",
+   "trousers_brown",
+   "trousers_green",
+   "trousers_grey"
+  ],
+  "cloak": [
+   "cape_purple",
+   "cape_red",
+   "cape_tattered",
+   "cape_white",
+   "cloak_blue",
+   "cloak_brown",
+   "cloak_green",
+   "cloak_red"
+  ],
+  "other": [
+   "chest",
+   "key",
+   "potion_health",
+   "potion_mana",
+   "skirt_purple"
+  ],
+  "armor": [
+   "cuirass_dark",
+   "cuirass_dragon",
+   "cuirass_light",
+   "cuirass_plate",
+   "hauberk_chain",
+   "jerkin_leather",
+   "jerkin_ranger",
+   "mantle_mage"
+  ]
+ },
+ "counts": {
+  "terrain tiles": 93,
+  "structures": 39,
+  "creatures": 25,
+  "elites": 16,
+  "bodies": 12,
+  "wardrobe items": 119,
+  "NPC looks": 39,
+  "icons": 124,
+  "wall pieces": 47
+ },
+ "known_gaps": [
+  {
+   "title": "Local-scale buildings",
+   "detail": "One hut is the only house a person can stand beside. A village scene needs a second house, an inn or shop front, and a door-in-a-wall piece for the rock kit (a cave or cellar entrance). Every other building is a world-map landmark."
+  },
+  {
+   "title": "Interiors",
+   "detail": "No floorboards or flagstones as terrain, no interior wall kit, no furniture (table, bed, shelf, barrel, crate, hearth)."
+  },
+  {
+   "title": "Map landmarks named on the world map and not drawn",
+   "detail": "The Tower of Legend, a lighthouse or sea tower, a mountain fortress, a temple or shrine."
+  },
+  {
+   "title": "Monsters by region",
+   "detail": "No sea creature that fights (the sea serpent is a prop), no desert creature (scorpion or snake), nothing for the swamp beyond the frog, nothing for snow beyond the yeti, no elemental for ash."
+  },
+  {
+   "title": "Signatures, elites, portraits",
+   "detail": "The imp and beastman have no signature state or elite; golem and treant have no signature; ogre, treant and dragon have no elite; the four boss lords have no dialogue portrait."
+  },
+  {
+   "title": "A second wall material",
+   "detail": "The wall kit is rock only: no timber palisade or dressed stone, no gate or door piece, no second height."
+  },
+  {
+   "title": "UI",
+   "detail": "Five parchment pieces only: no health or stamina bars, inventory slots, cursor or font."
+  },
+  {
+   "title": "Loot",
+   "detail": "Gold, three gems, a sword and an axe. Potions and keys exist as icons but not as dropped loot."
+  },
+  {
+   "title": "Faces",
+   "detail": "At 64 px a face is two eyes and a brow. Portraits carry the detail; sprites do not. More facial detail is under consideration, not built."
+  },
+  {
+   "title": "Terrain",
+   "detail": "No cliffs within one terrain (a height step of grass over grass); farmland furrows only run east-west; edge textures have one seed each."
+  },
+  {
+   "title": "Gameplay data",
+   "detail": "Only suggested data ships: walkability per terrain, blocked cells, idle hurtboxes, impact frames. No per-state hitboxes."
+  }
+ ],
+ "sheets": [
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/terrain.png",
+   "title": "Terrain: 17 bases then 76 variants (frame 0, 2x)",
+   "size": [
+    1666,
+    1394
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_map_0.png",
+   "title": "Transitions: proof map 0: every terrain meeting its neighbours",
+   "size": [
+    1280,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_map_1.png",
+   "title": "Transitions: proof map 1",
+   "size": [
+    1280,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_map_2.png",
+   "title": "Transitions: proof map 2",
+   "size": [
+    1280,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_diagonals.png",
+   "title": "Transitions: one-cell diagonal paths stay continuous",
+   "size": [
+    1176,
+    1888
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_pair_water__grass.png",
+   "title": "Transitions: pair: grass over water, 16 masks (shore)",
+   "size": [
+    896,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_pair_roads__grass.png",
+   "title": "Transitions: pair: roads and grass",
+   "size": [
+    896,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_pair_lava__grass.png",
+   "title": "Transitions: pair: grass over lava (scorch)",
+   "size": [
+    896,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_pair_ash__snow.png",
+   "title": "Transitions: pair: ash and snow",
+   "size": [
+    896,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_pair_grass__rock.png",
+   "title": "Transitions: pair: rock over grass (dual-grid cliff)",
+   "size": [
+    896,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls.png",
+   "title": "Rock wall kit: 47 labelled pieces (2x)",
+   "size": [
+    1390,
+    890
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_rock_demo.png",
+   "title": "Walls: a yard, a maze and a cliff line built from the kit",
+   "size": [
+    1152,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_rock_pieces.png",
+   "title": "Walls: the pieces in place, labelled",
+   "size": [
+    1132,
+    912
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/structures.png",
+   "title": "Structures: 39 props and their states (1x)",
+   "size": [
+    1626,
+    1058
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_slime.png",
+   "title": "Monster slime: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_rat.png",
+   "title": "Monster rat: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_bat.png",
+   "title": "Monster bat: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    1792
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_frog.png",
+   "title": "Monster frog: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_crab.png",
+   "title": "Monster crab: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_imp.png",
+   "title": "Monster imp: every state x 6 frames, facing right",
+   "size": [
+    1222,
+    384
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_goblin.png",
+   "title": "Monster goblin: every state x 6 frames, facing right",
+   "size": [
+    1222,
+    384
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_skeleton.png",
+   "title": "Monster skeleton: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    1792
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_wolf.png",
+   "title": "Monster wolf: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_boar.png",
+   "title": "Monster boar: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_zombie.png",
+   "title": "Monster zombie: every state x 6 frames, facing right",
+   "size": [
+    1222,
+    448
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_harpy.png",
+   "title": "Monster harpy: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    1792
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_beastman.png",
+   "title": "Monster beastman: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_orc.png",
+   "title": "Monster orc: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_spider.png",
+   "title": "Monster spider: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_wraith.png",
+   "title": "Monster wraith: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_yeti.png",
+   "title": "Monster yeti: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_golem.png",
+   "title": "Monster golem: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_ogre.png",
+   "title": "Monster ogre: every state x 6 frames, facing right",
+   "size": [
+    1222,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_treant.png",
+   "title": "Monster treant: every state x 6 frames, facing right",
+   "size": [
+    1222,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_dragon.png",
+   "title": "Monster dragon: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    1024
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_ghorakhar.png",
+   "title": "Monster ghorakhar: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_rangoskhar.png",
+   "title": "Monster rangoskhar: every state x 6 frames, facing right",
+   "size": [
+    1222,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_ramulos.png",
+   "title": "Monster ramulos: every state x 6 frames, facing right",
+   "size": [
+    1222,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_darkhorn.png",
+   "title": "Monster darkhorn: every state x 6 frames, facing right",
+   "size": [
+    1222,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monsters.png",
+   "title": "Monsters: 25 creatures by tier, then 16 elites (idle, facing down, 2x)",
+   "size": [
+    1872,
+    1826
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/people_bodies.png",
+   "title": "People: 12 bodies, 9 skins, 7 hair colours (2x)",
+   "size": [
+    1390,
+    554
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/people_heroes.png",
+   "title": "Hero builds: 2 heroes x 10 sets (2x)",
+   "size": [
+    1390,
+    386
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/people_npcs.png",
+   "title": "NPC looks: 39 (2x), each on one sample body",
+   "size": [
+    1390,
+    722
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/people_states.png",
+   "title": "People: every state as a 6-frame strip (hero in leather, 1x)",
+   "size": [
+    1192,
+    882
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/wardrobe.png",
+   "title": "Wardrobe: 119 items, each alone on the hero body (2x) [slot]",
+   "size": [
+    1666,
+    1730
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/portraits.png",
+   "title": "Dialogue portraits: a sample (1x). Any body x any outfit composes.",
+   "size": [
+    1340,
+    490
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/ui.png",
+   "title": "UI: nine-slice pieces and each one sliced to a box (2x)",
+   "size": [
+    1660,
+    514
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/items.png",
+   "title": "Loot (6), effects (4), icons (124) (2x)",
+   "size": [
+    1666,
+    2066
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_scene.png",
+   "title": "Scene: a local scene: walled yard, trees a person walks behind, chest, people",
+   "size": [
+    576,
+    384
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_map.png",
+   "title": "Scene: a map assembled by the reference loader: terrain, transitions, structures, monsters",
+   "size": [
+    896,
+    640
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_dialogue.png",
+   "title": "Scene: a dialogue box: nine-slice panel and a composed portrait",
+   "size": [
+    620,
+    262
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_scene.gif",
+   "title": "Scene: the local scene, animated",
+   "size": [
+    576,
+    384
+   ]
+  }
+ ]
+}
