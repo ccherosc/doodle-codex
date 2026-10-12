@@ -196,20 +196,29 @@ section("transitions", "Transitions", "%d overlay, %d shore, %d scorch, %d cliff
         "<b>Shore</b> atlases replace the overlay when the lowest terrain is water (foam), "
         "<b>scorch</b> when it is lava (charred crust). Diagonal roads, rivers and trails stay "
         "connected by design. <b>Cliff</b> atlases draw a height step inside one terrain (grass over "
-        "grass) from an integer height per cell: a bank on the south-facing edge, a rim and shadow "
-        "elsewhere, no ramps. Every overlay, shore and scorch atlas also has a second-seed "
-        "<b>alternate</b> that can be mixed in tile by tile without a seam. The pictures below "
-        "are static proofs built from the shipped atlases.")
+        "grass) from an integer height per cell: a bank on the south-facing edge and a drawn rim "
+        "on the other three, with foam or a charred line at its foot where it stands in water or "
+        "lava. Four stone stairs (see Structures) are the way up. Every overlay, shore and scorch "
+        "atlas also has three <b>alternate</b> drawings that can be mixed in tile by tile without "
+        "a seam, so a long border does not repeat. The pictures below are static proofs built "
+        "from the shipped atlases.")
 MD.append("Corner-Wang (16 masks) on a dual grid; overlay per higher terrain, `shore` over water, "
           "`scorch` over lava. Elevation: %s.\n" % " < ".join(order))
-MD.append("Cliffs (a height step within one terrain, heights per cell, south-facing bank only, no "
-          "ramps): %s. Alternates: a second seed for every overlay, shore and scorch atlas, "
-          "seam-safe in any mix.\n" % ", ".join(sorted(tt.get("cliff", {}))))
+MD.append("Cliffs (a height step within one terrain, heights per cell; a bank on the south-facing "
+          "edge, a rim on the others, a wash atlas where the step stands in water or lava; the "
+          "stairs_* structures cross it): %s. Alternates: %d more drawings of every overlay, shore "
+          "and scorch atlas, seam-safe in any mix.\n"
+          % (", ".join(sorted(tt.get("cliff", {}))), tt.get("alternates", {}).get("count", 1)))
 CAT["transitions"] = {"elevation_low_to_high": order, "overlay": sorted(tt["overlay"]),
                       "shore": sorted(tt["shore"]), "scorch": sorted(tt["scorch"]),
                       "cliff": sorted(tt.get("cliff", {})),
-                      "alternates": {k: sorted(v) for k, v in tt.get("alternates", {}).items()
-                                     if isinstance(v, dict)}}
+                      "cliff_shore": sorted(tt.get("cliff_shore", {})),
+                      "cliff_scorch": sorted(tt.get("cliff_scorch", {})),
+                      "alternates": {"count": tt.get("alternates", {}).get("count", 1),
+                                     "suffixes": [s["suffix"] for s in tt.get("alternates", {}).get("sets", [])],
+                                     "overlay": sorted(tt.get("alternates", {}).get("overlay", {})),
+                                     "shore": sorted(tt.get("alternates", {}).get("shore", {})),
+                                     "scorch": sorted(tt.get("alternates", {}).get("scorch", {}))}}
 V = os.path.join(ROOT, "art", "validation")
 H.append('<div class="grid proof">')
 pics = [("transitions/map_0.png", "proof map 0: every terrain meeting its neighbours"),
@@ -222,7 +231,9 @@ pics = [("transitions/map_0.png", "proof map 0: every terrain meeting its neighb
         ("transitions/pair_grass__rock.png", "pair: rock over grass (dual-grid cliff)"),
         ("transitions/cliffs_sheet.png", "cliffs: a height step in each of six terrains"),
         ("transitions/cliff_grass.png", "cliff: grass plateaus over grass, dirt and sand"),
-        ("transitions/alternates.png", "alternates: the same border with one seed and with two")]
+        ("transitions/cliff_wash_sheet.png", "cliff wash: a step standing in water (foam) and in lava (char)"),
+        ("transitions/alternates.png", "alternates: the same border in each of its four drawings"),
+        ("transitions/alternates_map.png", "alternates: one coast with the primary only, and with all four mixed")]
 for rel, cap in pics:
     q = copy_any(os.path.join(V, rel), "sheets/" + rel.replace("transitions/", "transition_"))
     if q:
@@ -241,8 +252,10 @@ section("walls", "Wall kits", "%d materials x %d pieces, %d door and gate pieces
         "what it blocks. The name says where the piece sits in a wall; a 256-entry lookup on the "
         "eight neighbours picks it automatically. Walls do not animate. Kinds: " +
         "; ".join("<b>%s</b> (face %d px)" % (k, v["face_px"]) for k, v in KINDS.items()) +
-        ". A door or gate replaces one straight piece of a run and ships closed and open.")
-MD.append(W["rule"] + "\n\n" + W.get("door_rule", "") + "\n\nNaming: "
+        ". A door or gate replaces one straight piece of a run and ships closed and open. Kits "
+        "join each other with a butt joint: %d small joint pieces per kit close the cut end where "
+        "the neighbouring cell is a wall of another material." % len(next(iter(KINDS.values())).get("joints", {})))
+MD.append(W["rule"] + "\n\n" + W.get("door_rule", "") + "\n\n" + W.get("join_rule", "") + "\n\nNaming: "
           + "; ".join("`%s` = %s" % kv for kv in W["naming"].items()) + "\n")
 MD.append("Pieces (the same %d labels in every kind): " % len(KINDS["rock"]["pieces"])
           + ", ".join("`%s`" % n for n in KINDS["rock"]["pieces"]) + "\n")
@@ -267,6 +280,7 @@ for kind, krec in KINDS.items():
     MD.append("- **%s**: face %d px; doors and gates: %s" % (
         kind, krec["face_px"], ", ".join("`%s`" % n for n in krec.get("doors", {})) or "none"))
     CAT["walls"]["kinds"][kind] = {"pieces": list(krec["pieces"]), "doors": list(krec.get("doors", {})),
+                                   "joints": list(krec.get("joints", {})),
                                    "inset_px": krec["inset_px"], "face_px": krec["face_px"]}
     p = sheet("walls_" + kind, "%s wall kit: %d labelled pieces and doors (2x)" % (kind.capitalize(), len(ent)), ent, 10)
     H.append(sheet_link(p, "every %s piece" % kind))
@@ -278,6 +292,12 @@ for kind, krec in KINDS.items():
             H.append(card('<a href="%s"><img loading="lazy" src="%s" alt="%s"></a>' % (q, q, esc(cap)), cap))
             SHEETS.append((q, "Walls: " + cap, Image.open(os.path.join(HERE, q)).size))
     H.append("</div>")
+q = copy_any(os.path.join(V, "walls/mixed_demo.png"), "sheets/walls_mixed_demo.png")
+if q:
+    cap = "all five kits in one building: a butt joint wherever two materials meet"
+    H.append('<div class="grid proof">' + card(
+        '<a href="%s"><img loading="lazy" src="%s" alt="%s"></a>' % (q, q, esc(cap)), cap) + "</div>")
+    SHEETS.append((q, "Walls: " + cap, Image.open(os.path.join(HERE, q)).size))
 H.append("</section>")
 
 # --- structures ------------------------------------------------------------------
@@ -288,7 +308,8 @@ section("structures", "Structures and props", "%d props, %d at a person's scale"
         "Cut-outs that stand on terrain, drawn in elevation with a ground shadow. <b>map</b> scale "
         "means a landmark for the world map (a castle two tiles wide); <b>local</b> scale means "
         "drawn to stand beside a person. Trees block only the trunk, so a person can walk behind "
-        "the crown. Some have a second state (open, raided).")
+        "the crown. Some have a second state (open, raided). The four <b>stairs</b> stand across "
+        "a cliff edge, one cell on the high ground and one on the low, and are where a unit climbs.")
 MD.append("| name | tiles | scale | passable | states | description |\n| --- | --- | --- | --- | --- | --- |")
 ent, CAT["structures"] = [], {}
 H.append('<div class="grid wide">')
@@ -310,6 +331,8 @@ for name, r in S.items():
     CAT["structures"][name] = {"footprint_tiles": r["footprint_tiles"], "scale": r["scale"],
                                "passable": bool(r.get("passable")), "walk_behind": bool(r.get("walk_behind")),
                                "states": list(st), "description": d}
+    if r.get("climbs"):
+        CAT["structures"][name]["climbs"] = r["climbs"]
 H.append("</div>")
 p = sheet("structures", "Structures: %d props and their states (1x)" % len(S), ent, 8, 1)
 H.append(sheet_link(p, "every structure") + "</section>")
@@ -323,9 +346,12 @@ npair = sum(len(M[n]["states"]) for n in base)
 section("monsters", "Monsters", "%d creatures, %d elites, %d states x 4 facings"
         % (len(base), len(elite), npair),
         "Cut-out actors. Every creature has idle, walk, attack, hurt, die and poof (the corpse "
-        "vanishing in smoke) in four facings; some add a signature. Below: idle in all four "
+        "vanishing in smoke) in four facings; most add a signature. Below: idle in all four "
         "facings, then every other state facing down. Tier is difficulty 1&ndash;5. An elite is "
-        "its base creature in another palette with the same silhouette.")
+        "its base creature in another palette with the same silhouette, and every creature has "
+        "one. The seven big creatures (ogre, treant, dragon and the four lords) play their attack, "
+        "walk and signature over <b>12 frames</b> instead of 6: a wind-up, the blow on frame 5, a "
+        "follow-through and a recovery.")
 MD.append("| creature | tier | rank | tiles | states | description |\n| --- | --- | --- | --- | --- | --- |")
 ent, CAT["monsters"] = [], {}
 for name in sorted(base, key=lambda n: (M[n]["tier"], base.index(n))):
@@ -353,23 +379,31 @@ for name in sorted(base, key=lambda n: (M[n]["tier"], base.index(n))):
     ch = max(ay - f["anchor"][1] + f["frame_h"] for f in fs.values())
     sc = 2 if cw <= 128 else 1
     lab = 70
-    im = Image.new("RGBA", (lab + F * cw * sc, len(states) * ch * sc), PAPER)
+    nfs = {s: kit.monster_frames(name, s) for s in states}
+    wide = max(nfs.values())
+    im = Image.new("RGBA", (lab + wide * cw * sc, len(states) * ch * sc), PAPER)
     dr = ImageDraw.Draw(im)
     for j, s in enumerate(states):
         dr.text((6, j * ch * sc + 6), s, fill=INK, font=font(13))
-        for i in range(F):
+        for i in range(nfs[s]):
             fr = kit.cell(fs[s]["file"], i, 0, fs[s]["frame_w"], fs[s]["frame_h"])
             fr = fr.resize((fr.width * sc, fr.height * sc), Image.NEAREST)
             im.alpha_composite(fr, (lab + (i * cw + ax - fs[s]["anchor"][0]) * sc,
                                     (j * ch + ay - fs[s]["anchor"][1]) * sc))
     q = save(im.convert("RGB"), "sheets/monster_%s.png" % name)
-    SHEETS.append((q, "Monster %s: every state x 6 frames, facing right" % name, im.size))
-    H.append("</div>" + sheet_link(q, "%s, every state x 6 frames, facing right" % name) + "</article>")
+    per = "6 frames" if wide == F else "6 or %d frames" % wide
+    SHEETS.append((q, "Monster %s: every state x %s, facing right" % (name, per), im.size))
+    H.append("</div>" + sheet_link(q, "%s, every state x %s, facing right" % (name, per)) + "</article>")
     ent.append(("%s (tier %d)" % (name, r["tier"]), frame0(r["states"]["idle"]["facings"]["down"]["file"],
                                                          r["box"][0], r["box"][1])))
-    MD.append("| %s | %d | %s | %s | %s | %s |" % (name, r["tier"], r["rank"], foot, ", ".join(states), d))
+    long_ = [s for s in states if nfs[s] != F]
+    MD.append("| %s | %d | %s | %s | %s | %s |" % (
+        name, r["tier"], r["rank"], foot,
+        ", ".join(s + (" (%d frames)" % nfs[s] if s in long_ else "") for s in states), d))
     CAT["monsters"][name] = {"tier": r["tier"], "rank": r["rank"], "footprint_tiles": r["footprint_tiles"],
                              "states": states, "description": d}
+    if long_:
+        CAT["monsters"][name]["frames"] = {s: nfs[s] for s in long_}
 H.append('<h3>Elites</h3><div class="grid">')
 for name in elite:
     r = M[name]
@@ -379,7 +413,8 @@ for name in elite:
     ent.append((name, frame0(f["file"], f["frame_w"], f["frame_h"])))
     CAT["monsters"][name] = {"tier": r["tier"], "rank": r["rank"], "elite": True, "states": list(r["states"])}
 H.append("</div>")
-MD.append("\nElites (palette swaps, same states as their base): " + ", ".join(elite) + "\n")
+MD.append("\nElites (palette swaps, same states and frame counts as their base; what they throw is "
+          "dyed from their own palette): " + ", ".join(elite) + "\n")
 p = sheet("monsters", "Monsters: %d creatures by tier, then %d elites (idle, facing down, 2x)"
           % (len(base), len(elite)), ent, 7, 2)
 H.append(sheet_link(p, "every monster") + "</section>")
@@ -518,8 +553,10 @@ section("ui", "UI and portraits", "%d nine-slice pieces, %d bar fills, %d cursor
         % (len(UI["pieces"]), len(UI["bars"]["fills"]), len(UI["cursors"]["cursors"]),
            len(UI["fonts"]["fonts"]), len(kit.portraits["bodies"]), len(kit.portraits.get("monsters", {}))),
         "Parchment UI as nine-slice pieces (corners fixed, edges tiled), inventory slots, bars "
-        "whose fill tiles, cursors, and a handwritten bitmap font in two sizes and two pencils "
-        "(ink and chalk): every word in the game is written by the hand that drew it. Dialogue "
+        "whose fill tiles, cursors, and two handwritten bitmap fonts, each in two sizes and two "
+        "pencils (ink and chalk): <b>hand</b>, the game's own printed pencil, and <b>cute</b>, a "
+        "middle-schooler's rounder, friendlier writing. Both cover Western and Central European "
+        "accents, and both also ship as a .ttf. Dialogue "
         "portraits are layered from the same wardrobe as the sprite, so a portrait always matches "
         "what the person is wearing, and carry the face detail a 64 px sprite cannot: irises, "
         "lids, nose, mouth, wrinkles, freckles, scars. Portraits are stills, facing the viewer.")
@@ -577,10 +614,10 @@ H.append("</div>")
 sheet("ui", "UI: nine-slice pieces sliced to a box, bars, cursors (2x)", ent, 5)
 ent = []
 H.append('<h3>Handwriting</h3><div class="grid proof">')
-PANGRAM = "The quick brown fox jumps over the lazy dog. 0123456789 ?!"
+PANGRAM = "The quick brown fox jumps over the lazy dog. 0123456789 ?! Zażółć gęślą jaźń, où est l'été? ♥ ★"
 for fname, frec in UI["fonts"]["fonts"].items():
     for colour in frec["files"]:
-        t = kit.text(kit.wrap(PANGRAM, 420, fname), fname, colour)
+        t = kit.text(kit.wrap(PANGRAM, 520, fname), fname, colour)
         bg = Image.new("RGBA", (t.width + 24, t.height + 20), PAPER if colour == "ink" else (58, 52, 48, 255))
         bg.alpha_composite(t, (12, 10))
         q = save(bg.convert("RGB"), "assets/ui/font_%s_%s.png" % (fname, colour))
@@ -588,13 +625,21 @@ for fname, frec in UI["fonts"]["fonts"].items():
         H.append(card('<img loading="lazy" src="%s" alt="%s">' % (q, esc(cap)), cap))
         ent.append(("%s %s" % (fname, colour), bg))
 H.append("</div>")
-sheet("font", "Handwriting font: two sizes, ink and chalk (1x)", ent, 2, 1)
+sheet("font", "Handwriting: two faces (hand, cute), two sizes, ink and chalk (1x)", ent, 2, 1)
+for face, frec in UI["fonts"].get("faces", {}).items():
+    if frec.get("ttf"):
+        put(frec["ttf"], "ui/%s.ttf" % face)
 CAT["ui"] = {"pieces": list(UI["pieces"]), "bar_fills": list(UI["bars"]["fills"]),
              "cursors": list(UI["cursors"]["cursors"]), "fonts": list(UI["fonts"]["fonts"]),
+             "font_faces": {f: {"ttf": URL + "assets/ui/%s.ttf" % f, "use": r.get("use", "")}
+                            for f, r in UI["fonts"].get("faces", {}).items()},
+             "font_chars": UI["fonts"]["chars"],
              "monster_portraits": list(kit.portraits.get("monsters", {}))}
-MD.append("UI pieces: %s. Bar fills: %s. Cursors: %s. Fonts (handwriting, ASCII 32-126, ink and chalk): %s. "
+MD.append("UI pieces: %s. Bar fills: %s. Cursors: %s. Fonts (handwriting, %d characters: ASCII, Latin-1, "
+          "Latin Extended-A, typographic marks and nine symbols; ink and chalk; faces %s, each also a .ttf): %s. "
           "Portraits compose for all %d bodies from the worn items; the lords %s have one still each.\n"
           % (", ".join(UI["pieces"]), ", ".join(UI["bars"]["fills"]), ", ".join(UI["cursors"]["cursors"]),
+             len(UI["fonts"]["chars"]), ", ".join(UI["fonts"].get("faces", {})),
              ", ".join(UI["fonts"]["fonts"]), len(kit.portraits["bodies"]),
              ", ".join(kit.portraits.get("monsters", {}))))
 H.append("</section>")
@@ -640,7 +685,11 @@ if DEMO:
                     ("demo_map.png", "a map assembled by the reference loader: terrain, transitions, structures, monsters"),
                     ("demo_dialogue.png", "a dialogue box: nine-slice panel, composed portraits, handwritten text"),
                     ("demo_hud.png", "a HUD: bars, inventory slots, cursors, all from the package"),
-                    ("demo_cliff.png", "a grass plateau with a knoll: heights per cell, cliff atlases, alternates on"),
+                    ("demo_cliff.png", "a grass plateau with a knoll and two flights of stairs: heights per cell, cliff atlases, alternates on"),
+                    ("demo_cliff_wash.png", "the same step standing in water and in lava: foam and char at its foot"),
+                    ("demo_walls_mixed.png", "five wall kits in one plan, joined where they meet"),
+                    ("demo_handwriting.png", "both handwriting faces, with accents and symbols"),
+                    ("demo_map.gif", "the map, animated: the ogre's blow takes twelve frames"),
                     ("demo_scene.gif", "the local scene, animated")):
         q = copy_any(os.path.join(DEMO, fn), "sheets/" + fn)
         if q:
@@ -648,14 +697,14 @@ if DEMO:
             SHEETS.append((q, "Scene: " + cap, Image.open(os.path.join(HERE, q)).size))
 
 GAPS = [
-    ("Local scenes are still thin", "Two houses, an inn, six pieces of furniture, two floors and five wall kits. No stairs, windows as pieces, rugs, signs, market stalls or street lamps at a person's scale; kinds of wall do not join each other."),
-    ("Cliffs", "A height step has a drawn bank on its south-facing edge only; north, west and east edges are a rim and a shadow. No ramp or stair art, no foam where a cliff stands in water, and only six terrains have one."),
+    ("Local scenes are still thin", "Two houses, an inn, six pieces of furniture, two floors, five wall kits and four flights of stone stairs. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. Wall kits meet in a butt joint: one material stops and the next starts, with no bonded corner."),
+    ("Cliffs and stairs", "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Stairs are one material and climb one level (16 px): no ramp, no wooden flight, nothing that climbs a wall. Only six terrains have a cliff."),
     ("Landmarks", "One design and no state each (no ruined, raided or lit variant) for the great landmarks."),
-    ("Monsters", "The regional monsters have no signature state. The four lords have no elite. Monster portraits exist for the lords only."),
+    ("Monsters", "Eight creatures have no signature state: rat, goblin, wolf, orc, ogre and three of the lords. Twelve-frame animation covers the attack, walk and signature of the seven creatures bigger than a tile; their hurt and die, and every smaller creature and every person, are six frames. Three elite effects keep the base's colours by nature (a web, a tongue, a war-cry). Monster portraits exist for the lords only."),
     ("Portraits", "Stills, facing the viewer, one expression per body. No talking or blinking frames."),
-    ("UI", "No icons for status effects, no minimap frame, no scroll bar, no second language: the font covers ASCII 32-126 only."),
+    ("UI", "No icons for status effects, no minimap frame, no scroll bar. The two handwriting faces are Latin only (303 characters; no Greek, Cyrillic or CJK) and have no kerning pairs."),
     ("Faces", "Sprites keep two eyes and a brow at 64 px by design; all face detail is in the portraits."),
-    ("Terrain", "Farmland runs east-west or north-south, not diagonally. Alternates change 7 to 29 percent of an edge tile: they break a rhythm, they do not hide it."),
+    ("Terrain", "Farmland runs east-west or north-south, not diagonally. Borders come in four interchangeable looks; within 10 px of the drawn contour any two differ on 11 to 45 percent of pixels (mean 24), and where a border crosses the tile edge is fixed, so a border is varied, not unique. Cliff and pair atlases have one look."),
     ("Gameplay data", "Only suggested data ships: walkability per terrain, blocked cells, idle hurtboxes, impact frames. No per-state hitboxes."),
 ]
 
@@ -674,7 +723,8 @@ head_md = [
     "",
     "The art library for *Norfair Chronicles*, a real-time overhead action RPG (Godot 4, flat 2D, "
     "y-sorted): a world map for travel and local scenes for play. Everything is drawn in one "
-    "pencil-doodle style on a 64x64 grid, animated as 6-frame horizontal strips at 10 fps, in "
+    "pencil-doodle style on a 64x64 grid, animated as 6-frame horizontal strips at 10 fps (12 "
+    "frames for a big creature's attack, walk and signature: read `frames` per state), in "
     "four facings (down, left, right, up) where a thing can turn.",
     "",
     "This file is the text inventory. It is generated from the shipped game package, so the names "

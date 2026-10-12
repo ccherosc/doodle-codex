@@ -398,7 +398,29 @@
    "sand",
    "snow"
   ],
+  "cliff_shore": [
+   "ash",
+   "desert",
+   "dirt",
+   "grass",
+   "sand",
+   "snow"
+  ],
+  "cliff_scorch": [
+   "ash",
+   "desert",
+   "dirt",
+   "grass",
+   "sand",
+   "snow"
+  ],
   "alternates": {
+   "count": 3,
+   "suffixes": [
+    "_b",
+    "_c",
+    "_d"
+   ],
    "overlay": [
     "ash",
     "cave",
@@ -536,6 +558,24 @@
      "door_edge_s_closed",
      "door_edge_s_open"
     ],
+    "joints": [
+     "joint_n",
+     "joint_n_ne",
+     "joint_n_nw",
+     "joint_n_nw_ne",
+     "joint_e",
+     "joint_e_se",
+     "joint_e_ne",
+     "joint_e_ne_se",
+     "joint_s",
+     "joint_s_se",
+     "joint_s_sw",
+     "joint_s_sw_se",
+     "joint_w",
+     "joint_w_sw",
+     "joint_w_nw",
+     "joint_w_nw_sw"
+    ],
     "inset_px": 8,
     "face_px": 36
    },
@@ -594,6 +634,24 @@
      "door_ew_open",
      "door_edge_s_closed",
      "door_edge_s_open"
+    ],
+    "joints": [
+     "joint_n",
+     "joint_n_ne",
+     "joint_n_nw",
+     "joint_n_nw_ne",
+     "joint_e",
+     "joint_e_se",
+     "joint_e_ne",
+     "joint_e_ne_se",
+     "joint_s",
+     "joint_s_se",
+     "joint_s_sw",
+     "joint_s_sw_se",
+     "joint_w",
+     "joint_w_sw",
+     "joint_w_nw",
+     "joint_w_nw_sw"
     ],
     "inset_px": 8,
     "face_px": 24
@@ -658,6 +716,24 @@
      "gate_edge_s_closed",
      "gate_edge_s_open"
     ],
+    "joints": [
+     "joint_n",
+     "joint_n_ne",
+     "joint_n_nw",
+     "joint_n_nw_ne",
+     "joint_e",
+     "joint_e_se",
+     "joint_e_ne",
+     "joint_e_ne_se",
+     "joint_s",
+     "joint_s_se",
+     "joint_s_sw",
+     "joint_s_sw_se",
+     "joint_w",
+     "joint_w_sw",
+     "joint_w_nw",
+     "joint_w_nw_sw"
+    ],
     "inset_px": 8,
     "face_px": 30
    },
@@ -712,6 +788,24 @@
      "cross"
     ],
     "doors": [],
+    "joints": [
+     "joint_n",
+     "joint_n_ne",
+     "joint_n_nw",
+     "joint_n_nw_ne",
+     "joint_e",
+     "joint_e_se",
+     "joint_e_ne",
+     "joint_e_ne_se",
+     "joint_s",
+     "joint_s_se",
+     "joint_s_sw",
+     "joint_s_sw_se",
+     "joint_w",
+     "joint_w_sw",
+     "joint_w_nw",
+     "joint_w_nw_sw"
+    ],
     "inset_px": 8,
     "face_px": 12
    },
@@ -774,6 +868,24 @@
      "gate_ew_open",
      "gate_edge_s_closed",
      "gate_edge_s_open"
+    ],
+    "joints": [
+     "joint_n",
+     "joint_n_ne",
+     "joint_n_nw",
+     "joint_n_nw_ne",
+     "joint_e",
+     "joint_e_se",
+     "joint_e_ne",
+     "joint_e_ne_se",
+     "joint_s",
+     "joint_s_se",
+     "joint_s_sw",
+     "joint_s_sw_se",
+     "joint_w",
+     "joint_w_sw",
+     "joint_w_nw",
+     "joint_w_nw_sw"
     ],
     "inset_px": 8,
     "face_px": 28
@@ -1361,6 +1473,98 @@
    "walk_behind": false,
    "states": [],
    "description": "A temple, four tiles: steps, a colonnade, a pediment, and a god at home."
+  },
+  "stairs_s": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "A stone flight down a bank that faces the viewer: treads and risers.",
+   "climbs": {
+    "descends": "s",
+    "high_cell": [
+     0,
+     0
+    ],
+    "low_cell": [
+     0,
+     1
+    ],
+    "rise_px": 16
+   }
+  },
+  "stairs_n": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The flight down the far side of a step: you look along it from above.",
+   "climbs": {
+    "descends": "n",
+    "high_cell": [
+     0,
+     1
+    ],
+    "low_cell": [
+     0,
+     0
+    ],
+    "rise_px": 16
+   }
+  },
+  "stairs_e": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The flight down a step's east flank. See `_stairs_flank`.",
+   "climbs": {
+    "descends": "e",
+    "high_cell": [
+     0,
+     0
+    ],
+    "low_cell": [
+     1,
+     0
+    ],
+    "rise_px": 16
+   }
+  },
+  "stairs_w": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The flight down a step's west flank. See `_stairs_flank`.",
+   "climbs": {
+    "descends": "w",
+    "high_cell": [
+     1,
+     0
+    ],
+    "low_cell": [
+     0,
+     0
+    ],
+    "rise_px": 16
+   }
   }
  },
  "monsters": {
@@ -1484,6 +1688,7 @@
     "attack",
     "hurt",
     "die",
+    "spit",
     "poof"
    ],
    "description": "A marsh adder: two coils on the ground and a neck standing out of them."
@@ -1625,6 +1830,7 @@
     "attack",
     "hurt",
     "die",
+    "venom",
     "poof"
    ],
    "description": "A desert scorpion: a low plated body, two claws out in front, and a tail arched over all of it with a barb on the end."
@@ -1642,6 +1848,7 @@
     "attack",
     "hurt",
     "die",
+    "tide",
     "poof"
    ],
    "description": "A fish-man out of the surf: a fin crest on the skull, fins for ears, flippers for feet, a pale belly and a trident carried like a staff."
@@ -1748,6 +1955,7 @@
     "attack",
     "hurt",
     "die",
+    "nova",
     "poof"
    ],
    "description": "An ice elemental: one big crystal hanging in the air with two cold eyes in it, and four splinters hanging round it. Nothing touches the ground."
@@ -1765,6 +1973,7 @@
     "attack",
     "hurt",
     "die",
+    "cinders",
     "poof"
    ],
    "description": "An ash elemental: a whirling column of cinders rooted where it stands, two coals for eyes and two arms of smoke."
@@ -1784,7 +1993,11 @@
     "die",
     "poof"
    ],
-   "description": "1x2. Twice a tile tall, and the height is the point."
+   "description": "1x2. Twice a tile tall, and the height is the point.",
+   "frames": {
+    "walk": 12,
+    "attack": 12
+   }
   },
   "treant": {
    "tier": 4,
@@ -1802,7 +2015,12 @@
     "roots",
     "poof"
    ],
-   "description": "A treant: a walking trunk a tile wide and two tall, leaves for a head."
+   "description": "A treant: a walking trunk a tile wide and two tall, leaves for a head.",
+   "frames": {
+    "walk": 12,
+    "attack": 12,
+    "roots": 12
+   }
   },
   "dragon": {
    "tier": 5,
@@ -1821,7 +2039,13 @@
     "fire_breath",
     "poof"
    ],
-   "description": "2x2. The one creature with four tiles to be drawn in."
+   "description": "2x2. The one creature with four tiles to be drawn in.",
+   "frames": {
+    "walk": 12,
+    "attack": 12,
+    "fly": 12,
+    "fire_breath": 12
+   }
   },
   "ghorakhar": {
    "tier": 5,
@@ -1838,7 +2062,11 @@
     "die",
     "poof"
    ],
-   "description": "1x2. Ghora'Khar, warlord of the Unlands: a black bull in bronze."
+   "description": "1x2. Ghora'Khar, warlord of the Unlands: a black bull in bronze.",
+   "frames": {
+    "walk": 12,
+    "attack": 12
+   }
   },
   "rangoskhar": {
    "tier": 5,
@@ -1855,7 +2083,11 @@
     "die",
     "poof"
    ],
-   "description": "1x2. Rangos'Khar: a grey minotaur, white-maned, with an axe in both hands and horns that burn along their cracks."
+   "description": "1x2. Rangos'Khar: a grey minotaur, white-maned, with an axe in both hands and horns that burn along their cracks.",
+   "frames": {
+    "walk": 12,
+    "attack": 12
+   }
   },
   "ramulos": {
    "tier": 5,
@@ -1872,7 +2104,11 @@
     "die",
     "poof"
    ],
-   "description": "1x2. Ramulos the Lion Lord, Ghora'Khar's rival: gold over navy, a mane wider than his shoulders and a small crown lost in it."
+   "description": "1x2. Ramulos the Lion Lord, Ghora'Khar's rival: gold over navy, a mane wider than his shoulders and a small crown lost in it.",
+   "frames": {
+    "walk": 12,
+    "attack": 12
+   }
   },
   "darkhorn": {
    "tier": 5,
@@ -1890,7 +2126,12 @@
     "cast",
     "poof"
    ],
-   "description": "1x2. Darkhorn, the horned sorcerer: a hood with nothing in it but two green lights, a spiked mantle, and a robe that reaches the ground."
+   "description": "1x2. Darkhorn, the horned sorcerer: a hood with nothing in it but two green lights, a spiked mantle, and a robe that reaches the ground.",
+   "frames": {
+    "walk": 12,
+    "attack": 12,
+    "cast": 12
+   }
   },
   "slime_elite": {
    "tier": 1,
@@ -2122,6 +2363,7 @@
     "attack",
     "hurt",
     "die",
+    "spit",
     "poof"
    ]
   },
@@ -2135,6 +2377,7 @@
     "attack",
     "hurt",
     "die",
+    "venom",
     "poof"
    ]
   },
@@ -2148,6 +2391,7 @@
     "attack",
     "hurt",
     "die",
+    "tide",
     "poof"
    ]
   },
@@ -2161,6 +2405,7 @@
     "attack",
     "hurt",
     "die",
+    "nova",
     "poof"
    ]
   },
@@ -2174,6 +2419,7 @@
     "attack",
     "hurt",
     "die",
+    "cinders",
     "poof"
    ]
   },
@@ -2244,6 +2490,59 @@
     "die",
     "fly",
     "fire_breath",
+    "poof"
+   ]
+  },
+  "ghorakhar_elite": {
+   "tier": 5,
+   "rank": "boss",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "rangoskhar_elite": {
+   "tier": 5,
+   "rank": "boss",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "ramulos_elite": {
+   "tier": 5,
+   "rank": "boss",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "darkhorn_elite": {
+   "tier": 5,
+   "rank": "boss",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "cast",
     "poof"
    ]
   }
@@ -2971,8 +3270,21 @@
   ],
   "fonts": [
    "hand_22",
-   "hand_34"
+   "hand_34",
+   "cute_22",
+   "cute_34"
   ],
+  "font_faces": {
+   "hand": {
+    "ttf": "https://ccherosc.github.io/doodle-codex/assets/ui/hand.ttf",
+    "use": "the game's own voice: menus, labels, numbers, a narrator, an adult's speech"
+   },
+   "cute": {
+    "ttf": "https://ccherosc.github.io/doodle-codex/assets/ui/cute.ttf",
+    "use": "a child's hand: a young hero's journal, notes, letters, a friendlier dialogue box"
+   }
+  },
+  "font_chars": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u00a1\u00a2\u00a3\u00a4\u00a5\u00a6\u00a7\u00a8\u00a9\u00aa\u00ab\u00ac\u00ae\u00af\u00b0\u00b1\u00b2\u00b3\u00b4\u00b5\u00b6\u00b7\u00b8\u00b9\u00ba\u00bb\u00bc\u00bd\u00be\u00bf\u00c0\u00c1\u00c2\u00c3\u00c4\u00c5\u00c6\u00c7\u00c8\u00c9\u00ca\u00cb\u00cc\u00cd\u00ce\u00cf\u00d0\u00d1\u00d2\u00d3\u00d4\u00d5\u00d6\u00d7\u00d8\u00d9\u00da\u00db\u00dc\u00dd\u00de\u00df\u00e0\u00e1\u00e2\u00e3\u00e4\u00e5\u00e6\u00e7\u00e8\u00e9\u00ea\u00eb\u00ec\u00ed\u00ee\u00ef\u00f0\u00f1\u00f2\u00f3\u00f4\u00f5\u00f6\u00f7\u00f8\u00f9\u00fa\u00fb\u00fc\u00fd\u00fe\u00ff\u0100\u0101\u0102\u0103\u0104\u0105\u0106\u0107\u010c\u010d\u010e\u010f\u0110\u0111\u0112\u0113\u0116\u0117\u0118\u0119\u011a\u011b\u011e\u011f\u0122\u0123\u012a\u012b\u012e\u012f\u0130\u0131\u0136\u0137\u0139\u013a\u013b\u013c\u013d\u013e\u0141\u0142\u0143\u0144\u0145\u0146\u0147\u0148\u014c\u014d\u0150\u0151\u0152\u0153\u0154\u0155\u0158\u0159\u015a\u015b\u015e\u015f\u0160\u0161\u0164\u0165\u016a\u016b\u016e\u016f\u0170\u0171\u0172\u0173\u0178\u0179\u017a\u017b\u017c\u017d\u017e\u0192\u0218\u0219\u021a\u021b\u02c6\u02dc\u2013\u2014\u2018\u2019\u201a\u201c\u201d\u201e\u2020\u2021\u2022\u2026\u2030\u2039\u203a\u20ac\u2122\u2190\u2191\u2192\u2193\u2605\u2665\u266a\u2713\u2717",
   "monster_portraits": [
    "ghorakhar",
    "rangoskhar",
@@ -3145,9 +3457,9 @@
  },
  "counts": {
   "terrain tiles": 108,
-  "structures": 51,
+  "structures": 55,
   "creatures": 30,
-  "elites": 26,
+  "elites": 30,
   "bodies": 12,
   "wardrobe items": 119,
   "NPC looks": 39,
@@ -3157,11 +3469,11 @@
  "known_gaps": [
   {
    "title": "Local scenes are still thin",
-   "detail": "Two houses, an inn, six pieces of furniture, two floors and five wall kits. No stairs, windows as pieces, rugs, signs, market stalls or street lamps at a person's scale; kinds of wall do not join each other."
+   "detail": "Two houses, an inn, six pieces of furniture, two floors, five wall kits and four flights of stone stairs. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. Wall kits meet in a butt joint: one material stops and the next starts, with no bonded corner."
   },
   {
-   "title": "Cliffs",
-   "detail": "A height step has a drawn bank on its south-facing edge only; north, west and east edges are a rim and a shadow. No ramp or stair art, no foam where a cliff stands in water, and only six terrains have one."
+   "title": "Cliffs and stairs",
+   "detail": "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Stairs are one material and climb one level (16 px): no ramp, no wooden flight, nothing that climbs a wall. Only six terrains have a cliff."
   },
   {
    "title": "Landmarks",
@@ -3169,7 +3481,7 @@
   },
   {
    "title": "Monsters",
-   "detail": "The regional monsters have no signature state. The four lords have no elite. Monster portraits exist for the lords only."
+   "detail": "Eight creatures have no signature state: rat, goblin, wolf, orc, ogre and three of the lords. Twelve-frame animation covers the attack, walk and signature of the seven creatures bigger than a tile; their hurt and die, and every smaller creature and every person, are six frames. Three elite effects keep the base's colours by nature (a web, a tongue, a war-cry). Monster portraits exist for the lords only."
   },
   {
    "title": "Portraits",
@@ -3177,7 +3489,7 @@
   },
   {
    "title": "UI",
-   "detail": "No icons for status effects, no minimap frame, no scroll bar, no second language: the font covers ASCII 32-126 only."
+   "detail": "No icons for status effects, no minimap frame, no scroll bar. The two handwriting faces are Latin only (303 characters; no Greek, Cyrillic or CJK) and have no kerning pairs."
   },
   {
    "title": "Faces",
@@ -3185,7 +3497,7 @@
   },
   {
    "title": "Terrain",
-   "detail": "Farmland runs east-west or north-south, not diagonally. Alternates change 7 to 29 percent of an edge tile: they break a rhythm, they do not hide it."
+   "detail": "Farmland runs east-west or north-south, not diagonally. Borders come in four interchangeable looks; within 10 px of the drawn contour any two differ on 11 to 45 percent of pixels (mean 24), and where a border crosses the tile edge is fixed, so a border is varied, not unique. Cliff and pair atlases have one look."
   },
   {
    "title": "Gameplay data",
@@ -3290,11 +3602,27 @@
    ]
   },
   {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_cliff_wash_sheet.png",
+   "title": "Transitions: cliff wash: a step standing in water (foam) and in lava (char)",
+   "size": [
+    1376,
+    1632
+   ]
+  },
+  {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_alternates.png",
-   "title": "Transitions: alternates: the same border with one seed and with two",
+   "title": "Transitions: alternates: the same border in each of its four drawings",
    "size": [
     784,
     3860
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_alternates_map.png",
+   "title": "Transitions: alternates: one coast with the primary only, and with all four mixed",
+   "size": [
+    1304,
+    478
    ]
   },
   {
@@ -3418,11 +3746,19 @@
    ]
   },
   {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_mixed_demo.png",
+   "title": "Walls: all five kits in one building: a butt joint wherever two materials meet",
+   "size": [
+    1408,
+    1408
+   ]
+  },
+  {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/structures.png",
-   "title": "Structures: 51 props and their states (1x)",
+   "title": "Structures: 55 props and their states (1x)",
    "size": [
     1626,
-    1394
+    1562
    ]
   },
   {
@@ -3478,7 +3814,7 @@
    "title": "Monster serpent: every state x 6 frames, facing right",
    "size": [
     1606,
-    768
+    896
    ]
   },
   {
@@ -3542,7 +3878,7 @@
    "title": "Monster scorpion: every state x 6 frames, facing right",
    "size": [
     1606,
-    768
+    896
    ]
   },
   {
@@ -3550,7 +3886,7 @@
    "title": "Monster merrow: every state x 6 frames, facing right",
    "size": [
     1606,
-    768
+    896
    ]
   },
   {
@@ -3598,7 +3934,7 @@
    "title": "Monster frostshard: every state x 6 frames, facing right",
    "size": [
     1606,
-    768
+    896
    ]
   },
   {
@@ -3606,71 +3942,71 @@
    "title": "Monster ashfiend: every state x 6 frames, facing right",
    "size": [
     1606,
-    768
+    896
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_ogre.png",
-   "title": "Monster ogre: every state x 6 frames, facing right",
+   "title": "Monster ogre: every state x 6 or 12 frames, facing right",
    "size": [
-    1222,
-    768
+    2374,
+    1152
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_treant.png",
-   "title": "Monster treant: every state x 6 frames, facing right",
+   "title": "Monster treant: every state x 6 or 12 frames, facing right",
    "size": [
-    1222,
+    2374,
     896
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_dragon.png",
-   "title": "Monster dragon: every state x 6 frames, facing right",
+   "title": "Monster dragon: every state x 6 or 12 frames, facing right",
    "size": [
-    1606,
+    3910,
     1024
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_ghorakhar.png",
-   "title": "Monster ghorakhar: every state x 6 frames, facing right",
+   "title": "Monster ghorakhar: every state x 6 or 12 frames, facing right",
    "size": [
-    1606,
+    3142,
     768
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_rangoskhar.png",
-   "title": "Monster rangoskhar: every state x 6 frames, facing right",
+   "title": "Monster rangoskhar: every state x 6 or 12 frames, facing right",
    "size": [
-    1222,
+    3142,
     768
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_ramulos.png",
-   "title": "Monster ramulos: every state x 6 frames, facing right",
+   "title": "Monster ramulos: every state x 6 or 12 frames, facing right",
    "size": [
-    1222,
-    768
+    3142,
+    1152
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_darkhorn.png",
-   "title": "Monster darkhorn: every state x 6 frames, facing right",
+   "title": "Monster darkhorn: every state x 6 or 12 frames, facing right",
    "size": [
-    1222,
+    2374,
     896
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/monsters.png",
-   "title": "Monsters: 30 creatures by tier, then 26 elites (idle, facing down, 2x)",
+   "title": "Monsters: 30 creatures by tier, then 30 elites (idle, facing down, 2x)",
    "size": [
     1872,
-    2418
+    2714
    ]
   },
   {
@@ -3731,10 +4067,10 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/font.png",
-   "title": "Handwriting font: two sizes, ink and chalk (1x)",
+   "title": "Handwriting: two faces (hand, cute), two sizes, ink and chalk (1x)",
    "size": [
-    932,
-    322
+    1124,
+    742
    ]
   },
   {
@@ -3779,10 +4115,42 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_cliff.png",
-   "title": "Scene: a grass plateau with a knoll: heights per cell, cliff atlases, alternates on",
+   "title": "Scene: a grass plateau with a knoll and two flights of stairs: heights per cell, cliff atlases, alternates on",
    "size": [
     640,
     448
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_cliff_wash.png",
+   "title": "Scene: the same step standing in water and in lava: foam and char at its foot",
+   "size": [
+    640,
+    448
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_walls_mixed.png",
+   "title": "Scene: five wall kits in one plan, joined where they meet",
+   "size": [
+    640,
+    448
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_handwriting.png",
+   "title": "Scene: both handwriting faces, with accents and symbols",
+   "size": [
+    470,
+    214
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_map.gif",
+   "title": "Scene: the map, animated: the ogre's blow takes twelve frames",
+   "size": [
+    896,
+    640
    ]
   },
   {

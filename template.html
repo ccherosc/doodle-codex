@@ -84,7 +84,7 @@ footer{margin-top:40px; padding-top:18px; border-top:1px solid var(--line);
 <div class="wrap">
   <header>
     <h1>Doodle Codex</h1>
-    <span class="tag">64px tile &middot; 6 frames &middot; 10 fps</span>
+    <span class="tag">64px tile &middot; 6 frames (12 for a big creature's blow) &middot; 10 fps</span>
     {{TAGS}}
   </header>
   <nav>{{NAV}}</nav>
@@ -102,12 +102,14 @@ footer{margin-top:40px; padding-top:18px; border-top:1px solid var(--line);
 </div>
 
 <script>
-const FRAMES = 6, FPS = 10;
+const FPS = 10;
 const live = new Set();
-function paint(cv, frame) {
+function paint(cv, tick) {
   const img = cv._img;
   if (!img || !img.complete || !img.naturalWidth) return;
   const fw = +cv.dataset.fw, fh = +cv.dataset.fh, n = +cv.dataset.rep;
+  // a strip is 6 frames, or 12 for a big creature's long states: read it off the width
+  const frame = tick % Math.max(1, Math.round(img.naturalWidth / fw));
   const ctx = cv.getContext('2d');
   ctx.imageSmoothingEnabled = false;
   ctx.clearRect(0, 0, cv.width, cv.height);
@@ -126,7 +128,7 @@ const io = new IntersectionObserver(entries => {
   }
 }, {rootMargin: '300px'});
 document.querySelectorAll('canvas[data-src]').forEach(cv => io.observe(cv));
-setInterval(() => { frame = (frame + 1) % FRAMES; live.forEach(cv => paint(cv, frame)); }, 1000 / FPS);
+setInterval(() => { frame = (frame + 1) % 12; live.forEach(cv => paint(cv, frame)); }, 1000 / FPS);
 </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # Doodle Codex: full asset catalog
 
-The art library for *Norfair Chronicles*, a real-time overhead action RPG (Godot 4, flat 2D, y-sorted): a world map for travel and local scenes for play. Everything is drawn in one pencil-doodle style on a 64x64 grid, animated as 6-frame horizontal strips at 10 fps, in four facings (down, left, right, up) where a thing can turn.
+The art library for *Norfair Chronicles*, a real-time overhead action RPG (Godot 4, flat 2D, y-sorted): a world map for travel and local scenes for play. Everything is drawn in one pencil-doodle style on a 64x64 grid, animated as 6-frame horizontal strips at 10 fps (12 frames for a big creature's attack, walk and signature: read `frames` per state), in four facings (down, left, right, up) where a thing can turn.
 
 This file is the text inventory. It is generated from the shipped game package, so the names here are the real asset names. Site: https://ccherosc.github.io/doodle-codex/
 
@@ -20,7 +20,9 @@ Each of these is a static PNG with every asset labelled:
 - [Transitions: pair: rock over grass (dual-grid cliff)](https://ccherosc.github.io/doodle-codex/sheets/transition_pair_grass__rock.png) (896x768)
 - [Transitions: cliffs: a height step in each of six terrains](https://ccherosc.github.io/doodle-codex/sheets/transition_cliffs_sheet.png) (1376x1226)
 - [Transitions: cliff: grass plateaus over grass, dirt and sand](https://ccherosc.github.io/doodle-codex/sheets/transition_cliff_grass.png) (1536x1152)
-- [Transitions: alternates: the same border with one seed and with two](https://ccherosc.github.io/doodle-codex/sheets/transition_alternates.png) (784x3860)
+- [Transitions: cliff wash: a step standing in water (foam) and in lava (char)](https://ccherosc.github.io/doodle-codex/sheets/transition_cliff_wash_sheet.png) (1376x1632)
+- [Transitions: alternates: the same border in each of its four drawings](https://ccherosc.github.io/doodle-codex/sheets/transition_alternates.png) (784x3860)
+- [Transitions: alternates: one coast with the primary only, and with all four mixed](https://ccherosc.github.io/doodle-codex/sheets/transition_alternates_map.png) (1304x478)
 - [Interior wall kit: 51 labelled pieces and doors (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_interior.png) (1390x1058)
 - [Walls: interior: a yard, a maze and a line built from the kit](https://ccherosc.github.io/doodle-codex/sheets/walls_interior_demo.png) (1152x768)
 - [Walls: interior: the pieces in place, labelled](https://ccherosc.github.io/doodle-codex/sheets/walls_interior_pieces.png) (1132x1062)
@@ -36,14 +38,15 @@ Each of these is a static PNG with every asset labelled:
 - [Timber wall kit: 55 labelled pieces and doors (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_timber.png) (1390x1058)
 - [Walls: timber: a yard, a maze and a line built from the kit](https://ccherosc.github.io/doodle-codex/sheets/walls_timber_demo.png) (1152x768)
 - [Walls: timber: the pieces in place, labelled](https://ccherosc.github.io/doodle-codex/sheets/walls_timber_pieces.png) (1132x1062)
-- [Structures: 51 props and their states (1x)](https://ccherosc.github.io/doodle-codex/sheets/structures.png) (1626x1394)
+- [Walls: all five kits in one building: a butt joint wherever two materials meet](https://ccherosc.github.io/doodle-codex/sheets/walls_mixed_demo.png) (1408x1408)
+- [Structures: 55 props and their states (1x)](https://ccherosc.github.io/doodle-codex/sheets/structures.png) (1626x1562)
 - [Monster slime: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_slime.png) (1606x896)
 - [Monster rat: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_rat.png) (1606x768)
 - [Monster bat: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_bat.png) (1606x1792)
 - [Monster frog: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_frog.png) (1606x896)
 - [Monster crab: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_crab.png) (1606x896)
 - [Monster imp: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_imp.png) (1222x448)
-- [Monster serpent: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_serpent.png) (1606x768)
+- [Monster serpent: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_serpent.png) (1606x896)
 - [Monster goblin: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_goblin.png) (1222x384)
 - [Monster skeleton: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_skeleton.png) (1606x1792)
 - [Monster wolf: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_wolf.png) (1606x768)
@@ -51,23 +54,23 @@ Each of these is a static PNG with every asset labelled:
 - [Monster zombie: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_zombie.png) (1222x448)
 - [Monster harpy: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_harpy.png) (1606x1792)
 - [Monster beastman: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_beastman.png) (1606x896)
-- [Monster scorpion: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_scorpion.png) (1606x768)
-- [Monster merrow: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_merrow.png) (1606x768)
+- [Monster scorpion: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_scorpion.png) (1606x896)
+- [Monster merrow: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_merrow.png) (1606x896)
 - [Monster orc: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_orc.png) (1606x768)
 - [Monster spider: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_spider.png) (1606x896)
 - [Monster wraith: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_wraith.png) (1606x896)
 - [Monster yeti: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_yeti.png) (1606x896)
 - [Monster golem: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_golem.png) (1606x896)
-- [Monster frostshard: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_frostshard.png) (1606x768)
-- [Monster ashfiend: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_ashfiend.png) (1606x768)
-- [Monster ogre: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_ogre.png) (1222x768)
-- [Monster treant: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_treant.png) (1222x896)
-- [Monster dragon: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_dragon.png) (1606x1024)
-- [Monster ghorakhar: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_ghorakhar.png) (1606x768)
-- [Monster rangoskhar: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_rangoskhar.png) (1222x768)
-- [Monster ramulos: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_ramulos.png) (1222x768)
-- [Monster darkhorn: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_darkhorn.png) (1222x896)
-- [Monsters: 30 creatures by tier, then 26 elites (idle, facing down, 2x)](https://ccherosc.github.io/doodle-codex/sheets/monsters.png) (1872x2418)
+- [Monster frostshard: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_frostshard.png) (1606x896)
+- [Monster ashfiend: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_ashfiend.png) (1606x896)
+- [Monster ogre: every state x 6 or 12 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_ogre.png) (2374x1152)
+- [Monster treant: every state x 6 or 12 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_treant.png) (2374x896)
+- [Monster dragon: every state x 6 or 12 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_dragon.png) (3910x1024)
+- [Monster ghorakhar: every state x 6 or 12 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_ghorakhar.png) (3142x768)
+- [Monster rangoskhar: every state x 6 or 12 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_rangoskhar.png) (3142x768)
+- [Monster ramulos: every state x 6 or 12 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_ramulos.png) (3142x1152)
+- [Monster darkhorn: every state x 6 or 12 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_darkhorn.png) (2374x896)
+- [Monsters: 30 creatures by tier, then 30 elites (idle, facing down, 2x)](https://ccherosc.github.io/doodle-codex/sheets/monsters.png) (1872x2714)
 - [People: 12 bodies, 9 skins, 7 hair colours (2x)](https://ccherosc.github.io/doodle-codex/sheets/people_bodies.png) (1390x554)
 - [Hero builds: 2 heroes x 10 sets (2x)](https://ccherosc.github.io/doodle-codex/sheets/people_heroes.png) (1390x386)
 - [NPC looks: 39 (2x), each on one sample body](https://ccherosc.github.io/doodle-codex/sheets/people_npcs.png) (1390x722)
@@ -75,13 +78,17 @@ Each of these is a static PNG with every asset labelled:
 - [Wardrobe: 119 items, each alone on the hero body (2x) [slot]](https://ccherosc.github.io/doodle-codex/sheets/wardrobe.png) (1666x1730)
 - [Dialogue portraits: a sample (1x). Any body x any outfit composes.](https://ccherosc.github.io/doodle-codex/sheets/portraits.png) (1340x710)
 - [UI: nine-slice pieces sliced to a box, bars, cursors (2x)](https://ccherosc.github.io/doodle-codex/sheets/ui.png) (1860x978)
-- [Handwriting font: two sizes, ink and chalk (1x)](https://ccherosc.github.io/doodle-codex/sheets/font.png) (932x322)
+- [Handwriting: two faces (hand, cute), two sizes, ink and chalk (1x)](https://ccherosc.github.io/doodle-codex/sheets/font.png) (1124x742)
 - [Loot (9), effects (4), icons (124) (2x)](https://ccherosc.github.io/doodle-codex/sheets/items.png) (1666x2066)
 - [Scene: a local scene: walled yard, trees a person walks behind, chest, people](https://ccherosc.github.io/doodle-codex/sheets/demo_scene.png) (576x384)
 - [Scene: a map assembled by the reference loader: terrain, transitions, structures, monsters](https://ccherosc.github.io/doodle-codex/sheets/demo_map.png) (896x640)
 - [Scene: a dialogue box: nine-slice panel, composed portraits, handwritten text](https://ccherosc.github.io/doodle-codex/sheets/demo_dialogue.png) (890x262)
 - [Scene: a HUD: bars, inventory slots, cursors, all from the package](https://ccherosc.github.io/doodle-codex/sheets/demo_hud.png) (420x200)
-- [Scene: a grass plateau with a knoll: heights per cell, cliff atlases, alternates on](https://ccherosc.github.io/doodle-codex/sheets/demo_cliff.png) (640x448)
+- [Scene: a grass plateau with a knoll and two flights of stairs: heights per cell, cliff atlases, alternates on](https://ccherosc.github.io/doodle-codex/sheets/demo_cliff.png) (640x448)
+- [Scene: the same step standing in water and in lava: foam and char at its foot](https://ccherosc.github.io/doodle-codex/sheets/demo_cliff_wash.png) (640x448)
+- [Scene: five wall kits in one plan, joined where they meet](https://ccherosc.github.io/doodle-codex/sheets/demo_walls_mixed.png) (640x448)
+- [Scene: both handwriting faces, with accents and symbols](https://ccherosc.github.io/doodle-codex/sheets/demo_handwriting.png) (470x214)
+- [Scene: the map, animated: the ogre's blow takes twelve frames](https://ccherosc.github.io/doodle-codex/sheets/demo_map.gif) (896x640)
 - [Scene: the local scene, animated](https://ccherosc.github.io/doodle-codex/sheets/demo_scene.gif) (576x384)
 
 The engine contract (file layout, JSON fields, autotile rule, paperdoll composition): [GAME_INTEGRATION.md](https://ccherosc.github.io/doodle-codex/GAME_INTEGRATION.md). Machine-readable summary: [catalog.json](https://ccherosc.github.io/doodle-codex/catalog.json).
@@ -89,9 +96,9 @@ The engine contract (file layout, JSON fields, autotile rule, paperdoll composit
 ## Counts
 
 - terrain tiles: 108
-- structures: 51
+- structures: 55
 - creatures: 30
-- elites: 26
+- elites: 30
 - bodies: 12
 - wardrobe items: 119
 - NPC looks: 39
@@ -100,14 +107,14 @@ The engine contract (file layout, JSON fields, autotile rule, paperdoll composit
 
 ## Known gaps (what the library does not have yet)
 
-1. **Local scenes are still thin.** Two houses, an inn, six pieces of furniture, two floors and five wall kits. No stairs, windows as pieces, rugs, signs, market stalls or street lamps at a person's scale; kinds of wall do not join each other.
-2. **Cliffs.** A height step has a drawn bank on its south-facing edge only; north, west and east edges are a rim and a shadow. No ramp or stair art, no foam where a cliff stands in water, and only six terrains have one.
+1. **Local scenes are still thin.** Two houses, an inn, six pieces of furniture, two floors, five wall kits and four flights of stone stairs. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. Wall kits meet in a butt joint: one material stops and the next starts, with no bonded corner.
+2. **Cliffs and stairs.** A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Stairs are one material and climb one level (16 px): no ramp, no wooden flight, nothing that climbs a wall. Only six terrains have a cliff.
 3. **Landmarks.** One design and no state each (no ruined, raided or lit variant) for the great landmarks.
-4. **Monsters.** The regional monsters have no signature state. The four lords have no elite. Monster portraits exist for the lords only.
+4. **Monsters.** Eight creatures have no signature state: rat, goblin, wolf, orc, ogre and three of the lords. Twelve-frame animation covers the attack, walk and signature of the seven creatures bigger than a tile; their hurt and die, and every smaller creature and every person, are six frames. Three elite effects keep the base's colours by nature (a web, a tongue, a war-cry). Monster portraits exist for the lords only.
 5. **Portraits.** Stills, facing the viewer, one expression per body. No talking or blinking frames.
-6. **UI.** No icons for status effects, no minimap frame, no scroll bar, no second language: the font covers ASCII 32-126 only.
+6. **UI.** No icons for status effects, no minimap frame, no scroll bar. The two handwriting faces are Latin only (303 characters; no Greek, Cyrillic or CJK) and have no kerning pairs.
 7. **Faces.** Sprites keep two eyes and a brow at 64 px by design; all face detail is in the portraits.
-8. **Terrain.** Farmland runs east-west or north-south, not diagonally. Alternates change 7 to 29 percent of an edge tile: they break a rhythm, they do not hide it.
+8. **Terrain.** Farmland runs east-west or north-south, not diagonally. Borders come in four interchangeable looks; within 10 px of the drawn contour any two differ on 11 to 45 percent of pixels (mean 24), and where a border crosses the tile edge is fixed, so a border is varied, not unique. Cliff and pair atlases have one look.
 9. **Gameplay data.** Only suggested data ships: walkability per terrain, blocked cells, idle hurtboxes, impact frames. No per-state hitboxes.
 
 ## Terrain (20 terrains, 88 variants)
@@ -141,14 +148,16 @@ Seamless 64x64 tiles, 6 frames. Listed low to high in elevation (draw order).
 
 Corner-Wang (16 masks) on a dual grid; overlay per higher terrain, `shore` over water, `scorch` over lava. Elevation: water < lava < ice < cave < ash < sand < desert < swamp < flagstones < floorboards < dirt < farmland < farmland_ns < snow < roads < grass < forest < mountain < peaks < rock.
 
-Cliffs (a height step within one terrain, heights per cell, south-facing bank only, no ramps): ash, desert, dirt, grass, sand, snow. Alternates: a second seed for every overlay, shore and scorch atlas, seam-safe in any mix.
+Cliffs (a height step within one terrain, heights per cell; a bank on the south-facing edge, a rim on the others, a wash atlas where the step stands in water or lava; the stairs_* structures cross it): ash, desert, dirt, grass, sand, snow. Alternates: 3 more drawings of every overlay, shore and scorch atlas, seam-safe in any mix.
 
 
 ## Wall kits (5 materials x 47 pieces, 24 door and gate pieces)
 
-For a wall cell, OR together neighbour_bits of the eight neighbours that are also wall cells and index `lookup` with the result. A diagonal neighbour only matters when both orthogonal neighbours beside it are wall; lookup already accounts for that. Draw the piece in the cell, y-sorted or on the ground layer above terrain.
+For a wall cell, OR together neighbour_bits of the eight neighbours that are also wall cells, of any kind, and index `lookup` with the result. A diagonal neighbour only matters when both orthogonal neighbours beside it are wall; lookup already accounts for that. Draw the piece in the cell, y-sorted or on the ground layer above terrain.
 
 A door or gate is a wall cell whose piece is swapped: where lookup answers a door's `replaces`, draw the door instead. Closed, it blocks like any wall. Open, the cell is walkable and the piece is drawn over whoever stands in it. Swap closed for open to open it; there is no strip.
+
+Kits join with a butt joint. A wall cell of any kind counts as a neighbour when choosing a piece, so each kit runs to the edge of its own cell. Then, for each of the four sides where the neighbour is a wall of ANOTHER kind, draw this kind's joint over the piece: pieces[piece].joints[side] names it (a door uses its `replaces` piece's). Both cells of a boundary do this, each from its own kit. A joint lies inside its own cell and its own piece.
 
 Naming: `single` = a lone pillar; `end_<side>` = the <side> end of a one-cell-wide wall; `straight_ns / straight_ew` = a one-cell-wide run; `bend_<corner>` = a one-cell-wide wall turning; <corner> is the outside of the turn; `corner_<corner>` = the <corner> corner of a solid block; `edge_<side>` = the <side> edge of a solid block (edge_s shows the face); `tee_<side>` = a one-cell-wide T; <side> is the side with no branch; `inner_<diagonal>` = solid, with the <diagonal> neighbour missing (an inside corner); `cross` = a one-cell-wide crossing; `solid` = interior: the top, no edge; `*_notch_<diagonals>` = the same piece with inside corners at those diagonals; `door_<where>_<state> / gate_<where>_<state>` = a door (18 px) or gate (38 px) in a south face; <where> is ew (replaces straight_ew) or edge_s (replaces edge_s)
 
@@ -160,7 +169,7 @@ Pieces (the same 47 labels in every kind): `single`, `end_w`, `end_s`, `end_n`, 
 - **stone_low**: face 12 px; doors and gates: none
 - **timber**: face 28 px; doors and gates: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`, `door_edge_s_open`, `gate_ew_closed`, `gate_ew_open`, `gate_edge_s_closed`, `gate_edge_s_open`
 
-## Structures and props (51 props, 13 at a person's scale)
+## Structures and props (55 props, 17 at a person's scale)
 
 | name | tiles | scale | passable | states | description |
 | --- | --- | --- | --- | --- | --- |
@@ -215,8 +224,12 @@ Pieces (the same 47 labels in every kind): `single`, `end_w`, `end_s`, `end_n`, 
 | lighthouse | 1x2 | map |  |  | A lighthouse on its own rock, two tiles tall. The lamp is the animation. |
 | mountain_fortress | 3x2 | map |  |  | A fortress built up the face of a mountain, six tiles. |
 | temple | 2x2 | map |  |  | A temple, four tiles: steps, a colonnade, a pediment, and a god at home. |
+| stairs_s | 1x2 | local | yes |  | A stone flight down a bank that faces the viewer: treads and risers. |
+| stairs_n | 1x2 | local | yes |  | The flight down the far side of a step: you look along it from above. |
+| stairs_e | 2x1 | local | yes |  | The flight down a step's east flank. See `_stairs_flank`. |
+| stairs_w | 2x1 | local | yes |  | The flight down a step's west flank. See `_stairs_flank`. |
 
-## Monsters (30 creatures, 26 elites, 198 states x 4 facings)
+## Monsters (30 creatures, 30 elites, 203 states x 4 facings)
 
 | creature | tier | rank | tiles | states | description |
 | --- | --- | --- | --- | --- | --- |
@@ -226,7 +239,7 @@ Pieces (the same 47 labels in every kind): `single`, `end_w`, `end_s`, `end_n`, 
 | frog | 1 | normal | 1x1 | idle, walk, attack, hurt, die, tongue, poof | A giant frog: all mouth, two eyes on top, and legs folded like springs. |
 | crab | 1 | normal | 1x1 | idle, walk, attack, hurt, die, bubble, poof | A crab: a wide shell on six legs, two eyes on stalks and one claw much too big for it. |
 | imp | 1 | normal | 1x1 | idle, walk, attack, hurt, die, ember, poof | A goblin's worth of devil: horns up, wings out, a tail with a coal on it. |
-| serpent | 1 | normal | 1x1 | idle, walk, attack, hurt, die, poof | A marsh adder: two coils on the ground and a neck standing out of them. |
+| serpent | 1 | normal | 1x1 | idle, walk, attack, hurt, die, spit, poof | A marsh adder: two coils on the ground and a neck standing out of them. |
 | goblin | 2 | normal | 1x1 | idle, walk, attack, hurt, die, poof | Head too big, ears too wide, knife too eager. |
 | skeleton | 2 | normal | 1x1 | idle, walk, attack, hurt, die, cast, poof | Bone, so it barely boils - it is the one creature nearly as still as a wall. |
 | wolf | 2 | normal | 1x1 | idle, walk, attack, hurt, die, poof | A wolf seen from the front or from behind; `_wolf_side` is its profile. |
@@ -234,24 +247,24 @@ Pieces (the same 47 labels in every kind): `single`, `end_w`, `end_s`, `end_n`, 
 | zombie | 2 | normal | 1x1 | idle, walk, attack, hurt, die, spew, poof | A zombie: a goblin's height and nobody home. Arms out, head on one side. |
 | harpy | 2 | normal | 1x1 | idle, walk, attack, hurt, die, fly, poof | A harpy: yellow wings, bird legs, a pale face and a shock of blue hair. |
 | beastman | 2 | normal | 1x1 | idle, walk, attack, hurt, die, warcry, poof | The Dominion's foot soldier: a bull's head on an orc's shoulders. |
-| scorpion | 2 | normal | 1x1 | idle, walk, attack, hurt, die, poof | A desert scorpion: a low plated body, two claws out in front, and a tail arched over all of it with a barb on the end. |
-| merrow | 2 | normal | 1x1 | idle, walk, attack, hurt, die, poof | A fish-man out of the surf: a fin crest on the skull, fins for ears, flippers for feet, a pale belly and a trident carried like a staff. |
+| scorpion | 2 | normal | 1x1 | idle, walk, attack, hurt, die, venom, poof | A desert scorpion: a low plated body, two claws out in front, and a tail arched over all of it with a barb on the end. |
+| merrow | 2 | normal | 1x1 | idle, walk, attack, hurt, die, tide, poof | A fish-man out of the surf: a fin crest on the skull, fins for ears, flippers for feet, a pale belly and a trident carried like a staff. |
 | orc | 3 | normal | 1x1 | idle, walk, attack, hurt, die, poof | Shoulders first. An orc is a goblin that got the gym membership. |
 | spider | 3 | normal | 1x1 | idle, walk, attack, hurt, die, web, poof | Eight legs, and the legs are the whole animal. |
 | wraith | 3 | normal | 1x1 | idle, walk, attack, hurt, die, cast, poof | A hood with nothing in it, and a hem that never reaches the ground. |
 | yeti | 3 | normal | 1x1 | idle, walk, attack, hurt, die, roar, poof | A yeti: a tile-filling heap of white fur with a blue face set into it. |
 | golem | 3 | normal | 1x1 | idle, walk, attack, hurt, die, slam, poof | A golem: stacked grey blocks, two boulder fists and a rune that is lit. |
-| frostshard | 3 | normal | 1x1 | idle, walk, attack, hurt, die, poof | An ice elemental: one big crystal hanging in the air with two cold eyes in it, and four splinters hanging round it. Nothing touches the ground. |
-| ashfiend | 3 | normal | 1x1 | idle, walk, attack, hurt, die, poof | An ash elemental: a whirling column of cinders rooted where it stands, two coals for eyes and two arms of smoke. |
-| ogre | 4 | miniboss | 1x2 | idle, walk, attack, hurt, die, poof | 1x2. Twice a tile tall, and the height is the point. |
-| treant | 4 | miniboss | 1x2 | idle, walk, attack, hurt, die, roots, poof | A treant: a walking trunk a tile wide and two tall, leaves for a head. |
-| dragon | 5 | boss | 2x2 | idle, walk, attack, hurt, die, fly, fire_breath, poof | 2x2. The one creature with four tiles to be drawn in. |
-| ghorakhar | 5 | boss | 1x2 | idle, walk, attack, hurt, die, poof | 1x2. Ghora'Khar, warlord of the Unlands: a black bull in bronze. |
-| rangoskhar | 5 | boss | 1x2 | idle, walk, attack, hurt, die, poof | 1x2. Rangos'Khar: a grey minotaur, white-maned, with an axe in both hands and horns that burn along their cracks. |
-| ramulos | 5 | boss | 1x2 | idle, walk, attack, hurt, die, poof | 1x2. Ramulos the Lion Lord, Ghora'Khar's rival: gold over navy, a mane wider than his shoulders and a small crown lost in it. |
-| darkhorn | 5 | boss | 1x2 | idle, walk, attack, hurt, die, cast, poof | 1x2. Darkhorn, the horned sorcerer: a hood with nothing in it but two green lights, a spiked mantle, and a robe that reaches the ground. |
+| frostshard | 3 | normal | 1x1 | idle, walk, attack, hurt, die, nova, poof | An ice elemental: one big crystal hanging in the air with two cold eyes in it, and four splinters hanging round it. Nothing touches the ground. |
+| ashfiend | 3 | normal | 1x1 | idle, walk, attack, hurt, die, cinders, poof | An ash elemental: a whirling column of cinders rooted where it stands, two coals for eyes and two arms of smoke. |
+| ogre | 4 | miniboss | 1x2 | idle, walk (12 frames), attack (12 frames), hurt, die, poof | 1x2. Twice a tile tall, and the height is the point. |
+| treant | 4 | miniboss | 1x2 | idle, walk (12 frames), attack (12 frames), hurt, die, roots (12 frames), poof | A treant: a walking trunk a tile wide and two tall, leaves for a head. |
+| dragon | 5 | boss | 2x2 | idle, walk (12 frames), attack (12 frames), hurt, die, fly (12 frames), fire_breath (12 frames), poof | 2x2. The one creature with four tiles to be drawn in. |
+| ghorakhar | 5 | boss | 1x2 | idle, walk (12 frames), attack (12 frames), hurt, die, poof | 1x2. Ghora'Khar, warlord of the Unlands: a black bull in bronze. |
+| rangoskhar | 5 | boss | 1x2 | idle, walk (12 frames), attack (12 frames), hurt, die, poof | 1x2. Rangos'Khar: a grey minotaur, white-maned, with an axe in both hands and horns that burn along their cracks. |
+| ramulos | 5 | boss | 1x2 | idle, walk (12 frames), attack (12 frames), hurt, die, poof | 1x2. Ramulos the Lion Lord, Ghora'Khar's rival: gold over navy, a mane wider than his shoulders and a small crown lost in it. |
+| darkhorn | 5 | boss | 1x2 | idle, walk (12 frames), attack (12 frames), hurt, die, cast (12 frames), poof | 1x2. Darkhorn, the horned sorcerer: a hood with nothing in it but two green lights, a spiked mantle, and a robe that reaches the ground. |
 
-Elites (palette swaps, same states as their base): slime_elite, rat_elite, bat_elite, frog_elite, crab_elite, goblin_elite, skeleton_elite, wolf_elite, boar_elite, zombie_elite, harpy_elite, orc_elite, spider_elite, wraith_elite, yeti_elite, golem_elite, serpent_elite, scorpion_elite, merrow_elite, frostshard_elite, ashfiend_elite, imp_elite, beastman_elite, ogre_elite, treant_elite, dragon_elite
+Elites (palette swaps, same states and frame counts as their base; what they throw is dyed from their own palette): slime_elite, rat_elite, bat_elite, frog_elite, crab_elite, goblin_elite, skeleton_elite, wolf_elite, boar_elite, zombie_elite, harpy_elite, orc_elite, spider_elite, wraith_elite, yeti_elite, golem_elite, serpent_elite, scorpion_elite, merrow_elite, frostshard_elite, ashfiend_elite, imp_elite, beastman_elite, ogre_elite, treant_elite, dragon_elite, ghorakhar_elite, rangoskhar_elite, ramulos_elite, darkhorn_elite
 
 
 ## People: heroes and NPCs (12 bodies, 9 skins, 7 hair colours, 16 states)
@@ -329,9 +342,9 @@ Paperdoll: body + skin + hair + wardrobe items, stacked by the engine. Bodies: h
 - **cloak**: cape_purple, cape_red, cape_tattered, cape_white, cloak_blue, cloak_brown, cloak_green, cloak_red
 - **armor**: cuirass_dark, cuirass_dragon, cuirass_light, cuirass_plate, hauberk_chain, jerkin_leather, jerkin_ranger, mantle_mage
 
-## UI and portraits (7 nine-slice pieces, 3 bar fills, 2 cursors, 2 fonts, portraits for 12 bodies and 4 lords)
+## UI and portraits (7 nine-slice pieces, 3 bar fills, 2 cursors, 4 fonts, portraits for 12 bodies and 4 lords)
 
-UI pieces: panel, button, button_hover, button_pressed, frame, slot, slot_selected. Bar fills: health, stamina, mana. Cursors: cursor, cursor_target. Fonts (handwriting, ASCII 32-126, ink and chalk): hand_22, hand_34. Portraits compose for all 12 bodies from the worn items; the lords ghorakhar, rangoskhar, ramulos, darkhorn have one still each.
+UI pieces: panel, button, button_hover, button_pressed, frame, slot, slot_selected. Bar fills: health, stamina, mana. Cursors: cursor, cursor_target. Fonts (handwriting, 303 characters: ASCII, Latin-1, Latin Extended-A, typographic marks and nine symbols; ink and chalk; faces hand, cute, each also a .ttf): hand_22, hand_34, cute_22, cute_34. Portraits compose for all 12 bodies from the worn items; the lords ghorakhar, rangoskhar, ramulos, darkhorn have one still each.
 
 
 ## Loot, effects and icons (9 drops, 4 effects, 124 icons)
