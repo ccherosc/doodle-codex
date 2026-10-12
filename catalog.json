@@ -482,6 +482,30 @@
     "sand",
     "snow",
     "swamp"
+   ],
+   "cliff": [
+    "ash",
+    "desert",
+    "dirt",
+    "grass",
+    "sand",
+    "snow"
+   ],
+   "cliff_shore": [
+    "ash",
+    "desert",
+    "dirt",
+    "grass",
+    "sand",
+    "snow"
+   ],
+   "cliff_scorch": [
+    "ash",
+    "desert",
+    "dirt",
+    "grass",
+    "sand",
+    "snow"
    ]
   }
  },
@@ -576,6 +600,32 @@
      "joint_w_nw",
      "joint_w_nw_sw"
     ],
+    "bonds": {
+     "rock": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "stone": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "stone_low": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "timber": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ]
+    },
     "inset_px": 8,
     "face_px": 36
    },
@@ -653,6 +703,32 @@
      "joint_w_nw",
      "joint_w_nw_sw"
     ],
+    "bonds": {
+     "interior": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "stone": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "stone_low": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "timber": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ]
+    },
     "inset_px": 8,
     "face_px": 24
    },
@@ -734,6 +810,32 @@
      "joint_w_nw",
      "joint_w_nw_sw"
     ],
+    "bonds": {
+     "interior": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "rock": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "stone_low": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "timber": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ]
+    },
     "inset_px": 8,
     "face_px": 30
    },
@@ -806,6 +908,32 @@
      "joint_w_nw",
      "joint_w_nw_sw"
     ],
+    "bonds": {
+     "interior": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "rock": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "stone": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "timber": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ]
+    },
     "inset_px": 8,
     "face_px": 12
    },
@@ -887,6 +1015,32 @@
      "joint_w_nw",
      "joint_w_nw_sw"
     ],
+    "bonds": {
+     "interior": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "rock": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "stone": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ],
+     "stone_low": [
+      "joint_e",
+      "joint_e_ne",
+      "joint_w",
+      "joint_w_nw"
+     ]
+    },
     "inset_px": 8,
     "face_px": 28
    }
@@ -1494,7 +1648,9 @@
      0,
      1
     ],
-    "rise_px": 16
+    "rise_px": 16,
+    "material": "stone",
+    "onto": "step"
    }
   },
   "stairs_n": {
@@ -1517,7 +1673,9 @@
      0,
      0
     ],
-    "rise_px": 16
+    "rise_px": 16,
+    "material": "stone",
+    "onto": "step"
    }
   },
   "stairs_e": {
@@ -1540,7 +1698,9 @@
      1,
      0
     ],
-    "rise_px": 16
+    "rise_px": 16,
+    "material": "stone",
+    "onto": "step"
    }
   },
   "stairs_w": {
@@ -1563,7 +1723,313 @@
      0,
      0
     ],
-    "rise_px": 16
+    "rise_px": 16,
+    "material": "stone",
+    "onto": "step"
+   }
+  },
+  "stairs_wood_s": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "A plank flight down a bank that faces the viewer: `stairs_s` in wood.",
+   "climbs": {
+    "descends": "s",
+    "high_cell": [
+     0,
+     0
+    ],
+    "low_cell": [
+     0,
+     1
+    ],
+    "rise_px": 16,
+    "material": "wood",
+    "onto": "step"
+   }
+  },
+  "stairs_wood_n": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The plank flight down the far side of a step: `stairs_n` in wood.",
+   "climbs": {
+    "descends": "n",
+    "high_cell": [
+     0,
+     1
+    ],
+    "low_cell": [
+     0,
+     0
+    ],
+    "rise_px": 16,
+    "material": "wood",
+    "onto": "step"
+   }
+  },
+  "stairs_wood_e": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The plank flight down a step's east flank. See `_wood_flank`.",
+   "climbs": {
+    "descends": "e",
+    "high_cell": [
+     0,
+     0
+    ],
+    "low_cell": [
+     1,
+     0
+    ],
+    "rise_px": 16,
+    "material": "wood",
+    "onto": "step"
+   }
+  },
+  "stairs_wood_w": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The plank flight down a step's west flank. See `_wood_flank`.",
+   "climbs": {
+    "descends": "w",
+    "high_cell": [
+     1,
+     0
+    ],
+    "low_cell": [
+     0,
+     0
+    ],
+    "rise_px": 16,
+    "material": "wood",
+    "onto": "step"
+   }
+  },
+  "ramp_s": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "An earth ramp down a bank that faces the viewer. No risers at all.",
+   "climbs": {
+    "descends": "s",
+    "high_cell": [
+     0,
+     0
+    ],
+    "low_cell": [
+     0,
+     1
+    ],
+    "rise_px": 16,
+    "material": "earth",
+    "onto": "step"
+   }
+  },
+  "ramp_n": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The earth ramp down the far side of a step: you look along it.",
+   "climbs": {
+    "descends": "n",
+    "high_cell": [
+     0,
+     1
+    ],
+    "low_cell": [
+     0,
+     0
+    ],
+    "rise_px": 16,
+    "material": "earth",
+    "onto": "step"
+   }
+  },
+  "ramp_e": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The earth ramp down a step's east flank. See `_ramp_flank`.",
+   "climbs": {
+    "descends": "e",
+    "high_cell": [
+     0,
+     0
+    ],
+    "low_cell": [
+     1,
+     0
+    ],
+    "rise_px": 16,
+    "material": "earth",
+    "onto": "step"
+   }
+  },
+  "ramp_w": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The earth ramp down a step's west flank. See `_ramp_flank`.",
+   "climbs": {
+    "descends": "w",
+    "high_cell": [
+     1,
+     0
+    ],
+    "low_cell": [
+     0,
+     0
+    ],
+    "rise_px": 16,
+    "material": "earth",
+    "onto": "step"
+   }
+  },
+  "stairs_wall_s": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "A stone flight down the south face of a `stone` wall: twice `stairs_s`.",
+   "climbs": {
+    "descends": "s",
+    "high_cell": [
+     0,
+     0
+    ],
+    "low_cell": [
+     0,
+     1
+    ],
+    "rise_px": 30,
+    "material": "stone",
+    "onto": "wall",
+    "wall_kind": "stone"
+   }
+  },
+  "stairs_wall_n": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The flight down the north side of a `stone` wall: `stairs_n`, longer.",
+   "climbs": {
+    "descends": "n",
+    "high_cell": [
+     0,
+     1
+    ],
+    "low_cell": [
+     0,
+     0
+    ],
+    "rise_px": 30,
+    "material": "stone",
+    "onto": "wall",
+    "wall_kind": "stone"
+   }
+  },
+  "stairs_wall_e": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The flight down the east end of a stone wall. See `_wall_flank`.",
+   "climbs": {
+    "descends": "e",
+    "high_cell": [
+     0,
+     0
+    ],
+    "low_cell": [
+     1,
+     0
+    ],
+    "rise_px": 30,
+    "material": "stone",
+    "onto": "wall",
+    "wall_kind": "stone"
+   }
+  },
+  "stairs_wall_w": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "The flight down the west end of a stone wall. See `_wall_flank`.",
+   "climbs": {
+    "descends": "w",
+    "high_cell": [
+     1,
+     0
+    ],
+    "low_cell": [
+     0,
+     0
+    ],
+    "rise_px": 30,
+    "material": "stone",
+    "onto": "wall",
+    "wall_kind": "stone"
    }
   }
  },
@@ -1599,6 +2065,7 @@
     "attack",
     "hurt",
     "die",
+    "pounce",
     "poof"
    ],
    "description": "A rat seen from the front or from behind; `_rat_side` is its profile."
@@ -1706,6 +2173,7 @@
     "attack",
     "hurt",
     "die",
+    "bomb",
     "poof"
    ],
    "description": "Head too big, ears too wide, knife too eager."
@@ -1741,6 +2209,7 @@
     "attack",
     "hurt",
     "die",
+    "howl",
     "poof"
    ],
    "description": "A wolf seen from the front or from behind; `_wolf_side` is its profile."
@@ -1866,6 +2335,7 @@
     "attack",
     "hurt",
     "die",
+    "cleave",
     "poof"
    ],
    "description": "Shoulders first. An orc is a goblin that got the gym membership."
@@ -1991,12 +2461,15 @@
     "attack",
     "hurt",
     "die",
+    "hurl",
     "poof"
    ],
    "description": "1x2. Twice a tile tall, and the height is the point.",
    "frames": {
     "walk": 12,
-    "attack": 12
+    "attack": 12,
+    "die": 12,
+    "hurl": 12
    }
   },
   "treant": {
@@ -2019,6 +2492,7 @@
    "frames": {
     "walk": 12,
     "attack": 12,
+    "die": 12,
     "roots": 12
    }
   },
@@ -2043,6 +2517,7 @@
    "frames": {
     "walk": 12,
     "attack": 12,
+    "die": 12,
     "fly": 12,
     "fire_breath": 12
    }
@@ -2060,12 +2535,15 @@
     "attack",
     "hurt",
     "die",
+    "charge",
     "poof"
    ],
    "description": "1x2. Ghora'Khar, warlord of the Unlands: a black bull in bronze.",
    "frames": {
     "walk": 12,
-    "attack": 12
+    "attack": 12,
+    "die": 12,
+    "charge": 12
    }
   },
   "rangoskhar": {
@@ -2081,12 +2559,15 @@
     "attack",
     "hurt",
     "die",
+    "slam",
     "poof"
    ],
    "description": "1x2. Rangos'Khar: a grey minotaur, white-maned, with an axe in both hands and horns that burn along their cracks.",
    "frames": {
     "walk": 12,
-    "attack": 12
+    "attack": 12,
+    "die": 12,
+    "slam": 12
    }
   },
   "ramulos": {
@@ -2102,12 +2583,15 @@
     "attack",
     "hurt",
     "die",
+    "roar",
     "poof"
    ],
    "description": "1x2. Ramulos the Lion Lord, Ghora'Khar's rival: gold over navy, a mane wider than his shoulders and a small crown lost in it.",
    "frames": {
     "walk": 12,
-    "attack": 12
+    "attack": 12,
+    "die": 12,
+    "roar": 12
    }
   },
   "darkhorn": {
@@ -2130,6 +2614,7 @@
    "frames": {
     "walk": 12,
     "attack": 12,
+    "die": 12,
     "cast": 12
    }
   },
@@ -2157,6 +2642,7 @@
     "attack",
     "hurt",
     "die",
+    "pounce",
     "poof"
    ]
   },
@@ -2212,6 +2698,7 @@
     "attack",
     "hurt",
     "die",
+    "bomb",
     "poof"
    ]
   },
@@ -2239,6 +2726,7 @@
     "attack",
     "hurt",
     "die",
+    "howl",
     "poof"
    ]
   },
@@ -2294,6 +2782,7 @@
     "attack",
     "hurt",
     "die",
+    "cleave",
     "poof"
    ]
   },
@@ -2461,6 +2950,7 @@
     "attack",
     "hurt",
     "die",
+    "hurl",
     "poof"
    ]
   },
@@ -2503,6 +2993,7 @@
     "attack",
     "hurt",
     "die",
+    "charge",
     "poof"
    ]
   },
@@ -2516,6 +3007,7 @@
     "attack",
     "hurt",
     "die",
+    "slam",
     "poof"
    ]
   },
@@ -2529,6 +3021,7 @@
     "attack",
     "hurt",
     "die",
+    "roar",
     "poof"
    ]
   },
@@ -3257,7 +3750,8 @@
    "button_pressed",
    "frame",
    "slot",
-   "slot_selected"
+   "slot_selected",
+   "minimap"
   ],
   "bar_fills": [
    "health",
@@ -3284,7 +3778,74 @@
     "use": "a child's hand: a young hero's journal, notes, letters, a friendlier dialogue box"
    }
   },
-  "font_chars": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u00a1\u00a2\u00a3\u00a4\u00a5\u00a6\u00a7\u00a8\u00a9\u00aa\u00ab\u00ac\u00ae\u00af\u00b0\u00b1\u00b2\u00b3\u00b4\u00b5\u00b6\u00b7\u00b8\u00b9\u00ba\u00bb\u00bc\u00bd\u00be\u00bf\u00c0\u00c1\u00c2\u00c3\u00c4\u00c5\u00c6\u00c7\u00c8\u00c9\u00ca\u00cb\u00cc\u00cd\u00ce\u00cf\u00d0\u00d1\u00d2\u00d3\u00d4\u00d5\u00d6\u00d7\u00d8\u00d9\u00da\u00db\u00dc\u00dd\u00de\u00df\u00e0\u00e1\u00e2\u00e3\u00e4\u00e5\u00e6\u00e7\u00e8\u00e9\u00ea\u00eb\u00ec\u00ed\u00ee\u00ef\u00f0\u00f1\u00f2\u00f3\u00f4\u00f5\u00f6\u00f7\u00f8\u00f9\u00fa\u00fb\u00fc\u00fd\u00fe\u00ff\u0100\u0101\u0102\u0103\u0104\u0105\u0106\u0107\u010c\u010d\u010e\u010f\u0110\u0111\u0112\u0113\u0116\u0117\u0118\u0119\u011a\u011b\u011e\u011f\u0122\u0123\u012a\u012b\u012e\u012f\u0130\u0131\u0136\u0137\u0139\u013a\u013b\u013c\u013d\u013e\u0141\u0142\u0143\u0144\u0145\u0146\u0147\u0148\u014c\u014d\u0150\u0151\u0152\u0153\u0154\u0155\u0158\u0159\u015a\u015b\u015e\u015f\u0160\u0161\u0164\u0165\u016a\u016b\u016e\u016f\u0170\u0171\u0172\u0173\u0178\u0179\u017a\u017b\u017c\u017d\u017e\u0192\u0218\u0219\u021a\u021b\u02c6\u02dc\u2013\u2014\u2018\u2019\u201a\u201c\u201d\u201e\u2020\u2021\u2022\u2026\u2030\u2039\u203a\u20ac\u2122\u2190\u2191\u2192\u2193\u2605\u2665\u266a\u2713\u2717",
+  "font_chars": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u00a1\u00a2\u00a3\u00a4\u00a5\u00a6\u00a7\u00a8\u00a9\u00aa\u00ab\u00ac\u00ae\u00af\u00b0\u00b1\u00b2\u00b3\u00b4\u00b5\u00b6\u00b7\u00b8\u00b9\u00ba\u00bb\u00bc\u00bd\u00be\u00bf\u00c0\u00c1\u00c2\u00c3\u00c4\u00c5\u00c6\u00c7\u00c8\u00c9\u00ca\u00cb\u00cc\u00cd\u00ce\u00cf\u00d0\u00d1\u00d2\u00d3\u00d4\u00d5\u00d6\u00d7\u00d8\u00d9\u00da\u00db\u00dc\u00dd\u00de\u00df\u00e0\u00e1\u00e2\u00e3\u00e4\u00e5\u00e6\u00e7\u00e8\u00e9\u00ea\u00eb\u00ec\u00ed\u00ee\u00ef\u00f0\u00f1\u00f2\u00f3\u00f4\u00f5\u00f6\u00f7\u00f8\u00f9\u00fa\u00fb\u00fc\u00fd\u00fe\u00ff\u0100\u0101\u0102\u0103\u0104\u0105\u0106\u0107\u010c\u010d\u010e\u010f\u0110\u0111\u0112\u0113\u0116\u0117\u0118\u0119\u011a\u011b\u011e\u011f\u0122\u0123\u012a\u012b\u012e\u012f\u0130\u0131\u0136\u0137\u0139\u013a\u013b\u013c\u013d\u013e\u0141\u0142\u0143\u0144\u0145\u0146\u0147\u0148\u014c\u014d\u0150\u0151\u0152\u0153\u0154\u0155\u0158\u0159\u015a\u015b\u015e\u015f\u0160\u0161\u0164\u0165\u016a\u016b\u016e\u016f\u0170\u0171\u0172\u0173\u0178\u0179\u017a\u017b\u017c\u017d\u017e\u0192\u0218\u0219\u021a\u021b\u02c6\u02dc\u2013\u2014\u2018\u2019\u201a\u201c\u201d\u201e\u2020\u2021\u2022\u2026\u2030\u2039\u203a\u20ac\u2122\u2190\u2191\u2192\u2193\u2605\u2665\u266a\u2713\u2717\u0386\u0387\u0388\u0389\u038a\u038c\u038e\u038f\u0390\u0391\u0392\u0393\u0394\u0395\u0396\u0397\u0398\u0399\u039a\u039b\u039c\u039d\u039e\u039f\u03a0\u03a1\u03a3\u03a4\u03a5\u03a6\u03a7\u03a8\u03a9\u03aa\u03ab\u03ac\u03ad\u03ae\u03af\u03b0\u03b1\u03b2\u03b3\u03b4\u03b5\u03b6\u03b7\u03b8\u03b9\u03ba\u03bb\u03bc\u03bd\u03be\u03bf\u03c0\u03c1\u03c2\u03c3\u03c4\u03c5\u03c6\u03c7\u03c8\u03c9\u03ca\u03cb\u03cc\u03cd\u03ce\u0401\u0402\u0403\u0404\u0405\u0406\u0407\u0408\u0409\u040a\u040b\u040c\u040e\u040f\u0410\u0411\u0412\u0413\u0414\u0415\u0416\u0417\u0418\u0419\u041a\u041b\u041c\u041d\u041e\u041f\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0427\u0428\u0429\u042a\u042b\u042c\u042d\u042e\u042f\u0430\u0431\u0432\u0433\u0434\u0435\u0436\u0437\u0438\u0439\u043a\u043b\u043c\u043d\u043e\u043f\u0440\u0441\u0442\u0443\u0444\u0445\u0446\u0447\u0448\u0449\u044a\u044b\u044c\u044d\u044e\u044f\u0451\u0452\u0453\u0454\u0455\u0456\u0457\u0458\u0459\u045a\u045b\u045c\u045e\u045f\u0490\u0491\u2116",
+  "font_kerning_pairs": {
+   "hand_22": 3711,
+   "hand_34": 3711,
+   "cute_22": 2274,
+   "cute_34": 2274
+  },
+  "status_effects": {
+   "poison": {
+    "good": false,
+    "chip": "round"
+   },
+   "burn": {
+    "good": false,
+    "chip": "round"
+   },
+   "freeze": {
+    "good": false,
+    "chip": "round"
+   },
+   "stun": {
+    "good": false,
+    "chip": "round"
+   },
+   "bleed": {
+    "good": false,
+    "chip": "round"
+   },
+   "slow": {
+    "good": false,
+    "chip": "round"
+   },
+   "haste": {
+    "good": true,
+    "chip": "square"
+   },
+   "shield": {
+    "good": true,
+    "chip": "square"
+   },
+   "regen": {
+    "good": true,
+    "chip": "square"
+   },
+   "curse": {
+    "good": false,
+    "chip": "round"
+   },
+   "silence": {
+    "good": false,
+    "chip": "round"
+   },
+   "sleep": {
+    "good": false,
+    "chip": "round"
+   }
+  },
+  "scroll": [
+   "thumb",
+   "track"
+  ],
+  "minimap": {
+   "frame": "minimap",
+   "markers": [
+    "player",
+    "quest"
+   ]
+  },
   "monster_portraits": [
    "ghorakhar",
    "rangoskhar",
@@ -3457,7 +4018,7 @@
  },
  "counts": {
   "terrain tiles": 108,
-  "structures": 55,
+  "structures": 67,
   "creatures": 30,
   "elites": 30,
   "bodies": 12,
@@ -3469,11 +4030,11 @@
  "known_gaps": [
   {
    "title": "Local scenes are still thin",
-   "detail": "Two houses, an inn, six pieces of furniture, two floors, five wall kits and four flights of stone stairs. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. Wall kits meet in a butt joint: one material stops and the next starts, with no bonded corner."
+   "detail": "Two houses, an inn, six pieces of furniture, two floors, five wall kits and sixteen flights. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. A bond between two wall kits lives in a face, on an east or west side: a boundary on a north or south side is still a butt joint, and the interior kit keys into nothing."
   },
   {
    "title": "Cliffs and stairs",
-   "detail": "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Stairs are one material and climb one level (16 px): no ramp, no wooden flight, nothing that climbs a wall. Only six terrains have a cliff."
+   "detail": "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Only six terrains have a cliff. A flight climbs one level (16 px) or onto a stone wall (30 px); no other wall kit has one. The east and west ramps are quiet at 1x: seen side-on, a slope is a worn patch with a banked edge."
   },
   {
    "title": "Landmarks",
@@ -3481,7 +4042,7 @@
   },
   {
    "title": "Monsters",
-   "detail": "Eight creatures have no signature state: rat, goblin, wolf, orc, ogre and three of the lords. Twelve-frame animation covers the attack, walk and signature of the seven creatures bigger than a tile; their hurt and die, and every smaller creature and every person, are six frames. Three elite effects keep the base's colours by nature (a web, a tongue, a war-cry). Monster portraits exist for the lords only."
+   "detail": "Twelve-frame animation covers the attack, walk, signature and death of the seven creatures bigger than a tile; their hurt, and every state of every smaller creature and every person, are six frames. Some elite effects keep the base's colours by nature (a web, a tongue, a war-cry, a howl, a thrown boulder). Monster portraits exist for the lords only."
   },
   {
    "title": "Portraits",
@@ -3489,7 +4050,7 @@
   },
   {
    "title": "UI",
-   "detail": "No icons for status effects, no minimap frame, no scroll bar. The two handwriting faces are Latin only (303 characters; no Greek, Cyrillic or CJK) and have no kerning pairs."
+   "detail": "The two handwriting faces cover Latin, monotonic Greek and Cyrillic (468 characters): no CJK, no polytonic Greek, no right-to-left script. The scroll bar is vertical only and has one thumb state. Twelve status icons; an effect outside that list has none."
   },
   {
    "title": "Faces",
@@ -3497,11 +4058,11 @@
   },
   {
    "title": "Terrain",
-   "detail": "Farmland runs east-west or north-south, not diagonally. Borders come in four interchangeable looks; within 10 px of the drawn contour any two differ on 11 to 45 percent of pixels (mean 24), and where a border crosses the tile edge is fixed, so a border is varied, not unique. Cliff and pair atlases have one look."
+   "detail": "Farmland runs east-west or north-south, not diagonally. Borders come in four interchangeable looks; within 10 px of the drawn contour any two differ on 11 to 45 percent of pixels (mean 24), and where a border crosses the tile edge is fixed, so a border is varied, not unique. A cliff has four looks too, but its face is mostly its own hatching: any two differ on 11 to 14 percent of drawn pixels. Pair atlases have one look."
   },
   {
    "title": "Gameplay data",
-   "detail": "Only suggested data ships: walkability per terrain, blocked cells, idle hurtboxes, impact frames. No per-state hitboxes."
+   "detail": "Only suggested data ships: walkability per terrain, blocked cells, idle hurtboxes, impact frames, and for monsters a measured box per frame and a hit box per state. Those are boxes round ink, not designed colliders. People have no per-state boxes: a paperdoll's ink depends on what it wears."
   }
  ],
  "sheets": [
@@ -3623,6 +4184,14 @@
    "size": [
     1304,
     478
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_cliff_alternates.png",
+   "title": "Transitions: cliff alternates: the same height step in each of its four drawings",
+   "size": [
+    784,
+    3004
    ]
   },
   {
@@ -3754,11 +4323,27 @@
    ]
   },
   {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_bonds_demo.png",
+   "title": "Walls: the same kinds of wall bonded: the stronger kit keyed into the weaker one's face",
+   "size": [
+    1544,
+    704
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_bonds_closeup.png",
+   "title": "Walls: bonds close up: a butt joint beside its bond, for each pair of kits",
+   "size": [
+    1920,
+    2352
+   ]
+  },
+  {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/structures.png",
-   "title": "Structures: 55 props and their states (1x)",
+   "title": "Structures: 67 props and their states (1x)",
    "size": [
     1626,
-    1562
+    1730
    ]
   },
   {
@@ -3774,7 +4359,7 @@
    "title": "Monster rat: every state x 6 frames, facing right",
    "size": [
     1606,
-    768
+    896
    ]
   },
   {
@@ -3822,7 +4407,7 @@
    "title": "Monster goblin: every state x 6 frames, facing right",
    "size": [
     1222,
-    384
+    448
    ]
   },
   {
@@ -3838,7 +4423,7 @@
    "title": "Monster wolf: every state x 6 frames, facing right",
    "size": [
     1606,
-    768
+    896
    ]
   },
   {
@@ -3894,7 +4479,7 @@
    "title": "Monster orc: every state x 6 frames, facing right",
    "size": [
     1606,
-    768
+    896
    ]
   },
   {
@@ -3950,7 +4535,7 @@
    "title": "Monster ogre: every state x 6 or 12 frames, facing right",
    "size": [
     2374,
-    1152
+    1344
    ]
   },
   {
@@ -3974,7 +4559,7 @@
    "title": "Monster ghorakhar: every state x 6 or 12 frames, facing right",
    "size": [
     3142,
-    768
+    896
    ]
   },
   {
@@ -3982,7 +4567,7 @@
    "title": "Monster rangoskhar: every state x 6 or 12 frames, facing right",
    "size": [
     3142,
-    768
+    1344
    ]
   },
   {
@@ -3990,7 +4575,7 @@
    "title": "Monster ramulos: every state x 6 or 12 frames, facing right",
    "size": [
     3142,
-    1152
+    1344
    ]
   },
   {
@@ -4059,18 +4644,18 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/ui.png",
-   "title": "UI: nine-slice pieces sliced to a box, bars, cursors (2x)",
+   "title": "UI: nine-slice pieces sliced to a box, bars, cursors, status icons, scroll bar, minimap pins (2x)",
    "size": [
     1860,
-    978
+    2610
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/font.png",
    "title": "Handwriting: two faces (hand, cute), two sizes, ink and chalk (1x)",
    "size": [
-    1124,
-    742
+    1134,
+    1186
    ]
   },
   {
@@ -4107,15 +4692,23 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_hud.png",
-   "title": "Scene: a HUD: bars, inventory slots, cursors, all from the package",
+   "title": "Scene: a HUD: bars, status icons, a minimap, a scrolling list, inventory slots, cursors, all from the package",
    "size": [
-    420,
-    200
+    640,
+    236
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_cliff.png",
-   "title": "Scene: a grass plateau with a knoll and two flights of stairs: heights per cell, cliff atlases, alternates on",
+   "title": "Scene: a grass plateau with a knoll and its flights: heights per cell, cliff atlases, alternates on",
+   "size": [
+    640,
+    448
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_cliff_alternates.png",
+   "title": "Scene: one cliff with the primary drawing only, and with all four mixed",
    "size": [
     640,
     448
@@ -4138,11 +4731,19 @@
    ]
   },
   {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_walls_bonded.png",
+   "title": "Scene: the same plan with bonds in place of the joints",
+   "size": [
+    640,
+    448
+   ]
+  },
+  {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_handwriting.png",
-   "title": "Scene: both handwriting faces, with accents and symbols",
+   "title": "Scene: both handwriting faces: accents, symbols, Greek, Cyrillic, kerned",
    "size": [
     470,
-    214
+    240
    ]
   },
   {

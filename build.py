@@ -198,16 +198,18 @@ section("transitions", "Transitions", "%d overlay, %d shore, %d scorch, %d cliff
         "connected by design. <b>Cliff</b> atlases draw a height step inside one terrain (grass over "
         "grass) from an integer height per cell: a bank on the south-facing edge and a drawn rim "
         "on the other three, with foam or a charred line at its foot where it stands in water or "
-        "lava. Four stone stairs (see Structures) are the way up. Every overlay, shore and scorch "
-        "atlas also has three <b>alternate</b> drawings that can be mixed in tile by tile without "
+        "lava. Sixteen flights (stone and wooden stairs, earth ramps, and stairs onto a stone "
+        "wall; see Structures) are the way up. Every overlay, shore, scorch and cliff atlas also "
+        "has three <b>alternate</b> drawings that can be mixed in tile by tile without "
         "a seam, so a long border does not repeat. The pictures below are static proofs built "
         "from the shipped atlases.")
 MD.append("Corner-Wang (16 masks) on a dual grid; overlay per higher terrain, `shore` over water, "
           "`scorch` over lava. Elevation: %s.\n" % " < ".join(order))
 MD.append("Cliffs (a height step within one terrain, heights per cell; a bank on the south-facing "
           "edge, a rim on the others, a wash atlas where the step stands in water or lava; the "
-          "stairs_* structures cross it): %s. Alternates: %d more drawings of every overlay, shore "
-          "and scorch atlas, seam-safe in any mix.\n"
+          "stairs_*, stairs_wood_* and ramp_* structures cross it): %s. Alternates: %d more "
+          "drawings of every overlay, shore, scorch and cliff atlas and of the cliff's two washes, "
+          "seam-safe in any mix.\n"
           % (", ".join(sorted(tt.get("cliff", {}))), tt.get("alternates", {}).get("count", 1)))
 CAT["transitions"] = {"elevation_low_to_high": order, "overlay": sorted(tt["overlay"]),
                       "shore": sorted(tt["shore"]), "scorch": sorted(tt["scorch"]),
@@ -218,7 +220,10 @@ CAT["transitions"] = {"elevation_low_to_high": order, "overlay": sorted(tt["over
                                      "suffixes": [s["suffix"] for s in tt.get("alternates", {}).get("sets", [])],
                                      "overlay": sorted(tt.get("alternates", {}).get("overlay", {})),
                                      "shore": sorted(tt.get("alternates", {}).get("shore", {})),
-                                     "scorch": sorted(tt.get("alternates", {}).get("scorch", {}))}}
+                                     "scorch": sorted(tt.get("alternates", {}).get("scorch", {})),
+                                     "cliff": sorted((tt.get("alternates", {}).get("sets") or [{}])[0].get("cliff", {})),
+                                     "cliff_shore": sorted((tt.get("alternates", {}).get("sets") or [{}])[0].get("cliff_shore", {})),
+                                     "cliff_scorch": sorted((tt.get("alternates", {}).get("sets") or [{}])[0].get("cliff_scorch", {}))}}
 V = os.path.join(ROOT, "art", "validation")
 H.append('<div class="grid proof">')
 pics = [("transitions/map_0.png", "proof map 0: every terrain meeting its neighbours"),
@@ -233,7 +238,8 @@ pics = [("transitions/map_0.png", "proof map 0: every terrain meeting its neighb
         ("transitions/cliff_grass.png", "cliff: grass plateaus over grass, dirt and sand"),
         ("transitions/cliff_wash_sheet.png", "cliff wash: a step standing in water (foam) and in lava (char)"),
         ("transitions/alternates.png", "alternates: the same border in each of its four drawings"),
-        ("transitions/alternates_map.png", "alternates: one coast with the primary only, and with all four mixed")]
+        ("transitions/alternates_map.png", "alternates: one coast with the primary only, and with all four mixed"),
+        ("transitions/cliff_alternates.png", "cliff alternates: the same height step in each of its four drawings")]
 for rel, cap in pics:
     q = copy_any(os.path.join(V, rel), "sheets/" + rel.replace("transitions/", "transition_"))
     if q:
@@ -254,8 +260,13 @@ section("walls", "Wall kits", "%d materials x %d pieces, %d door and gate pieces
         "; ".join("<b>%s</b> (face %d px)" % (k, v["face_px"]) for k, v in KINDS.items()) +
         ". A door or gate replaces one straight piece of a run and ships closed and open. Kits "
         "join each other with a butt joint: %d small joint pieces per kit close the cut end where "
-        "the neighbouring cell is a wall of another material." % len(next(iter(KINDS.values())).get("joints", {})))
-MD.append(W["rule"] + "\n\n" + W.get("door_rule", "") + "\n\n" + W.get("join_rule", "") + "\n\nNaming: "
+        "the neighbouring cell is a wall of another material. Or with a <b>bond</b>, drawn instead "
+        "of the joint where two kits are built as one wall: the stronger kit's courses run a tooth "
+        "or two into the weaker one's face (%d bond pieces, on east and west sides that show face)."
+        % (len(next(iter(KINDS.values())).get("joints", {})),
+           sum(len(v) for k in KINDS.values() for v in k.get("bonds", {}).values())))
+MD.append(W["rule"] + "\n\n" + W.get("door_rule", "") + "\n\n" + W.get("join_rule", "") + "\n\n"
+          + W.get("bond_rule", "") + " Strength, weakest first: " + " < ".join(W.get("bond_rank", [])) + ".\n\nNaming: "
           + "; ".join("`%s` = %s" % kv for kv in W["naming"].items()) + "\n")
 MD.append("Pieces (the same %d labels in every kind): " % len(KINDS["rock"]["pieces"])
           + ", ".join("`%s`" % n for n in KINDS["rock"]["pieces"]) + "\n")
@@ -281,6 +292,7 @@ for kind, krec in KINDS.items():
         kind, krec["face_px"], ", ".join("`%s`" % n for n in krec.get("doors", {})) or "none"))
     CAT["walls"]["kinds"][kind] = {"pieces": list(krec["pieces"]), "doors": list(krec.get("doors", {})),
                                    "joints": list(krec.get("joints", {})),
+                                   "bonds": {o: list(v) for o, v in krec.get("bonds", {}).items()},
                                    "inset_px": krec["inset_px"], "face_px": krec["face_px"]}
     p = sheet("walls_" + kind, "%s wall kit: %d labelled pieces and doors (2x)" % (kind.capitalize(), len(ent)), ent, 10)
     H.append(sheet_link(p, "every %s piece" % kind))
@@ -292,12 +304,15 @@ for kind, krec in KINDS.items():
             H.append(card('<a href="%s"><img loading="lazy" src="%s" alt="%s"></a>' % (q, q, esc(cap)), cap))
             SHEETS.append((q, "Walls: " + cap, Image.open(os.path.join(HERE, q)).size))
     H.append("</div>")
-q = copy_any(os.path.join(V, "walls/mixed_demo.png"), "sheets/walls_mixed_demo.png")
-if q:
-    cap = "all five kits in one building: a butt joint wherever two materials meet"
-    H.append('<div class="grid proof">' + card(
-        '<a href="%s"><img loading="lazy" src="%s" alt="%s"></a>' % (q, q, esc(cap)), cap) + "</div>")
-    SHEETS.append((q, "Walls: " + cap, Image.open(os.path.join(HERE, q)).size))
+H.append('<div class="grid proof">')
+for rel, cap in (("walls/mixed_demo.png", "all five kits in one building: a butt joint wherever two materials meet"),
+                 ("walls/bonds_demo.png", "the same kinds of wall bonded: the stronger kit keyed into the weaker one's face"),
+                 ("walls/bonds_closeup.png", "bonds close up: a butt joint beside its bond, for each pair of kits")):
+    q = copy_any(os.path.join(V, rel), "sheets/" + rel.replace("walls/", "walls_"))
+    if q:
+        H.append(card('<a href="%s"><img loading="lazy" src="%s" alt="%s"></a>' % (q, q, esc(cap)), cap))
+        SHEETS.append((q, "Walls: " + cap, Image.open(os.path.join(HERE, q)).size))
+H.append("</div>")
 H.append("</section>")
 
 # --- structures ------------------------------------------------------------------
@@ -308,8 +323,10 @@ section("structures", "Structures and props", "%d props, %d at a person's scale"
         "Cut-outs that stand on terrain, drawn in elevation with a ground shadow. <b>map</b> scale "
         "means a landmark for the world map (a castle two tiles wide); <b>local</b> scale means "
         "drawn to stand beside a person. Trees block only the trunk, so a person can walk behind "
-        "the crown. Some have a second state (open, raided). The four <b>stairs</b> stand across "
-        "a cliff edge, one cell on the high ground and one on the low, and are where a unit climbs.")
+        "the crown. Some have a second state (open, raided). The sixteen <b>flights</b> are where "
+        "a unit climbs: stone stairs, wooden stairs and an earth ramp stand across a cliff edge, "
+        "one cell on the high ground and one on the low (16 px), and <b>stairs_wall</b> climbs "
+        "30 px from the ground onto the top of a stone wall. Each comes in four directions.")
 MD.append("| name | tiles | scale | passable | states | description |\n| --- | --- | --- | --- | --- | --- |")
 ent, CAT["structures"] = [], {}
 H.append('<div class="grid wide">')
@@ -346,12 +363,13 @@ npair = sum(len(M[n]["states"]) for n in base)
 section("monsters", "Monsters", "%d creatures, %d elites, %d states x 4 facings"
         % (len(base), len(elite), npair),
         "Cut-out actors. Every creature has idle, walk, attack, hurt, die and poof (the corpse "
-        "vanishing in smoke) in four facings; most add a signature. Below: idle in all four "
+        "vanishing in smoke) in four facings, and every one adds a signature. Below: idle in all four "
         "facings, then every other state facing down. Tier is difficulty 1&ndash;5. An elite is "
         "its base creature in another palette with the same silhouette, and every creature has "
         "one. The seven big creatures (ogre, treant, dragon and the four lords) play their attack, "
-        "walk and signature over <b>12 frames</b> instead of 6: a wind-up, the blow on frame 5, a "
-        "follow-through and a recovery.")
+        "walk, signature and death over <b>12 frames</b> instead of 6: a wind-up, the blow, a "
+        "follow-through and a recovery; a stagger, a fall and a landing. Every state and facing "
+        "carries a measured box per frame, and a hit box on the frame the blow lands.")
 MD.append("| creature | tier | rank | tiles | states | description |\n| --- | --- | --- | --- | --- | --- |")
 ent, CAT["monsters"] = [], {}
 for name in sorted(base, key=lambda n: (M[n]["tier"], base.index(n))):
@@ -611,10 +629,35 @@ for i, icon in enumerate(("sword", "potion_health", None)):
     H.append(card('<img loading="lazy" src="%s" alt="inventory slot" style="width:%dpx">' % (q, im.width * 2),
                   "slot_selected" if i == 1 else "slot", "with icon %s" % icon if icon else "empty"))
 H.append("</div>")
-sheet("ui", "UI: nine-slice pieces sliced to a box, bars, cursors (2x)", ent, 5)
+if UI.get("status"):
+    H.append('<h3>Status icons</h3><div class="grid small">')
+    for name, srec in UI["status"]["effects"].items():
+        q = put(srec["file"], "ui/status_%s.png" % name)
+        im = kit.status_icon(name)
+        H.append(card('<img loading="lazy" src="%s" alt="status: %s" style="width:%dpx">' % (q, name, im.width * 2),
+                      name, "helps, squared chip" if srec["good"] else "harms, round chip"))
+        ent.append(("status " + name, im))
+    H.append("</div>")
+if UI.get("scroll") or UI.get("minimap"):
+    H.append('<h3>Scroll bar and minimap</h3><div class="grid wide">')
+    if UI.get("scroll"):
+        im = kit.scroll(140, 5, 18, 0.35)
+        q = save(im, "assets/ui/scroll_demo.png")
+        H.append(card('<img loading="lazy" src="%s" alt="scroll bar" style="width:%dpx">' % (q, im.width * 2),
+                      "scroll", "track + thumb, 5 of 18 rows shown"))
+        ent.append(("scroll bar", im))
+    for name, mrec in UI.get("minimap", {}).get("markers", {}).items():
+        q = put(mrec["file"], "ui/marker_%s.png" % name)
+        im = kit.marker(name)[0]
+        H.append(card('<img loading="lazy" src="%s" alt="minimap marker: %s" style="width:%dpx">' % (q, name, im.width * 2),
+                      "marker_" + name, "hotspot %s" % mrec["hotspot"]))
+        ent.append(("marker " + name, im))
+    H.append("</div>")
+sheet("ui", "UI: nine-slice pieces sliced to a box, bars, cursors, status icons, scroll bar, minimap pins (2x)", ent, 5)
 ent = []
 H.append('<h3>Handwriting</h3><div class="grid proof">')
-PANGRAM = "The quick brown fox jumps over the lazy dog. 0123456789 ?! Zażółć gęślą jaźń, où est l'été? ♥ ★"
+PANGRAM = ("The quick brown fox jumps over the lazy dog. 0123456789 ?! Zażółć gęślą jaźń, où est l'été? ♥ ★ "
+           "Ξεσκεπάζω την ψυχοφθόρα βδελυγμία. Съешь же ещё этих мягких французских булок, да выпей чаю.")
 for fname, frec in UI["fonts"]["fonts"].items():
     for colour in frec["files"]:
         t = kit.text(kit.wrap(PANGRAM, 520, fname), fname, colour)
@@ -634,12 +677,29 @@ CAT["ui"] = {"pieces": list(UI["pieces"]), "bar_fills": list(UI["bars"]["fills"]
              "font_faces": {f: {"ttf": URL + "assets/ui/%s.ttf" % f, "use": r.get("use", "")}
                             for f, r in UI["fonts"].get("faces", {}).items()},
              "font_chars": UI["fonts"]["chars"],
+             "font_kerning_pairs": {f: sum(len(v) for v in r.get("kerning", {}).values())
+                                    for f, r in UI["fonts"]["fonts"].items()},
+             "status_effects": {n: {"good": r["good"], "chip": r["chip"]}
+                                for n, r in UI.get("status", {}).get("effects", {}).items()},
+             "scroll": sorted(k for k in UI.get("scroll", {}) if k != "rule"),
+             "minimap": {"frame": UI.get("minimap", {}).get("frame"),
+                         "markers": list(UI.get("minimap", {}).get("markers", {}))},
              "monster_portraits": list(kit.portraits.get("monsters", {}))}
+MD.append("Status icons (24x24 stills; harm on a round chip, help on a squared one): %s. Scroll bar: an "
+          "upright three-slice track and thumb. Minimap: the hollow nine-slice `%s` drawn over the map, and "
+          "the pins %s.\n"
+          % (", ".join("%s (%s)" % (n, "help" if r["good"] else "harm")
+                       for n, r in UI.get("status", {}).get("effects", {}).items()),
+             UI.get("minimap", {}).get("frame"), ", ".join(UI.get("minimap", {}).get("markers", {}))))
 MD.append("UI pieces: %s. Bar fills: %s. Cursors: %s. Fonts (handwriting, %d characters: ASCII, Latin-1, "
-          "Latin Extended-A, typographic marks and nine symbols; ink and chalk; faces %s, each also a .ttf): %s. "
+          "Latin Extended-A, typographic marks, nine symbols, monotonic Greek and Cyrillic; kerning pairs "
+          "per font: %s; ink and chalk; faces %s, each also a .ttf): %s. "
           "Portraits compose for all %d bodies from the worn items; the lords %s have one still each.\n"
           % (", ".join(UI["pieces"]), ", ".join(UI["bars"]["fills"]), ", ".join(UI["cursors"]["cursors"]),
-             len(UI["fonts"]["chars"]), ", ".join(UI["fonts"].get("faces", {})),
+             len(UI["fonts"]["chars"]),
+             ", ".join("%s %d" % (f, sum(len(v) for v in r.get("kerning", {}).values()))
+                       for f, r in UI["fonts"]["fonts"].items()),
+             ", ".join(UI["fonts"].get("faces", {})),
              ", ".join(UI["fonts"]["fonts"]), len(kit.portraits["bodies"]),
              ", ".join(kit.portraits.get("monsters", {}))))
 H.append("</section>")
@@ -684,11 +744,13 @@ if DEMO:
     for fn, cap in (("demo_scene.png", "a local scene: walled yard, trees a person walks behind, chest, people"),
                     ("demo_map.png", "a map assembled by the reference loader: terrain, transitions, structures, monsters"),
                     ("demo_dialogue.png", "a dialogue box: nine-slice panel, composed portraits, handwritten text"),
-                    ("demo_hud.png", "a HUD: bars, inventory slots, cursors, all from the package"),
-                    ("demo_cliff.png", "a grass plateau with a knoll and two flights of stairs: heights per cell, cliff atlases, alternates on"),
+                    ("demo_hud.png", "a HUD: bars, status icons, a minimap, a scrolling list, inventory slots, cursors, all from the package"),
+                    ("demo_cliff.png", "a grass plateau with a knoll and its flights: heights per cell, cliff atlases, alternates on"),
+                    ("demo_cliff_alternates.png", "one cliff with the primary drawing only, and with all four mixed"),
                     ("demo_cliff_wash.png", "the same step standing in water and in lava: foam and char at its foot"),
                     ("demo_walls_mixed.png", "five wall kits in one plan, joined where they meet"),
-                    ("demo_handwriting.png", "both handwriting faces, with accents and symbols"),
+                    ("demo_walls_bonded.png", "the same plan with bonds in place of the joints"),
+                    ("demo_handwriting.png", "both handwriting faces: accents, symbols, Greek, Cyrillic, kerned"),
                     ("demo_map.gif", "the map, animated: the ogre's blow takes twelve frames"),
                     ("demo_scene.gif", "the local scene, animated")):
         q = copy_any(os.path.join(DEMO, fn), "sheets/" + fn)
@@ -697,15 +759,15 @@ if DEMO:
             SHEETS.append((q, "Scene: " + cap, Image.open(os.path.join(HERE, q)).size))
 
 GAPS = [
-    ("Local scenes are still thin", "Two houses, an inn, six pieces of furniture, two floors, five wall kits and four flights of stone stairs. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. Wall kits meet in a butt joint: one material stops and the next starts, with no bonded corner."),
-    ("Cliffs and stairs", "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Stairs are one material and climb one level (16 px): no ramp, no wooden flight, nothing that climbs a wall. Only six terrains have a cliff."),
+    ("Local scenes are still thin", "Two houses, an inn, six pieces of furniture, two floors, five wall kits and sixteen flights. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. A bond between two wall kits lives in a face, on an east or west side: a boundary on a north or south side is still a butt joint, and the interior kit keys into nothing."),
+    ("Cliffs and stairs", "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Only six terrains have a cliff. A flight climbs one level (16 px) or onto a stone wall (30 px); no other wall kit has one. The east and west ramps are quiet at 1x: seen side-on, a slope is a worn patch with a banked edge."),
     ("Landmarks", "One design and no state each (no ruined, raided or lit variant) for the great landmarks."),
-    ("Monsters", "Eight creatures have no signature state: rat, goblin, wolf, orc, ogre and three of the lords. Twelve-frame animation covers the attack, walk and signature of the seven creatures bigger than a tile; their hurt and die, and every smaller creature and every person, are six frames. Three elite effects keep the base's colours by nature (a web, a tongue, a war-cry). Monster portraits exist for the lords only."),
+    ("Monsters", "Twelve-frame animation covers the attack, walk, signature and death of the seven creatures bigger than a tile; their hurt, and every state of every smaller creature and every person, are six frames. Some elite effects keep the base's colours by nature (a web, a tongue, a war-cry, a howl, a thrown boulder). Monster portraits exist for the lords only."),
     ("Portraits", "Stills, facing the viewer, one expression per body. No talking or blinking frames."),
-    ("UI", "No icons for status effects, no minimap frame, no scroll bar. The two handwriting faces are Latin only (303 characters; no Greek, Cyrillic or CJK) and have no kerning pairs."),
+    ("UI", "The two handwriting faces cover Latin, monotonic Greek and Cyrillic (468 characters): no CJK, no polytonic Greek, no right-to-left script. The scroll bar is vertical only and has one thumb state. Twelve status icons; an effect outside that list has none."),
     ("Faces", "Sprites keep two eyes and a brow at 64 px by design; all face detail is in the portraits."),
-    ("Terrain", "Farmland runs east-west or north-south, not diagonally. Borders come in four interchangeable looks; within 10 px of the drawn contour any two differ on 11 to 45 percent of pixels (mean 24), and where a border crosses the tile edge is fixed, so a border is varied, not unique. Cliff and pair atlases have one look."),
-    ("Gameplay data", "Only suggested data ships: walkability per terrain, blocked cells, idle hurtboxes, impact frames. No per-state hitboxes."),
+    ("Terrain", "Farmland runs east-west or north-south, not diagonally. Borders come in four interchangeable looks; within 10 px of the drawn contour any two differ on 11 to 45 percent of pixels (mean 24), and where a border crosses the tile edge is fixed, so a border is varied, not unique. A cliff has four looks too, but its face is mostly its own hatching: any two differ on 11 to 14 percent of drawn pixels. Pair atlases have one look."),
+    ("Gameplay data", "Only suggested data ships: walkability per terrain, blocked cells, idle hurtboxes, impact frames, and for monsters a measured box per frame and a hit box per state. Those are boxes round ink, not designed colliders. People have no per-state boxes: a paperdoll's ink depends on what it wears."),
 ]
 
 # --- write -----------------------------------------------------------------------
@@ -724,7 +786,7 @@ head_md = [
     "The art library for *Norfair Chronicles*, a real-time overhead action RPG (Godot 4, flat 2D, "
     "y-sorted): a world map for travel and local scenes for play. Everything is drawn in one "
     "pencil-doodle style on a 64x64 grid, animated as 6-frame horizontal strips at 10 fps (12 "
-    "frames for a big creature's attack, walk and signature: read `frames` per state), in "
+    "frames for a big creature's attack, walk, signature and death: read `frames` per state), in "
     "four facings (down, left, right, up) where a thing can turn.",
     "",
     "This file is the text inventory. It is generated from the shipped game package, so the names "
