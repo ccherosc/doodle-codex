@@ -198,8 +198,11 @@ section("transitions", "Transitions", "%d overlay, %d shore, %d scorch, %d cliff
         "connected by design. <b>Cliff</b> atlases draw a height step inside one terrain (grass over "
         "grass) from an integer height per cell: a bank on the south-facing edge and a drawn rim "
         "on the other three, with foam or a charred line at its foot where it stands in water or "
-        "lava. Sixteen flights (stone and wooden stairs, earth ramps, and stairs onto a stone "
-        "wall; see Structures) are the way up. Every overlay, shore, scorch and cliff atlas also "
+        "lava. A natural bank is earth or its own stone; ground somebody built stands on a built "
+        "face (dry stone under a field, ashlar under a road or a flagged floor, upright planks "
+        "under floorboards). Sixteen flights (stone and wooden stairs, earth ramps, and stairs "
+        "onto a stone wall; see Structures) are the way up, and a waterfall carries a river over "
+        "the step. Every overlay, shore, scorch and cliff atlas also "
         "has three <b>alternate</b> drawings that can be mixed in tile by tile without "
         "a seam, so a long border does not repeat. The pictures below are static proofs built "
         "from the shipped atlases.")
@@ -207,7 +210,8 @@ MD.append("Corner-Wang (16 masks) on a dual grid; overlay per higher terrain, `s
           "`scorch` over lava. Elevation: %s.\n" % " < ".join(order))
 MD.append("Cliffs (a height step within one terrain, heights per cell; a bank on the south-facing "
           "edge, a rim on the others, a wash atlas where the step stands in water or lava; the "
-          "stairs_*, stairs_wood_* and ramp_* structures cross it): %s. Alternates: %d more "
+          "stairs_*, stairs_wood_* and ramp_* structures cross it, and `waterfall` carries water "
+          "over it): %s. Alternates: %d more "
           "drawings of every overlay, shore, scorch and cliff atlas and of the cliff's two washes, "
           "seam-safe in any mix.\n"
           % (", ".join(sorted(tt.get("cliff", {}))), tt.get("alternates", {}).get("count", 1)))
@@ -234,7 +238,7 @@ pics = [("transitions/map_0.png", "proof map 0: every terrain meeting its neighb
         ("transitions/pair_lava__grass.png", "pair: grass over lava (scorch)"),
         ("transitions/pair_ash__snow.png", "pair: ash and snow"),
         ("transitions/pair_grass__rock.png", "pair: rock over grass (dual-grid cliff)"),
-        ("transitions/cliffs_sheet.png", "cliffs: a height step in each of six terrains"),
+        ("transitions/cliffs_sheet.png", "cliffs: a height step in each of %d terrains" % len(tt.get("cliff", {}))),
         ("transitions/cliff_grass.png", "cliff: grass plateaus over grass, dirt and sand"),
         ("transitions/cliff_wash_sheet.png", "cliff wash: a step standing in water (foam) and in lava (char)"),
         ("transitions/alternates.png", "alternates: the same border in each of its four drawings"),
@@ -252,20 +256,25 @@ print("walls")
 W = kit.walls
 KINDS = W["kinds"]
 ndoor = sum(len(k.get("doors", {})) for k in KINDS.values())
-section("walls", "Wall kits", "%d materials x %d pieces, %d door and gate pieces"
-        % (len(KINDS), len(next(iter(KINDS.values()))["pieces"]), ndoor),
+nwin = sum(len(k.get("windows", {})) for k in KINDS.values())
+section("walls", "Wall kits", "%d materials x %d pieces, %d door and gate pieces, %d windows"
+        % (len(KINDS), len(next(iter(KINDS.values()))["pieces"]), ndoor, nwin),
         "Hand-placeable walls on the ordinary grid: one still piece per cell, and the cell is "
         "what it blocks. The name says where the piece sits in a wall; a 256-entry lookup on the "
         "eight neighbours picks it automatically. Walls do not animate. Kinds: " +
         "; ".join("<b>%s</b> (face %d px)" % (k, v["face_px"]) for k, v in KINDS.items()) +
-        ". A door or gate replaces one straight piece of a run and ships closed and open. Kits "
+        ". A door or gate replaces one straight piece of a run and ships closed and open. A "
+        "<b>window</b> is swapped in the same way, in a south-facing run or edge of the " +
+        ", ".join(k for k, v in KINDS.items() if v.get("windows")) +
+        " kits, dark and lit; it blocks as the wall does. Kits "
         "join each other with a butt joint: %d small joint pieces per kit close the cut end where "
         "the neighbouring cell is a wall of another material. Or with a <b>bond</b>, drawn instead "
         "of the joint where two kits are built as one wall: the stronger kit's courses run a tooth "
         "or two into the weaker one's face (%d bond pieces, on east and west sides that show face)."
         % (len(next(iter(KINDS.values())).get("joints", {})),
            sum(len(v) for k in KINDS.values() for v in k.get("bonds", {}).values())))
-MD.append(W["rule"] + "\n\n" + W.get("door_rule", "") + "\n\n" + W.get("join_rule", "") + "\n\n"
+MD.append(W["rule"] + "\n\n" + W.get("door_rule", "") + "\n\n" + W.get("window_rule", "") + "\n\n"
+          + W.get("join_rule", "") + "\n\n"
           + W.get("bond_rule", "") + " Strength, weakest first: " + " < ".join(W.get("bond_rank", [])) + ".\n\nNaming: "
           + "; ".join("`%s` = %s" % kv for kv in W["naming"].items()) + "\n")
 MD.append("Pieces (the same %d labels in every kind): " % len(KINDS["rock"]["pieces"])
@@ -287,14 +296,23 @@ for kind, krec in KINDS.items():
         src_ = put(rec["file"], "walls/%s/%s.png" % (kind, name))
         H.append(card('<img loading="lazy" src="%s" alt="wall %s: %s" width="128" height="128">'
                       % (src_, kind, name), name, kind + " door"))
+    for name, rec in krec.get("windows", {}).items():
+        ent.append((name, kit.image(rec["file"])))
+        src_ = put(rec["file"], "walls/%s/%s.png" % (kind, name))
+        H.append(card('<img loading="lazy" src="%s" alt="wall %s: %s" width="128" height="128">'
+                      % (src_, kind, name), name, "%s window, seen from %s" % (kind, rec.get("seen_from", "outside"))))
     H.append("</div>")
-    MD.append("- **%s**: face %d px; doors and gates: %s" % (
-        kind, krec["face_px"], ", ".join("`%s`" % n for n in krec.get("doors", {})) or "none"))
+    MD.append("- **%s**: face %d px; doors and gates: %s; windows: %s" % (
+        kind, krec["face_px"], ", ".join("`%s`" % n for n in krec.get("doors", {})) or "none",
+        ", ".join("`%s`" % n for n in krec.get("windows", {})) or "none"))
     CAT["walls"]["kinds"][kind] = {"pieces": list(krec["pieces"]), "doors": list(krec.get("doors", {})),
+                                   "windows": {n: {"replaces": r_["replaces"], "state": r_["state"],
+                                                   "seen_from": r_.get("seen_from"), "glass_px": r_.get("glass_px")}
+                                               for n, r_ in krec.get("windows", {}).items()},
                                    "joints": list(krec.get("joints", {})),
                                    "bonds": {o: list(v) for o, v in krec.get("bonds", {}).items()},
                                    "inset_px": krec["inset_px"], "face_px": krec["face_px"]}
-    p = sheet("walls_" + kind, "%s wall kit: %d labelled pieces and doors (2x)" % (kind.capitalize(), len(ent)), ent, 10)
+    p = sheet("walls_" + kind, "%s wall kit: %d labelled pieces, doors and windows (2x)" % (kind.capitalize(), len(ent)), ent, 10)
     H.append(sheet_link(p, "every %s piece" % kind))
     H.append('<div class="grid proof">')
     for rel, cap in (("walls/%s_demo.png" % kind, "%s: a yard, a maze and a line built from the kit" % kind),
@@ -323,7 +341,13 @@ section("structures", "Structures and props", "%d props, %d at a person's scale"
         "Cut-outs that stand on terrain, drawn in elevation with a ground shadow. <b>map</b> scale "
         "means a landmark for the world map (a castle two tiles wide); <b>local</b> scale means "
         "drawn to stand beside a person. Trees block only the trunk, so a person can walk behind "
-        "the crown. Some have a second state (open, raided). The sixteen <b>flights</b> are where "
+        "the crown; a street lamp, a shop sign and a market stall block their foot the same way. "
+        "A rug and a mat are <b>floor</b> pieces: flat, walked over, drawn under everyone. "
+        "%d props have a second state (%s). A state that plays once (a gate, a lid, a ship "
+        "mooring) starts on the idle picture and holds its last frame; play it backwards to undo "
+        "it. The <b>waterfall</b> stands across a cliff edge on water. The sixteen <b>flights</b> are where "
+        % (sum(1 for r in S.values() if r.get("states")),
+           ", ".join(sorted({s_ for r in S.values() for s_ in r.get("states", {})}))) +
         "a unit climbs: stone stairs, wooden stairs and an earth ramp stand across a cliff edge, "
         "one cell on the high ground and one on the low (16 px), and <b>stairs_wall</b> climbs "
         "30 px from the ground onto the top of a stone wall. Each comes in four directions.")
@@ -348,8 +372,9 @@ for name, r in S.items():
     CAT["structures"][name] = {"footprint_tiles": r["footprint_tiles"], "scale": r["scale"],
                                "passable": bool(r.get("passable")), "walk_behind": bool(r.get("walk_behind")),
                                "states": list(st), "description": d}
-    if r.get("climbs"):
-        CAT["structures"][name]["climbs"] = r["climbs"]
+    for key in ("climbs", "falls", "layer", "variant_of", "ground_suggested"):
+        if r.get(key):
+            CAT["structures"][name][key] = r[key]
 H.append("</div>")
 p = sheet("structures", "Structures: %d props and their states (1x)" % len(S), ent, 8, 1)
 H.append(sheet_link(p, "every structure") + "</section>")
@@ -751,17 +776,23 @@ if DEMO:
                     ("demo_walls_mixed.png", "five wall kits in one plan, joined where they meet"),
                     ("demo_walls_bonded.png", "the same plan with bonds in place of the joints"),
                     ("demo_handwriting.png", "both handwriting faces: accents, symbols, Greek, Cyrillic, kerned"),
+                    ("demo_street.png", "a street: two lamps (one dark), four trade signs, two stalls, windows in a stone and a timber wall"),
+                    ("demo_room.png", "a room: a rug under the table, two windows in the interior wall, furniture"),
+                    ("demo_waterfall.png", "a river crossing a cliff edge by the waterfall"),
+                    ("demo_landmark_states.png", "every map-scale state beside its idle picture"),
                     ("demo_map.gif", "the map, animated: the ogre's blow takes twelve frames"),
-                    ("demo_scene.gif", "the local scene, animated")):
+                    ("demo_scene.gif", "the local scene, animated"),
+                    ("demo_street.gif", "the street, animated: the lamp and the signs swing"),
+                    ("demo_waterfall.gif", "the waterfall, animated")):
         q = copy_any(os.path.join(DEMO, fn), "sheets/" + fn)
         if q:
             SC.append((q, cap))
             SHEETS.append((q, "Scene: " + cap, Image.open(os.path.join(HERE, q)).size))
 
 GAPS = [
-    ("Local scenes are still thin", "Two houses, an inn, six pieces of furniture, two floors, five wall kits and sixteen flights. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. A bond between two wall kits lives in a face, on an east or west side: a boundary on a north or south side is still a butt joint, and the interior kit keys into nothing."),
-    ("Cliffs and stairs", "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Only six terrains have a cliff. A flight climbs one level (16 px) or onto a stone wall (30 px); no other wall kit has one. The east and west ramps are quiet at 1x: seen side-on, a slope is a worn patch with a banked edge."),
-    ("Landmarks", "One design and no state each (no ruined, raided or lit variant) for the great landmarks."),
+    ("The street is a first set", "One lamp, four trade signs (inn, smith, shop, healer), two stalls, one rug and one mat, beside two houses, an inn, six pieces of furniture and two floors. No bench, cart, fountain, notice board or washing line; no sign for a temple, a stable or a guild. A window sits in a south-facing wall only, on the stone, timber and interior kits: none in a side wall or at a corner, no shutter that closes, no stained glass. A bond between two wall kits lives in a face, on an east or west side: a boundary on a north or south side is still a butt joint, and the interior kit keys into nothing."),
+    ("Cliffs and stairs", "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Fifteen terrains have a cliff; mountain, peaks, rock, water and lava do not, by design. The waterfall faces south, is one cell wide and one level tall, and nothing falls into lava. A flight climbs one level (16 px) or onto a stone wall (30 px); no other wall kit has one. Ramps are earth only: no sand or snow version."),
+    ("Landmarks", "Sixteen of the seventeen great landmarks have a state, and the ruin has none by design. Only the city has a second design (a timber town): no pirate ship, no second volcano or palace. The wayside props (bridge, mine, camp, well) have one design and no state."),
     ("Monsters", "Twelve-frame animation covers the attack, walk, signature and death of the seven creatures bigger than a tile; their hurt, and every state of every smaller creature and every person, are six frames. Some elite effects keep the base's colours by nature (a web, a tongue, a war-cry, a howl, a thrown boulder). Monster portraits exist for the lords only."),
     ("Portraits", "Stills, facing the viewer, one expression per body. No talking or blinking frames."),
     ("UI", "The two handwriting faces cover Latin, monotonic Greek and Cyrillic (468 characters): no CJK, no polytonic Greek, no right-to-left script. The scroll bar is vertical only and has one thumb state. Twelve status icons; an effect outside that list has none."),

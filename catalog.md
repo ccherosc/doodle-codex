@@ -18,31 +18,31 @@ Each of these is a static PNG with every asset labelled:
 - [Transitions: pair: grass over lava (scorch)](https://ccherosc.github.io/doodle-codex/sheets/transition_pair_lava__grass.png) (896x768)
 - [Transitions: pair: ash and snow](https://ccherosc.github.io/doodle-codex/sheets/transition_pair_ash__snow.png) (896x768)
 - [Transitions: pair: rock over grass (dual-grid cliff)](https://ccherosc.github.io/doodle-codex/sheets/transition_pair_grass__rock.png) (896x768)
-- [Transitions: cliffs: a height step in each of six terrains](https://ccherosc.github.io/doodle-codex/sheets/transition_cliffs_sheet.png) (1376x1226)
+- [Transitions: cliffs: a height step in each of 15 terrains](https://ccherosc.github.io/doodle-codex/sheets/transition_cliffs_sheet.png) (1376x2444)
 - [Transitions: cliff: grass plateaus over grass, dirt and sand](https://ccherosc.github.io/doodle-codex/sheets/transition_cliff_grass.png) (1536x1152)
-- [Transitions: cliff wash: a step standing in water (foam) and in lava (char)](https://ccherosc.github.io/doodle-codex/sheets/transition_cliff_wash_sheet.png) (1376x1632)
+- [Transitions: cliff wash: a step standing in water (foam) and in lava (char)](https://ccherosc.github.io/doodle-codex/sheets/transition_cliff_wash_sheet.png) (1376x4068)
 - [Transitions: alternates: the same border in each of its four drawings](https://ccherosc.github.io/doodle-codex/sheets/transition_alternates.png) (784x3860)
 - [Transitions: alternates: one coast with the primary only, and with all four mixed](https://ccherosc.github.io/doodle-codex/sheets/transition_alternates_map.png) (1304x478)
 - [Transitions: cliff alternates: the same height step in each of its four drawings](https://ccherosc.github.io/doodle-codex/sheets/transition_cliff_alternates.png) (784x3004)
-- [Interior wall kit: 51 labelled pieces and doors (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_interior.png) (1390x1058)
+- [Interior wall kit: 55 labelled pieces, doors and windows (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_interior.png) (1390x1058)
 - [Walls: interior: a yard, a maze and a line built from the kit](https://ccherosc.github.io/doodle-codex/sheets/walls_interior_demo.png) (1152x768)
 - [Walls: interior: the pieces in place, labelled](https://ccherosc.github.io/doodle-codex/sheets/walls_interior_pieces.png) (1132x1062)
-- [Rock wall kit: 51 labelled pieces and doors (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_rock.png) (1390x1058)
+- [Rock wall kit: 51 labelled pieces, doors and windows (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_rock.png) (1390x1058)
 - [Walls: rock: a yard, a maze and a line built from the kit](https://ccherosc.github.io/doodle-codex/sheets/walls_rock_demo.png) (1152x768)
 - [Walls: rock: the pieces in place, labelled](https://ccherosc.github.io/doodle-codex/sheets/walls_rock_pieces.png) (1132x1062)
-- [Stone wall kit: 55 labelled pieces and doors (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_stone.png) (1390x1058)
+- [Stone wall kit: 59 labelled pieces, doors and windows (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_stone.png) (1390x1058)
 - [Walls: stone: a yard, a maze and a line built from the kit](https://ccherosc.github.io/doodle-codex/sheets/walls_stone_demo.png) (1152x768)
-- [Walls: stone: the pieces in place, labelled](https://ccherosc.github.io/doodle-codex/sheets/walls_stone_pieces.png) (1132x1062)
-- [Stone_low wall kit: 47 labelled pieces and doors (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_stone_low.png) (1390x890)
+- [Walls: stone: the pieces in place, labelled](https://ccherosc.github.io/doodle-codex/sheets/walls_stone_pieces.png) (1132x1212)
+- [Stone_low wall kit: 47 labelled pieces, doors and windows (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_stone_low.png) (1390x890)
 - [Walls: stone_low: a yard, a maze and a line built from the kit](https://ccherosc.github.io/doodle-codex/sheets/walls_stone_low_demo.png) (1152x768)
 - [Walls: stone_low: the pieces in place, labelled](https://ccherosc.github.io/doodle-codex/sheets/walls_stone_low_pieces.png) (1132x912)
-- [Timber wall kit: 55 labelled pieces and doors (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_timber.png) (1390x1058)
+- [Timber wall kit: 59 labelled pieces, doors and windows (2x)](https://ccherosc.github.io/doodle-codex/sheets/walls_timber.png) (1390x1058)
 - [Walls: timber: a yard, a maze and a line built from the kit](https://ccherosc.github.io/doodle-codex/sheets/walls_timber_demo.png) (1152x768)
-- [Walls: timber: the pieces in place, labelled](https://ccherosc.github.io/doodle-codex/sheets/walls_timber_pieces.png) (1132x1062)
+- [Walls: timber: the pieces in place, labelled](https://ccherosc.github.io/doodle-codex/sheets/walls_timber_pieces.png) (1132x1212)
 - [Walls: all five kits in one building: a butt joint wherever two materials meet](https://ccherosc.github.io/doodle-codex/sheets/walls_mixed_demo.png) (1408x1408)
 - [Walls: the same kinds of wall bonded: the stronger kit keyed into the weaker one's face](https://ccherosc.github.io/doodle-codex/sheets/walls_bonds_demo.png) (1544x704)
 - [Walls: bonds close up: a butt joint beside its bond, for each pair of kits](https://ccherosc.github.io/doodle-codex/sheets/walls_bonds_closeup.png) (1920x2352)
-- [Structures: 67 props and their states (1x)](https://ccherosc.github.io/doodle-codex/sheets/structures.png) (1626x1730)
+- [Structures: 78 props and their states (1x)](https://ccherosc.github.io/doodle-codex/sheets/structures.png) (1626x2402)
 - [Monster slime: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_slime.png) (1606x896)
 - [Monster rat: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_rat.png) (1606x896)
 - [Monster bat: every state x 6 frames, facing right](https://ccherosc.github.io/doodle-codex/sheets/monster_bat.png) (1606x1792)
@@ -93,15 +93,21 @@ Each of these is a static PNG with every asset labelled:
 - [Scene: five wall kits in one plan, joined where they meet](https://ccherosc.github.io/doodle-codex/sheets/demo_walls_mixed.png) (640x448)
 - [Scene: the same plan with bonds in place of the joints](https://ccherosc.github.io/doodle-codex/sheets/demo_walls_bonded.png) (640x448)
 - [Scene: both handwriting faces: accents, symbols, Greek, Cyrillic, kerned](https://ccherosc.github.io/doodle-codex/sheets/demo_handwriting.png) (470x240)
+- [Scene: a street: two lamps (one dark), four trade signs, two stalls, windows in a stone and a timber wall](https://ccherosc.github.io/doodle-codex/sheets/demo_street.png) (704x384)
+- [Scene: a room: a rug under the table, two windows in the interior wall, furniture](https://ccherosc.github.io/doodle-codex/sheets/demo_room.png) (448x256)
+- [Scene: a river crossing a cliff edge by the waterfall](https://ccherosc.github.io/doodle-codex/sheets/demo_waterfall.png) (448x384)
+- [Scene: every map-scale state beside its idle picture](https://ccherosc.github.io/doodle-codex/sheets/demo_landmark_states.png) (1568x952)
 - [Scene: the map, animated: the ogre's blow takes twelve frames](https://ccherosc.github.io/doodle-codex/sheets/demo_map.gif) (896x640)
 - [Scene: the local scene, animated](https://ccherosc.github.io/doodle-codex/sheets/demo_scene.gif) (576x384)
+- [Scene: the street, animated: the lamp and the signs swing](https://ccherosc.github.io/doodle-codex/sheets/demo_street.gif) (704x384)
+- [Scene: the waterfall, animated](https://ccherosc.github.io/doodle-codex/sheets/demo_waterfall.gif) (448x384)
 
 The engine contract (file layout, JSON fields, autotile rule, paperdoll composition): [GAME_INTEGRATION.md](https://ccherosc.github.io/doodle-codex/GAME_INTEGRATION.md). Machine-readable summary: [catalog.json](https://ccherosc.github.io/doodle-codex/catalog.json).
 
 ## Counts
 
 - terrain tiles: 108
-- structures: 67
+- structures: 78
 - creatures: 30
 - elites: 30
 - bodies: 12
@@ -112,9 +118,9 @@ The engine contract (file layout, JSON fields, autotile rule, paperdoll composit
 
 ## Known gaps (what the library does not have yet)
 
-1. **Local scenes are still thin.** Two houses, an inn, six pieces of furniture, two floors, five wall kits and sixteen flights. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. A bond between two wall kits lives in a face, on an east or west side: a boundary on a north or south side is still a butt joint, and the interior kit keys into nothing.
-2. **Cliffs and stairs.** A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Only six terrains have a cliff. A flight climbs one level (16 px) or onto a stone wall (30 px); no other wall kit has one. The east and west ramps are quiet at 1x: seen side-on, a slope is a worn patch with a banked edge.
-3. **Landmarks.** One design and no state each (no ruined, raided or lit variant) for the great landmarks.
+1. **The street is a first set.** One lamp, four trade signs (inn, smith, shop, healer), two stalls, one rug and one mat, beside two houses, an inn, six pieces of furniture and two floors. No bench, cart, fountain, notice board or washing line; no sign for a temple, a stable or a guild. A window sits in a south-facing wall only, on the stone, timber and interior kits: none in a side wall or at a corner, no shutter that closes, no stained glass. A bond between two wall kits lives in a face, on an east or west side: a boundary on a north or south side is still a butt joint, and the interior kit keys into nothing.
+2. **Cliffs and stairs.** A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Fifteen terrains have a cliff; mountain, peaks, rock, water and lava do not, by design. The waterfall faces south, is one cell wide and one level tall, and nothing falls into lava. A flight climbs one level (16 px) or onto a stone wall (30 px); no other wall kit has one. Ramps are earth only: no sand or snow version.
+3. **Landmarks.** Sixteen of the seventeen great landmarks have a state, and the ruin has none by design. Only the city has a second design (a timber town): no pirate ship, no second volcano or palace. The wayside props (bridge, mine, camp, well) have one design and no state.
 4. **Monsters.** Twelve-frame animation covers the attack, walk, signature and death of the seven creatures bigger than a tile; their hurt, and every state of every smaller creature and every person, are six frames. Some elite effects keep the base's colours by nature (a web, a tongue, a war-cry, a howl, a thrown boulder). Monster portraits exist for the lords only.
 5. **Portraits.** Stills, facing the viewer, one expression per body. No talking or blinking frames.
 6. **UI.** The two handwriting faces cover Latin, monotonic Greek and Cyrillic (468 characters): no CJK, no polytonic Greek, no right-to-left script. The scroll bar is vertical only and has one thumb state. Twelve status icons; an effect outside that list has none.
@@ -149,34 +155,36 @@ Seamless 64x64 tiles, 6 frames. Listed low to high in elevation (draw order).
 | peaks | not walkable, blocks projectiles, blocks sight | summit_spire (one great spire); summit_glacier (a crevassed glacier tongue); summit_cairn (a cairn with a red pennant); summit_pines (snow-laden pines) |
 | rock | not walkable, blocks projectiles, blocks sight | wall_moss (moss and grass in the hollows); wall_ore (seams of gold ore); wall_crack (a branching fissure); wall_crystals (teal crystals in the face) |
 
-## Transitions (19 overlay, 19 shore, 18 scorch, 6 cliff atlases)
+## Transitions (19 overlay, 19 shore, 18 scorch, 15 cliff atlases)
 
 Corner-Wang (16 masks) on a dual grid; overlay per higher terrain, `shore` over water, `scorch` over lava. Elevation: water < lava < ice < cave < ash < sand < desert < swamp < flagstones < floorboards < dirt < farmland < farmland_ns < snow < roads < grass < forest < mountain < peaks < rock.
 
-Cliffs (a height step within one terrain, heights per cell; a bank on the south-facing edge, a rim on the others, a wash atlas where the step stands in water or lava; the stairs_*, stairs_wood_* and ramp_* structures cross it): ash, desert, dirt, grass, sand, snow. Alternates: 3 more drawings of every overlay, shore, scorch and cliff atlas and of the cliff's two washes, seam-safe in any mix.
+Cliffs (a height step within one terrain, heights per cell; a bank on the south-facing edge, a rim on the others, a wash atlas where the step stands in water or lava; the stairs_*, stairs_wood_* and ramp_* structures cross it, and `waterfall` carries water over it): ash, cave, desert, dirt, farmland, farmland_ns, flagstones, floorboards, forest, grass, ice, roads, sand, snow, swamp. Alternates: 3 more drawings of every overlay, shore, scorch and cliff atlas and of the cliff's two washes, seam-safe in any mix.
 
 
-## Wall kits (5 materials x 47 pieces, 24 door and gate pieces)
+## Wall kits (5 materials x 47 pieces, 24 door and gate pieces, 12 windows)
 
 For a wall cell, OR together neighbour_bits of the eight neighbours that are also wall cells, of any kind, and index `lookup` with the result. A diagonal neighbour only matters when both orthogonal neighbours beside it are wall; lookup already accounts for that. Draw the piece in the cell, y-sorted or on the ground layer above terrain.
 
 A door or gate is a wall cell whose piece is swapped: where lookup answers a door's `replaces`, draw the door instead. Closed, it blocks like any wall. Open, the cell is walkable and the piece is drawn over whoever stands in it. Swap closed for open to open it; there is no strip.
 
+A window is a wall cell whose piece is swapped, exactly as a door is: where lookup answers a window's `replaces`, draw the window instead. It always blocks, as the wall does. `state` is dark or lit: whether light comes through the glass at the viewer. seen_from outside (stone, timber), lit is a lamp indoors, for night; seen_from inside (interior), lit is daylight and dark is the night sky. glass_px is the pane, [x0, y0, x1, y1] in cell px, for an engine that adds its own glow. Only kits with a `windows` table have one.
+
 Kits join with a butt joint. A wall cell of any kind counts as a neighbour when choosing a piece, so each kit runs to the edge of its own cell. Then, for each of the four sides where the neighbour is a wall of ANOTHER kind, draw this kind's joint over the piece: pieces[piece].joints[side] names it (a door uses its `replaces` piece's). Both cells of a boundary do this, each from its own kit. A joint lies inside its own cell and its own piece.
 
 A bond is a joint with teeth, for two kits built as one wall: the stronger kit's blocks run a few px into the weaker one's face. To use it, where the join rule says to draw joint J on a side whose neighbour is of kind K, draw bonds[K][J] instead if it exists, and the joint if not. Both cells do this, each from its own kit. Bonds exist for east and west sides that show face; a north or south side, and any side with wall at its south corner, keeps its joint. Use bonds or joints for a whole wall, not a mix. Strength, weakest first: interior < timber < stone_low < stone < rock.
 
-Naming: `single` = a lone pillar; `end_<side>` = the <side> end of a one-cell-wide wall; `straight_ns / straight_ew` = a one-cell-wide run; `bend_<corner>` = a one-cell-wide wall turning; <corner> is the outside of the turn; `corner_<corner>` = the <corner> corner of a solid block; `edge_<side>` = the <side> edge of a solid block (edge_s shows the face); `tee_<side>` = a one-cell-wide T; <side> is the side with no branch; `inner_<diagonal>` = solid, with the <diagonal> neighbour missing (an inside corner); `cross` = a one-cell-wide crossing; `solid` = interior: the top, no edge; `*_notch_<diagonals>` = the same piece with inside corners at those diagonals; `door_<where>_<state> / gate_<where>_<state>` = a door (18 px) or gate (38 px) in a south face; <where> is ew (replaces straight_ew) or edge_s (replaces edge_s)
+Naming: `single` = a lone pillar; `end_<side>` = the <side> end of a one-cell-wide wall; `straight_ns / straight_ew` = a one-cell-wide run; `bend_<corner>` = a one-cell-wide wall turning; <corner> is the outside of the turn; `corner_<corner>` = the <corner> corner of a solid block; `edge_<side>` = the <side> edge of a solid block (edge_s shows the face); `tee_<side>` = a one-cell-wide T; <side> is the side with no branch; `inner_<diagonal>` = solid, with the <diagonal> neighbour missing (an inside corner); `cross` = a one-cell-wide crossing; `solid` = interior: the top, no edge; `*_notch_<diagonals>` = the same piece with inside corners at those diagonals; `door_<where>_<state> / gate_<where>_<state>` = a door (18 px) or gate (38 px) in a south face; <where> is ew (replaces straight_ew) or edge_s (replaces edge_s); `window_<where>_<state>` = a window (13 px of glass) in a south face, dark or lit; <where> as for a door
 
 Pieces (the same 47 labels in every kind): `single`, `end_w`, `end_s`, `end_n`, `end_e`, `bend_sw`, `corner_sw`, `bend_nw`, `corner_nw`, `straight_ew`, `corner_se`, `straight_ns`, `bend_se`, `corner_ne`, `bend_ne`, `edge_s`, `edge_w_notch_se`, `edge_w`, `edge_s_notch_nw`, `edge_s_notch_ne`, `tee_w`, `edge_w_notch_ne`, `tee_s`, `edge_n`, `edge_n_notch_sw`, `edge_n_notch_se`, `tee_n`, `edge_e`, `edge_e_notch_sw`, `edge_e_notch_nw`, `tee_e`, `solid`, `inner_sw`, `inner_se`, `solid_notch_se_sw`, `inner_nw`, `solid_notch_sw_nw`, `solid_notch_se_nw`, `solid_notch_se_sw_nw`, `inner_ne`, `solid_notch_ne_sw`, `solid_notch_ne_se`, `solid_notch_ne_se_sw`, `solid_notch_ne_nw`, `solid_notch_ne_sw_nw`, `solid_notch_ne_se_nw`, `cross`
 
-- **interior**: face 36 px; doors and gates: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`, `door_edge_s_open`
-- **rock**: face 24 px; doors and gates: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`, `door_edge_s_open`
-- **stone**: face 30 px; doors and gates: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`, `door_edge_s_open`, `gate_ew_closed`, `gate_ew_open`, `gate_edge_s_closed`, `gate_edge_s_open`
-- **stone_low**: face 12 px; doors and gates: none
-- **timber**: face 28 px; doors and gates: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`, `door_edge_s_open`, `gate_ew_closed`, `gate_ew_open`, `gate_edge_s_closed`, `gate_edge_s_open`
+- **interior**: face 36 px; doors and gates: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`, `door_edge_s_open`; windows: `window_ew_dark`, `window_ew_lit`, `window_edge_s_dark`, `window_edge_s_lit`
+- **rock**: face 24 px; doors and gates: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`, `door_edge_s_open`; windows: none
+- **stone**: face 30 px; doors and gates: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`, `door_edge_s_open`, `gate_ew_closed`, `gate_ew_open`, `gate_edge_s_closed`, `gate_edge_s_open`; windows: `window_ew_dark`, `window_ew_lit`, `window_edge_s_dark`, `window_edge_s_lit`
+- **stone_low**: face 12 px; doors and gates: none; windows: none
+- **timber**: face 28 px; doors and gates: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`, `door_edge_s_open`, `gate_ew_closed`, `gate_ew_open`, `gate_edge_s_closed`, `gate_edge_s_open`; windows: `window_ew_dark`, `window_ew_lit`, `window_edge_s_dark`, `window_edge_s_lit`
 
-## Structures and props (67 props, 29 at a person's scale)
+## Structures and props (78 props, 39 at a person's scale)
 
 | name | tiles | scale | passable | states | description |
 | --- | --- | --- | --- | --- | --- |
@@ -212,25 +220,26 @@ Pieces (the same 47 labels in every kind): `single`, `end_w`, `end_s`, `end_n`, 
 | barrel | 1x1 | local |  |  | A coopered barrel standing on end. |
 | crate | 1x1 | local |  |  | A slatted packing crate: raw planks in a frame, one diagonal brace. |
 | hearth | 1x1 | local |  |  | A stone fireplace with a fire in it, against the north wall. |
-| volcano | 3x2 | map |  |  | A fire mountain, six tiles: Hellfire Island, the Firebreak Peaks. |
-| palace | 2x2 | map |  |  | A palace of domes and minarets on its own rock, four tiles. |
-| ship | 2x1 | map |  |  | A two-masted ship under sail, two tiles: the sea lanes of the map. |
-| stronghold | 3x2 | map |  |  | A black fortress of spires, six tiles: the Ghora'Khar Dominion. |
-| city | 3x2 | map |  |  | A walled city, six tiles: the Imperial Capital, Veylorn, LeManns. |
+| volcano | 3x2 | map |  | erupt | A fire mountain, six tiles: Hellfire Island, the Firebreak Peaks. |
+| palace | 2x2 | map |  | raided | A palace of domes and minarets on its own rock, four tiles. |
+| ship | 2x1 | map |  | moored | A two-masted ship under sail, two tiles: the sea lanes of the map. |
+| stronghold | 3x2 | map |  | open | A black fortress of spires, six tiles: the Ghora'Khar Dominion. |
+| city | 3x2 | map |  | open, raided | A walled city, six tiles: the Imperial Capital, Veylorn, LeManns. |
+| city_timber | 3x2 | map |  | open, raided | A walled town of timber and thatch, six tiles: the second city. |
 | castle_ruin | 3x2 | map |  |  | An abandoned castle on a crag, six tiles: DragonLock. |
-| bastion | 2x2 | map |  |  | An iron works with walls on, four tiles: Coghollow Bastion. |
-| fort | 2x2 | map |  |  | A timber fort, four tiles: the Rogue Marches, the border states. |
-| great_tree | 2x2 | map |  |  | A tree that is a place, four tiles: Silver Arrow Woods, Draco Forest. |
-| cave_mouth | 2x1 | map |  |  | A cave in a rock outcrop, two tiles: the Cave of Descendants. |
-| sea_serpent | 2x1 | map |  |  | A serpent breaking the surface, two tiles: here be monsters. |
-| stilt_village | 2x1 | map |  |  | Thatched huts on stilts over a marsh, two tiles: Poko, the Flooding Plains. |
-| spires | 1x2 | map |  |  | Needles of black glass, two tiles tall: the Obsidian Wastes, the Valley of Shadows. |
+| bastion | 2x2 | map |  | open | An iron works with walls on, four tiles: Coghollow Bastion. |
+| fort | 2x2 | map |  | open, raided | A timber fort, four tiles: the Rogue Marches, the border states. |
+| great_tree | 2x2 | map |  | raided | A tree that is a place, four tiles: Silver Arrow Woods, Draco Forest. |
+| cave_mouth | 2x1 | map |  | sealed | A cave in a rock outcrop, two tiles: the Cave of Descendants. |
+| sea_serpent | 2x1 | map |  | dive | A serpent breaking the surface, two tiles: here be monsters. |
+| stilt_village | 2x1 | map |  | raided | Thatched huts on stilts over a marsh, two tiles: Poko, the Flooding Plains. |
+| spires | 1x2 | map |  | awake | Needles of black glass, two tiles tall: the Obsidian Wastes, the Valley of Shadows. |
 | house | 2x2 | local |  | open | A half-timbered cottage under red tiles, with a front gable. |
 | inn | 3x2 | local |  | open | An inn, six tiles: two storeys, a hanging sign, a counter under an awning. |
-| tower_legend | 1x2 | map |  |  | The Tower of Legend, two tiles tall: a shaft that widens as it climbs. |
-| lighthouse | 1x2 | map |  |  | A lighthouse on its own rock, two tiles tall. The lamp is the animation. |
-| mountain_fortress | 3x2 | map |  |  | A fortress built up the face of a mountain, six tiles. |
-| temple | 2x2 | map |  |  | A temple, four tiles: steps, a colonnade, a pediment, and a god at home. |
+| tower_legend | 1x2 | map |  | dark | The Tower of Legend, two tiles tall: a shaft that widens as it climbs. |
+| lighthouse | 1x2 | map |  | dark | A lighthouse on its own rock, two tiles tall. The lamp is the animation. |
+| mountain_fortress | 3x2 | map |  | open | A fortress built up the face of a mountain, six tiles. |
+| temple | 2x2 | map |  | dark | A temple, four tiles: steps, a colonnade, a pediment, and a god at home. |
 | stairs_s | 1x2 | local | yes |  | A stone flight down a bank that faces the viewer: treads and risers. |
 | stairs_n | 1x2 | local | yes |  | The flight down the far side of a step: you look along it from above. |
 | stairs_e | 2x1 | local | yes |  | The flight down a step's east flank. See `_stairs_flank`. |
@@ -247,6 +256,16 @@ Pieces (the same 47 labels in every kind): `single`, `end_w`, `end_s`, `end_n`, 
 | stairs_wall_n | 1x2 | local | yes |  | The flight down the north side of a `stone` wall: `stairs_n`, longer. |
 | stairs_wall_e | 2x1 | local | yes |  | The flight down the east end of a stone wall. See `_wall_flank`. |
 | stairs_wall_w | 2x1 | local | yes |  | The flight down the west end of a stone wall. See `_wall_flank`. |
+| lamp | 1x2 | local |  | dark | A street lamp: an iron post on a stone foot, a lantern on a crook. |
+| sign_inn | 1x2 | local |  |  | The tankard: somewhere to eat, drink and sleep. See `_shop_sign`. |
+| sign_smith | 1x2 | local |  |  | The anvil: arms and armour, made and mended. See `_shop_sign`. |
+| sign_shop | 1x2 | local |  |  | The purse and its coin: things bought and sold. See `_shop_sign`. |
+| sign_healer | 1x2 | local |  |  | The red flask: potions and mending. See `_shop_sign`. |
+| stall | 2x2 | local |  |  | A greengrocer's stall under a red awning. See `_stall`. |
+| stall_wares | 2x2 | local |  |  | A pedlar's stall under a blue awning: pots and cloth. See `_stall`. |
+| rug | 2x1 | local | yes |  | A long woven rug, two cells: a border, three lozenges, a fringe. |
+| mat | 1x1 | local | yes |  | A round rag mat, one cell: a braid coiled out from its middle. |
+| waterfall | 1x2 | local |  |  | A river over a south-facing step, one cell wide (`transitions.CLIFFS`). |
 
 ## Monsters (30 creatures, 30 elites, 211 states x 4 facings)
 

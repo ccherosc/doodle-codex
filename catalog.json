@@ -392,27 +392,54 @@
   ],
   "cliff": [
    "ash",
+   "cave",
    "desert",
    "dirt",
+   "farmland",
+   "farmland_ns",
+   "flagstones",
+   "floorboards",
+   "forest",
    "grass",
+   "ice",
+   "roads",
    "sand",
-   "snow"
+   "snow",
+   "swamp"
   ],
   "cliff_shore": [
    "ash",
+   "cave",
    "desert",
    "dirt",
+   "farmland",
+   "farmland_ns",
+   "flagstones",
+   "floorboards",
+   "forest",
    "grass",
+   "ice",
+   "roads",
    "sand",
-   "snow"
+   "snow",
+   "swamp"
   ],
   "cliff_scorch": [
    "ash",
+   "cave",
    "desert",
    "dirt",
+   "farmland",
+   "farmland_ns",
+   "flagstones",
+   "floorboards",
+   "forest",
    "grass",
+   "ice",
+   "roads",
    "sand",
-   "snow"
+   "snow",
+   "swamp"
   ],
   "alternates": {
    "count": 3,
@@ -485,27 +512,54 @@
    ],
    "cliff": [
     "ash",
+    "cave",
     "desert",
     "dirt",
+    "farmland",
+    "farmland_ns",
+    "flagstones",
+    "floorboards",
+    "forest",
     "grass",
+    "ice",
+    "roads",
     "sand",
-    "snow"
+    "snow",
+    "swamp"
    ],
    "cliff_shore": [
     "ash",
+    "cave",
     "desert",
     "dirt",
+    "farmland",
+    "farmland_ns",
+    "flagstones",
+    "floorboards",
+    "forest",
     "grass",
+    "ice",
+    "roads",
     "sand",
-    "snow"
+    "snow",
+    "swamp"
    ],
    "cliff_scorch": [
     "ash",
+    "cave",
     "desert",
     "dirt",
+    "farmland",
+    "farmland_ns",
+    "flagstones",
+    "floorboards",
+    "forest",
     "grass",
+    "ice",
+    "roads",
     "sand",
-    "snow"
+    "snow",
+    "swamp"
    ]
   }
  },
@@ -522,7 +576,8 @@
    "cross": "a one-cell-wide crossing",
    "solid": "interior: the top, no edge",
    "*_notch_<diagonals>": "the same piece with inside corners at those diagonals",
-   "door_<where>_<state> / gate_<where>_<state>": "a door (18 px) or gate (38 px) in a south face; <where> is ew (replaces straight_ew) or edge_s (replaces edge_s)"
+   "door_<where>_<state> / gate_<where>_<state>": "a door (18 px) or gate (38 px) in a south face; <where> is ew (replaces straight_ew) or edge_s (replaces edge_s)",
+   "window_<where>_<state>": "a window (13 px of glass) in a south face, dark or lit; <where> as for a door"
   },
   "frames": 1,
   "kinds": {
@@ -582,6 +637,52 @@
      "door_edge_s_closed",
      "door_edge_s_open"
     ],
+    "windows": {
+     "window_ew_dark": {
+      "replaces": "straight_ew",
+      "state": "dark",
+      "seen_from": "inside",
+      "glass_px": [
+       25,
+       24,
+       39,
+       38
+      ]
+     },
+     "window_ew_lit": {
+      "replaces": "straight_ew",
+      "state": "lit",
+      "seen_from": "inside",
+      "glass_px": [
+       25,
+       24,
+       39,
+       38
+      ]
+     },
+     "window_edge_s_dark": {
+      "replaces": "edge_s",
+      "state": "dark",
+      "seen_from": "inside",
+      "glass_px": [
+       25,
+       24,
+       39,
+       38
+      ]
+     },
+     "window_edge_s_lit": {
+      "replaces": "edge_s",
+      "state": "lit",
+      "seen_from": "inside",
+      "glass_px": [
+       25,
+       24,
+       39,
+       38
+      ]
+     }
+    },
     "joints": [
      "joint_n",
      "joint_n_ne",
@@ -685,6 +786,7 @@
      "door_edge_s_closed",
      "door_edge_s_open"
     ],
+    "windows": {},
     "joints": [
      "joint_n",
      "joint_n_ne",
@@ -792,6 +894,52 @@
      "gate_edge_s_closed",
      "gate_edge_s_open"
     ],
+    "windows": {
+     "window_ew_dark": {
+      "replaces": "straight_ew",
+      "state": "dark",
+      "seen_from": "outside",
+      "glass_px": [
+       25,
+       33,
+       39,
+       48
+      ]
+     },
+     "window_ew_lit": {
+      "replaces": "straight_ew",
+      "state": "lit",
+      "seen_from": "outside",
+      "glass_px": [
+       25,
+       33,
+       39,
+       48
+      ]
+     },
+     "window_edge_s_dark": {
+      "replaces": "edge_s",
+      "state": "dark",
+      "seen_from": "outside",
+      "glass_px": [
+       25,
+       33,
+       39,
+       48
+      ]
+     },
+     "window_edge_s_lit": {
+      "replaces": "edge_s",
+      "state": "lit",
+      "seen_from": "outside",
+      "glass_px": [
+       25,
+       33,
+       39,
+       48
+      ]
+     }
+    },
     "joints": [
      "joint_n",
      "joint_n_ne",
@@ -890,6 +1038,7 @@
      "cross"
     ],
     "doors": [],
+    "windows": {},
     "joints": [
      "joint_n",
      "joint_n_ne",
@@ -997,6 +1146,52 @@
      "gate_edge_s_closed",
      "gate_edge_s_open"
     ],
+    "windows": {
+     "window_ew_dark": {
+      "replaces": "straight_ew",
+      "state": "dark",
+      "seen_from": "outside",
+      "glass_px": [
+       25,
+       32,
+       39,
+       45
+      ]
+     },
+     "window_ew_lit": {
+      "replaces": "straight_ew",
+      "state": "lit",
+      "seen_from": "outside",
+      "glass_px": [
+       25,
+       32,
+       39,
+       45
+      ]
+     },
+     "window_edge_s_dark": {
+      "replaces": "edge_s",
+      "state": "dark",
+      "seen_from": "outside",
+      "glass_px": [
+       25,
+       32,
+       39,
+       45
+      ]
+     },
+     "window_edge_s_lit": {
+      "replaces": "edge_s",
+      "state": "lit",
+      "seen_from": "outside",
+      "glass_px": [
+       25,
+       32,
+       39,
+       45
+      ]
+     }
+    },
     "joints": [
      "joint_n",
      "joint_n_ne",
@@ -1266,7 +1461,8 @@
    "states": [
     "open"
    ],
-   "description": "A sandstone citadel: one great round tower under a spire, two turrets."
+   "description": "A sandstone citadel: one great round tower under a spire, two turrets.",
+   "variant_of": "castle"
   },
   "tower_wizard": {
    "footprint_tiles": [
@@ -1277,7 +1473,8 @@
    "passable": false,
    "walk_behind": false,
    "states": [],
-   "description": "A mage's tower: it leans, the top is too big for it, the hat is bent."
+   "description": "A mage's tower: it leans, the top is too big for it, the hat is bent.",
+   "variant_of": "tower"
   },
   "dungeon_crypt": {
    "footprint_tiles": [
@@ -1288,7 +1485,8 @@
    "passable": false,
    "walk_behind": false,
    "states": [],
-   "description": "A little mausoleum: steps, two columns, a pediment, a way down."
+   "description": "A little mausoleum: steps, two columns, a pediment, a way down.",
+   "variant_of": "dungeon"
   },
   "tree_oak": {
    "footprint_tiles": [
@@ -1423,7 +1621,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "erupt"
+   ],
    "description": "A fire mountain, six tiles: Hellfire Island, the Firebreak Peaks."
   },
   "palace": {
@@ -1434,7 +1634,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "raided"
+   ],
    "description": "A palace of domes and minarets on its own rock, four tiles."
   },
   "ship": {
@@ -1445,8 +1647,11 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
-   "description": "A two-masted ship under sail, two tiles: the sea lanes of the map."
+   "states": [
+    "moored"
+   ],
+   "description": "A two-masted ship under sail, two tiles: the sea lanes of the map.",
+   "ground_suggested": "water"
   },
   "stronghold": {
    "footprint_tiles": [
@@ -1456,7 +1661,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "open"
+   ],
    "description": "A black fortress of spires, six tiles: the Ghora'Khar Dominion."
   },
   "city": {
@@ -1467,8 +1674,26 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "open",
+    "raided"
+   ],
    "description": "A walled city, six tiles: the Imperial Capital, Veylorn, LeManns."
+  },
+  "city_timber": {
+   "footprint_tiles": [
+    3,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [
+    "open",
+    "raided"
+   ],
+   "description": "A walled town of timber and thatch, six tiles: the second city.",
+   "variant_of": "city"
   },
   "castle_ruin": {
    "footprint_tiles": [
@@ -1489,7 +1714,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "open"
+   ],
    "description": "An iron works with walls on, four tiles: Coghollow Bastion."
   },
   "fort": {
@@ -1500,7 +1727,10 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "open",
+    "raided"
+   ],
    "description": "A timber fort, four tiles: the Rogue Marches, the border states."
   },
   "great_tree": {
@@ -1511,7 +1741,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "raided"
+   ],
    "description": "A tree that is a place, four tiles: Silver Arrow Woods, Draco Forest."
   },
   "cave_mouth": {
@@ -1522,7 +1754,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "sealed"
+   ],
    "description": "A cave in a rock outcrop, two tiles: the Cave of Descendants."
   },
   "sea_serpent": {
@@ -1533,8 +1767,11 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
-   "description": "A serpent breaking the surface, two tiles: here be monsters."
+   "states": [
+    "dive"
+   ],
+   "description": "A serpent breaking the surface, two tiles: here be monsters.",
+   "ground_suggested": "water"
   },
   "stilt_village": {
    "footprint_tiles": [
@@ -1544,8 +1781,11 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
-   "description": "Thatched huts on stilts over a marsh, two tiles: Poko, the Flooding Plains."
+   "states": [
+    "raided"
+   ],
+   "description": "Thatched huts on stilts over a marsh, two tiles: Poko, the Flooding Plains.",
+   "ground_suggested": "swamp"
   },
   "spires": {
    "footprint_tiles": [
@@ -1555,7 +1795,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "awake"
+   ],
    "description": "Needles of black glass, two tiles tall: the Obsidian Wastes, the Valley of Shadows."
   },
   "house": {
@@ -1592,7 +1834,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "dark"
+   ],
    "description": "The Tower of Legend, two tiles tall: a shaft that widens as it climbs."
   },
   "lighthouse": {
@@ -1603,7 +1847,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "dark"
+   ],
    "description": "A lighthouse on its own rock, two tiles tall. The lamp is the animation."
   },
   "mountain_fortress": {
@@ -1614,7 +1860,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "open"
+   ],
    "description": "A fortress built up the face of a mountain, six tiles."
   },
   "temple": {
@@ -1625,7 +1873,9 @@
    "scale": "map",
    "passable": false,
    "walk_behind": false,
-   "states": [],
+   "states": [
+    "dark"
+   ],
    "description": "A temple, four tiles: steps, a colonnade, a pediment, and a god at home."
   },
   "stairs_s": {
@@ -2031,6 +2281,134 @@
     "onto": "wall",
     "wall_kind": "stone"
    }
+  },
+  "lamp": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [
+    "dark"
+   ],
+   "description": "A street lamp: an iron post on a stone foot, a lantern on a crook."
+  },
+  "sign_inn": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "The tankard: somewhere to eat, drink and sleep. See `_shop_sign`."
+  },
+  "sign_smith": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "The anvil: arms and armour, made and mended. See `_shop_sign`."
+  },
+  "sign_shop": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "The purse and its coin: things bought and sold. See `_shop_sign`."
+  },
+  "sign_healer": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "The red flask: potions and mending. See `_shop_sign`."
+  },
+  "stall": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "A greengrocer's stall under a red awning. See `_stall`."
+  },
+  "stall_wares": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "A pedlar's stall under a blue awning: pots and cloth. See `_stall`.",
+   "variant_of": "stall"
+  },
+  "rug": {
+   "footprint_tiles": [
+    2,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "A long woven rug, two cells: a border, three lozenges, a fringe.",
+   "layer": "floor"
+  },
+  "mat": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "local",
+   "passable": true,
+   "walk_behind": false,
+   "states": [],
+   "description": "A round rag mat, one cell: a braid coiled out from its middle.",
+   "layer": "floor"
+  },
+  "waterfall": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A river over a south-facing step, one cell wide (`transitions.CLIFFS`).",
+   "falls": {
+    "descends": "s",
+    "high_cell": [
+     0,
+     0
+    ],
+    "low_cell": [
+     0,
+     1
+    ],
+    "rise_px": 16
+   },
+   "ground_suggested": "water"
   }
  },
  "monsters": {
@@ -4018,7 +4396,7 @@
  },
  "counts": {
   "terrain tiles": 108,
-  "structures": 67,
+  "structures": 78,
   "creatures": 30,
   "elites": 30,
   "bodies": 12,
@@ -4029,16 +4407,16 @@
  },
  "known_gaps": [
   {
-   "title": "Local scenes are still thin",
-   "detail": "Two houses, an inn, six pieces of furniture, two floors, five wall kits and sixteen flights. No windows as pieces, rugs, signs, market stalls or street lamps at a person's scale. A bond between two wall kits lives in a face, on an east or west side: a boundary on a north or south side is still a butt joint, and the interior kit keys into nothing."
+   "title": "The street is a first set",
+   "detail": "One lamp, four trade signs (inn, smith, shop, healer), two stalls, one rug and one mat, beside two houses, an inn, six pieces of furniture and two floors. No bench, cart, fountain, notice board or washing line; no sign for a temple, a stable or a guild. A window sits in a south-facing wall only, on the stone, timber and interior kits: none in a side wall or at a corner, no shutter that closes, no stained glass. A bond between two wall kits lives in a face, on an east or west side: a boundary on a north or south side is still a butt joint, and the interior kit keys into nothing."
   },
   {
    "title": "Cliffs and stairs",
-   "detail": "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Only six terrains have a cliff. A flight climbs one level (16 px) or onto a stone wall (30 px); no other wall kit has one. The east and west ramps are quiet at 1x: seen side-on, a slope is a worn patch with a banked edge."
+   "detail": "A height step has a drawn bank on its south-facing edge only; the north, west and east edges are a lit lip, a rim line and a shade. Fifteen terrains have a cliff; mountain, peaks, rock, water and lava do not, by design. The waterfall faces south, is one cell wide and one level tall, and nothing falls into lava. A flight climbs one level (16 px) or onto a stone wall (30 px); no other wall kit has one. Ramps are earth only: no sand or snow version."
   },
   {
    "title": "Landmarks",
-   "detail": "One design and no state each (no ruined, raided or lit variant) for the great landmarks."
+   "detail": "Sixteen of the seventeen great landmarks have a state, and the ruin has none by design. Only the city has a second design (a timber town): no pirate ship, no second volcano or palace. The wayside props (bridge, mine, camp, well) have one design and no state."
   },
   {
    "title": "Monsters",
@@ -4148,10 +4526,10 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_cliffs_sheet.png",
-   "title": "Transitions: cliffs: a height step in each of six terrains",
+   "title": "Transitions: cliffs: a height step in each of 15 terrains",
    "size": [
     1376,
-    1226
+    2444
    ]
   },
   {
@@ -4167,7 +4545,7 @@
    "title": "Transitions: cliff wash: a step standing in water (foam) and in lava (char)",
    "size": [
     1376,
-    1632
+    4068
    ]
   },
   {
@@ -4196,7 +4574,7 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_interior.png",
-   "title": "Interior wall kit: 51 labelled pieces and doors (2x)",
+   "title": "Interior wall kit: 55 labelled pieces, doors and windows (2x)",
    "size": [
     1390,
     1058
@@ -4220,7 +4598,7 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_rock.png",
-   "title": "Rock wall kit: 51 labelled pieces and doors (2x)",
+   "title": "Rock wall kit: 51 labelled pieces, doors and windows (2x)",
    "size": [
     1390,
     1058
@@ -4244,7 +4622,7 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_stone.png",
-   "title": "Stone wall kit: 55 labelled pieces and doors (2x)",
+   "title": "Stone wall kit: 59 labelled pieces, doors and windows (2x)",
    "size": [
     1390,
     1058
@@ -4263,12 +4641,12 @@
    "title": "Walls: stone: the pieces in place, labelled",
    "size": [
     1132,
-    1062
+    1212
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_stone_low.png",
-   "title": "Stone_low wall kit: 47 labelled pieces and doors (2x)",
+   "title": "Stone_low wall kit: 47 labelled pieces, doors and windows (2x)",
    "size": [
     1390,
     890
@@ -4292,7 +4670,7 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_timber.png",
-   "title": "Timber wall kit: 55 labelled pieces and doors (2x)",
+   "title": "Timber wall kit: 59 labelled pieces, doors and windows (2x)",
    "size": [
     1390,
     1058
@@ -4311,7 +4689,7 @@
    "title": "Walls: timber: the pieces in place, labelled",
    "size": [
     1132,
-    1062
+    1212
    ]
   },
   {
@@ -4340,10 +4718,10 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/structures.png",
-   "title": "Structures: 67 props and their states (1x)",
+   "title": "Structures: 78 props and their states (1x)",
    "size": [
     1626,
-    1730
+    2402
    ]
   },
   {
@@ -4747,6 +5125,38 @@
    ]
   },
   {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_street.png",
+   "title": "Scene: a street: two lamps (one dark), four trade signs, two stalls, windows in a stone and a timber wall",
+   "size": [
+    704,
+    384
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_room.png",
+   "title": "Scene: a room: a rug under the table, two windows in the interior wall, furniture",
+   "size": [
+    448,
+    256
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_waterfall.png",
+   "title": "Scene: a river crossing a cliff edge by the waterfall",
+   "size": [
+    448,
+    384
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_landmark_states.png",
+   "title": "Scene: every map-scale state beside its idle picture",
+   "size": [
+    1568,
+    952
+   ]
+  },
+  {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_map.gif",
    "title": "Scene: the map, animated: the ogre's blow takes twelve frames",
    "size": [
@@ -4759,6 +5169,22 @@
    "title": "Scene: the local scene, animated",
    "size": [
     576,
+    384
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_street.gif",
+   "title": "Scene: the street, animated: the lamp and the signs swing",
+   "size": [
+    704,
+    384
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_waterfall.gif",
+   "title": "Scene: the waterfall, animated",
+   "size": [
+    448,
     384
    ]
   }

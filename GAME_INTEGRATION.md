@@ -14,7 +14,12 @@ water and in lava), `demo_cliff_alternates.png` (that step in its four looks),
 `demo_walls_mixed.png` and `demo_walls_bonded.png` (five wall kits joined in
 one plan, butted and bonded), `demo_hud.png` (bars, slots, status icons, a
 minimap and a scroll bar) and `demo_handwriting.png` (both handwriting faces,
-with accents, Greek and Cyrillic).
+with accents, Greek and Cyrillic), and four for a street and a map that
+changes: `demo_street.png` (a stone front and a timber one built from the wall
+kits with a door and three windows, lamps lit and dark, four trade signs, two
+stalls, a mat under the hero), `demo_room.png` (the interior kit's windows, a
+rug under a table), `demo_waterfall.png` (a river going over a step) and
+`demo_landmark_states.png` (every map structure's states beside its idle).
 
 Maintained by: `tools/package_game.py` builds `game/`, and this file is copied
 there. **Whoever changes the package layout, a JSON schema, or a rule the engine
@@ -61,7 +66,7 @@ game/
   terrain/transitions/shore/<upper>.png           16x6 atlas, RGBA overlay over water
   terrain/transitions/scorch/<upper>.png          16x6 atlas, RGBA overlay over lava (not for lava itself)
   terrain/transitions/pair/<lower>__<upper>.png   16x6 atlas, opaque, pre-composited
-  terrain/transitions/cliff/<terrain>.png         16x6 atlas, RGBA: a height step of one terrain (6 terrains)
+  terrain/transitions/cliff/<terrain>.png         16x6 atlas, RGBA: a height step of one terrain (15 terrains)
   terrain/transitions/cliff_shore/<terrain>.png   16x6 atlas, RGBA: the foam at the foot of a step that stands in water
   terrain/transitions/cliff_scorch/<terrain>.png  16x6 atlas, RGBA: the charred line at the foot of a step that stands in lava
   terrain/transitions/overlay_b|_c|_d/<upper>.png three more drawings of every overlay atlas (alternates)
@@ -73,11 +78,12 @@ game/
   terrain/walls/walls.json                        the hand-placeable wall kits: pieces, doors, joints, lookup, rules
   terrain/walls/<kind>/<label>.png                one still 64x64 cut-out: 47 labelled pieces per kind
   terrain/walls/<kind>/<door|gate>_<where>_<state>.png   a door or gate piece, closed and open
+  terrain/walls/<kind>/window_<where>_<dark|lit>.png     a window piece (stone, timber, interior)
   terrain/walls/<kind>/joint_<side>[_<corner>...].png    a butt joint against another kind: 16 per kind
   terrain/walls/<kind>/bond_<other>_<side>[_<corner>].png  the joint with teeth, against kind <other>: 16 per kind
   structures/structures.json
   structures/<name>.png                           cut-out strip, frame = footprint*64
-  structures/<name>_<state>.png                   the same frame in another state (open, raided)
+  structures/<name>_<state>.png                   the same frame in another state (open, raided, dark, erupt, ...)
                                                   (structures.json: `scale` = map landmark or person-scale)
   monsters/monsters.json
   monsters/<creature>/<state>_<facing>.png        cut-out strip, frame may be padded; 6 frames, or 12 (the state's `frames`)
@@ -299,9 +305,12 @@ want. Row 0 = all lower, row 15 = all upper.
 
 **Cliffs: a height step** (`transitions.cliff`, `cliff_rule`). Optional. A map
 may give each logical cell an integer height beside its terrain; without
-heights nothing changes. `cliff/<T>.png` exists for **grass, dirt, sand,
-desert, snow and ash** and is laid out like an overlay (row = mask, where a
-set bit is a corner on the *upper* level). It draws the upper level's ground,
+heights nothing changes. `cliff/<T>.png` exists for **fifteen terrains, every
+one a unit walks on**: grass, dirt, sand, desert, snow, ash, forest, swamp,
+ice, cave, farmland, farmland_ns, roads, flagstones and floorboards. Mountain,
+peaks and rock are already high ground and have none; water and lava have
+none either (see the waterfall, below). It is laid out like an overlay (row =
+mask, where a set bit is a corner on the *upper* level). It draws the upper level's ground,
 its edge and its cast shadow; the lower side is transparent, so a grass
 plateau stands on dirt or sand as readily as on grass. Where the edge faces
 **south** it is a bank `cliff_face_px` (16) tall. A **north, west or east**
@@ -324,7 +333,7 @@ it. Per display tile:
    at that level's mask, straight after the base strip and before every other
    layer of the tile; if `under` is `lava`, `cliff_scorch[T]` the same way. It
    is the foam (or the charred, glowing line) at the foot of the step and
-   nothing else: rows 0 and 15 are empty. Both exist for the same six
+   nothing else: rows 0 and 15 are empty. Both exist for the same fifteen
    terrains as `cliff`.
 
 **Stairs and ramps** are the way up. The terrain art draws none; twelve
@@ -334,14 +343,24 @@ stringers, for a village or a dock) and `ramp_s|n|e|w` (a trodden earth
 slope, for open country). Each is two cells, one on the high ground and one
 on the low (`structures.json:climbs`), and the border between them is the one
 place a unit may cross that step. The three are the same crossing in three
-materials: choose by what the place is built of.
+materials: choose by what the place is built of. Any of them stands on any of
+the fifteen stepping terrains.
+
+**A river goes over a step as a waterfall.** Water has no cliff atlas: a step
+is a contour a whole plateau follows, and a fall is one cell of it. So give
+the river's cells the **lower** height on both sides of the step. The banks'
+cliffs then stop at the river, each with its `cliff_shore` wash where it
+stands in the water, and the `waterfall` structure (§2.4, `falls`) is laid
+over the two river cells that straddle the step. Lava works the same way with
+`cliff_scorch`, and has no fall drawn for it.
 
 Limits: only a south-facing edge has a drawn face; the other three are the
 rim, which is correct for the camera. Every flight climbs one level, 16 px. A
 terrain not in `transitions.cliff` has no step (`tilekit` raises); for rock,
 build with the wall kit (§2.5), whose own flight is `stairs_wall_*` (§2.4).
 On masks 6 and 9 the lower level joins, like every other terrain. Cliff
-atlases have alternates (below).
+atlases have alternates (below). A waterfall exists for a south-facing step
+only, and is one cell wide.
 `tilekit.Kit.render_map(grid, frame, heights=...)` is the reference.
 
 **Alternates: four drawings of every edge** (`transitions.alternates`).
@@ -375,7 +394,7 @@ and `alternates.count` is how many there are (3).
 - **A height step has alternates on the same terms.** Each set also carries
   `cliff`, `cliff_shore` and `cliff_scorch` (folders `cliff_b/` … and
   `cliff_shore_b/` …), three more drawings of every cliff atlas for the same
-  six terrains. Use the tile's one choice for them with every other layer of
+  fifteen terrains. Use the tile's one choice for them with every other layer of
   that tile. Measured on the shipped atlases through the reference renderer:
   the difference on display-tile seams between any mix and the primary is 0.
 - Pair atlases have no alternate: they are pre-composited for editors. A map
@@ -420,14 +439,14 @@ layers ordered by elevation.
 
 ### 2.4 Structures (props)
 
-`structures.json:structures[name]` -> `{file, footprint_tiles:[cols,rows], blocked_cells_suggested, passable, scale, frame_w, frame_h, loops, variant_of?, ground_suggested?, perch?, states?, solid_px_suggested?, sort_y_px?, walk_behind?, climbs?}`.
+`structures.json:structures[name]` -> `{file, footprint_tiles:[cols,rows], blocked_cells_suggested, passable, scale, frame_w, frame_h, loops, variant_of?, ground_suggested?, perch?, states?, solid_px_suggested?, sort_y_px?, walk_behind?, climbs?, layer?, falls?}`.
 
-Sixty-seven structures:
+Seventy-eight structures:
 
 | group | names |
 | --- | --- |
 | landmarks | `castle`, `tower`, `dungeon` |
-| second designs | `castle_citadel`, `tower_wizard`, `dungeon_crypt` |
+| second designs | `castle_citadel`, `tower_wizard`, `dungeon_crypt`, `city_timber` (3x2, of `city`) |
 | towns | `town_hamlet`, `town_crossroads`, `town_market`, `town_village` |
 | wayside | `windmill`, `ruins`, `graveyard`, `mine`, `camp`, `well`, `signpost`, `fence` |
 | crossings | `bridge` (2x1, east-west), `bridge_ns` (1x2, north-south), `dock` (2x1) |
@@ -441,13 +460,46 @@ Sixty-seven structures:
 | | `stairs_wood_s`, `stairs_wood_n` (1x2), `stairs_wood_e`, `stairs_wood_w` (2x1): planks |
 | | `ramp_s`, `ramp_n` (1x2), `ramp_e`, `ramp_w` (2x1): trodden earth |
 | local scale, stairs up a wall | `stairs_wall_s`, `stairs_wall_n` (1x2), `stairs_wall_e`, `stairs_wall_w` (2x1): stone, onto the `stone` wall kit |
+| local scale, the street | `lamp`, `sign_inn`, `sign_smith`, `sign_shop`, `sign_healer` (1x2), `stall`, `stall_wares` (2x2) |
+| local scale, on the floor | `rug` (2x1), `mat` (1x1) |
+| local scale, water | `waterfall` (1x2) |
 
 - **`scale` is `"map"` or `"local"`.** A map structure is a landmark on an
   overworld: a whole castle is two tiles wide and a person beside it is a
   marker. A local structure is drawn at a person's own scale (the hut's door is
   as tall as the people who use it) for a scene people walk around in. The
-  twenty-nine in the last six rows are local; the other thirty-eight are map. Do
+  thirty-nine in the last nine rows are local; the other thirty-nine are map. Do
   not put a map building and a local building in one scene.
+- **The street: a lamp, four trade signs and two stalls.** All seven stand
+  up, are walked behind and carry `walk_behind`, `solid_px_suggested` and
+  `sort_y_px`, like the trees.
+  - `lamp` is an iron post with a lantern on a crook, two cells tall so the
+    light hangs above the heads under it. It blocks its foot cell `[0, 1]`
+    (`solid_px_suggested` `[18, 104, 14, 10]`, `sort_y_px` 113). Idle is lit;
+    the state `dark` is the same lamp with the light out, for day.
+  - `sign_inn` (a tankard), `sign_smith` (an anvil), `sign_shop` (a purse and
+    a coin) and `sign_healer` (a red flask) are a board hanging from a post,
+    1x2, blocking the foot cell (`[11, 106, 9, 8]`, 113). They name a trade
+    without a word, so they need no font and no translation. Stand one beside
+    the door it belongs to. (`signpost`, the wayside fingerpost, points down a
+    road; these mark a door.)
+  - `stall` (a greengrocer's, red awning) and `stall_wares` (a pedlar's pots
+    and cloth, blue awning; `variant_of` `stall`) are 2x2 and block their
+    bottom row (`[20, 98, 88, 14]`, `sort_y_px` 112): a buyer stands south of
+    the counter, and whoever stands north of it is behind the awning.
+- **`layer: "floor"` marks a structure that lies flat** (`rug`, `mat`), seen
+  from straight above: no height, no ground shadow, no collider. Draw it over
+  the terrain and **under** every unit and every other structure, and never
+  y-sort it. It is `passable`, blocks nothing and changes nothing about the
+  ground under it. Absent means the structure stands up and is y-sorted.
+  `tilekit.structure_is_floor(name)` is the reference.
+- **`falls` is on `waterfall` only**: `{descends: "s", high_cell: [0, 0],
+  low_cell: [0, 1], rise_px: 16}`, the same shape as a flight's `climbs`. It
+  is laid over the two river cells that straddle a south-facing step (§2.2):
+  `high_cell` on the river cell upstream of the step and `low_cell` on the
+  one below it. Both cells are blocked and `ground_suggested` is `"water"`.
+  It is one cell wide and falls 16 px, a cascade and not a cataract; a wider
+  river takes one per cell, side by side. It loops on the global clock.
 - **`house` and `inn` are buildings a person walks behind.** They block only
   their bottom row of cells (`blocked_cells_suggested`), and like the trees
   they carry `walk_behind`, `solid_px_suggested` (`[19, 89, 90, 24]` for the
@@ -487,7 +539,8 @@ Sixty-seven structures:
   `tilekit.structure_sort_y(name, top_px)` is the reference; it falls back to
   the frame's bottom edge for structures without the field.
 - `passable` is `true` for a structure units walk **over**: `bridge`,
-  `bridge_ns` and `dock`. Their `blocked_cells_suggested` is `[]`. Lay a bridge
+  `bridge_ns` and `dock`, the sixteen flights below, and the two floor pieces
+  `rug` and `mat` (twenty-one in all). Their `blocked_cells_suggested` is `[]`. Lay a bridge
   over water cells (`bridge` for a crossing that runs east-west, `bridge_ns`
   for one that runs north-south) and treat those cells as walkable; a `dock`
   runs out from a shore over water the same way. Draw a passable structure
@@ -512,9 +565,10 @@ Sixty-seven structures:
   - The three materials are the same crossing. Stone and wood have treads
     and read as built; the ramp is a bare slope with no risers, and it reads
     best where it comes toward the viewer (`ramp_s`). On a flank (`ramp_e`,
-    `ramp_w`) a slope has no steps to show its tilt and reads as a worn
-    patch across the rim: prefer the stairs there if the crossing has to be
-    found at a glance.
+    `ramp_w`) it is drawn from the side: one sheet of trodden earth falling
+    from the landing to the ground, with the bank showing in section under
+    its near edge. It still has no treads to count, so prefer the stairs on a
+    flank if the crossing has to be found at a glance.
   - **`onto: "wall"`** (`stairs_wall_*`): the top of a wall kit, and
     `wall_kind` names the kit, `"stone"`. `rise_px` is 30, that kit's face.
     Put `high_cell` **on a wall cell** (the flight is drawn over that piece's
@@ -531,12 +585,18 @@ Sixty-seven structures:
     one against them.
 - `variant_of` names the structure this one is a second design of
   (`castle_citadel` -> `castle`, `tower_wizard` -> `tower`, `dungeon_crypt` ->
-  `dungeon`). The footprints match, so a map can swap one for the other, by
-  hand or by a hash of the cell.
+  `dungeon`, `city_timber` -> `city`, `stall_wares` -> `stall`). The
+  footprint, the blocked cells and the states match, so a map can swap one
+  for the other, by hand or by a hash of the cell. `city_timber` is a walled
+  town of timber and thatch on the capital's ground plan (a palisade, a
+  roofed gate, a thatched hall, a lookout on legs), for the northern and
+  border towns the pale stone capital does not suit.
 - **The great landmarks are the named places of a world map**, two, four and
   six tiles each, for the zoomed-in map layer: one per place, not scattered.
   A six-tile one is 192x128 and stands on a 3x2 block of cells. They block
-  their whole footprint and have no states.
+  their whole footprint. Sixteen of the seventeen have a state (below);
+  `castle_ruin` has none, because what changes there is the dragon on its
+  `perch`.
 - `ground_suggested` names the terrain a structure is drawn to stand in when
   that is not dry land: `ship` and `sea_serpent` are `"water"` (a waterline
   and wake, no ground shadow: on grass they float), `stilt_village` is
@@ -549,15 +609,36 @@ Sixty-seven structures:
 - `windmill` turns its sails 90 degrees per loop (four sails, so the loop
   closes); `camp` has a fire and `graveyard` a wisp, both looping.
 
-**Structure states.** `states` is present on ten structures and maps a state
-name to `{file, frame_w, frame_h, loops, label}`. `file` at the top level is
-idle. A state's frame has the same size and position as idle's.
+**Structure states.** `states` is present on twenty-eight structures (thirty-one
+state strips) and maps a state name to `{file, frame_w, frame_h, loops,
+label}`. `file` at the top level is idle. A state's frame has the same size
+and position as idle's. There are two kinds, and `loops` says which:
+
+- **`loops: false`: play once, hold the last frame, play backwards to undo.**
+  Frame 0 is idle's frame 0, pixel for pixel (measured on all fifteen shipped
+  strips), so the change starts on any idle frame boundary without a jump.
+- **`loops: true`: a condition.** Swap it in for idle for as long as it
+  lasts, on the global clock, and cut between the two on any frame.
 
 | state | on | loops | how to play it |
 | --- | --- | --- | --- |
 | `open` | `castle`, `castle_citadel` | `false` | Frame 0 is the closed gate: idle's frame 0, pixel for pixel (measured on both castles). Play 0->5 once and **hold frame 5**: the gate stays up. To close it, play the strip backwards. |
 | `open` | `chest`, `hut`, `house`, `inn` | `false` | The same contract (frame 0 measured identical to idle's on each): the chest's lid tilts back on its rear hinge, one connected shape in every frame, onto gold; the door swings in. Hold frame 5; play backwards to close. An opened chest stays on frame 5. |
-| `raided` | the four `town_*` | `true` | The settlement on fire. Swap it in for idle for as long as the raid lasts; it loops on the global clock. |
+| `open` | `city`, `city_timber`, `stronghold`, `bastion`, `fort`, `mountain_fortress` | `false` | The same contract on a great landmark: the gate goes up, or the doors swing in, and stays. |
+| `moored` | `ship` | `false` | The sails are furled and she rides at anchor. Hold frame 5 while she is in port; play backwards to make sail. |
+| `dive` | `sea_serpent` | `false` | The serpent goes under. Frame 5 is open water with a ripple on it: hold it, or remove the structure. Play backwards for it to surface. |
+| `sealed` | `cave_mouth` | `false` | A rockfall closes the mouth. Hold frame 5 while the way is shut; play backwards to clear it. |
+| `raided` | the four `town_*`; `city`, `city_timber`, `palace`, `fort`, `great_tree`, `stilt_village` | `true` | The place on fire. Swap it in for idle for as long as the raid lasts. |
+| `erupt` | `volcano` | `true` | The volcano in eruption, for as long as the story says. |
+| `dark` | `lamp`, `lighthouse`, `temple`, `tower_legend` | `true` | The lights are out: a lamp or a lighthouse by day, a temple or a tower abandoned. |
+| `awake` | `spires` | `true` | The obsidian spires lit from within. |
+
+Two things an engine should know about them, measured on the shipped strips.
+`sea_serpent`'s `dive` changes more per frame than any other structure strip
+(mean step 45.5, against 1.6-8.6 for the other landmark states): the whole
+animal leaves the frame, which is the point. And `ship`'s `moored` is 24.3
+for the same reason, three sails coming down. Neither is a looping state, so
+neither flickers; both simply should not be played faster than the clock.
 
 `tilekit.structure_frame(name, frame, state)` is the reference.
 
@@ -575,7 +656,7 @@ with proper ends, corners, tees and crossings.
 ```json
 { "frames": 1, "still": "...", "grid": "primary",
   "neighbour_bits": {"n":1,"ne":2,"e":4,"se":8,"s":16,"sw":32,"w":64,"nw":128},
-  "rule": "...", "door_rule": "...", "join_rule": "...", "bond_rule": "...",
+  "rule": "...", "door_rule": "...", "window_rule": "...", "join_rule": "...", "bond_rule": "...",
   "bond_rank": ["interior","timber","stone_low","stone","rock"],
   "naming": {...}, "blocks": "...", "draw": "...",
   "kinds": { "<kind>": {
@@ -584,6 +665,7 @@ with proper ends, corners, tees and crossings.
       "pieces": { "<label>": { "file", "wall_neighbours": [...], "open_sides": [...], "has_face": bool,
                                "joints": {"n","e","s","w": "<joint name>"} } },
       "doors":  { "<name>":  { "file", "replaces", "what", "state", "passable", "opening_px": [x0,y0,x1,y1] } },
+      "windows": { "<name>": { "file", "replaces", "state", "passable": false, "seen_from", "glass_px": [x0,y0,x1,y1] } },
       "joints": { "<joint name>": { "file", "side", "wall_at_corners": [...] } },
       "bonds":  { "<other kind>": { "<joint name>": { "file", "against", "replaces", "teeth_of" } } },
       "lookup": [ 256 labels ] } } }
@@ -675,6 +757,25 @@ with proper ends, corners, tees and crossings.
   - An `_ew` door leads through a one-cell-wide wall, north to south. An
     `_edge_s` door leads *into* a solid block: it is the mouth of a cave or
     cellar, and what is behind it is another scene.
+- **Windows are wall cells with the piece swapped, as doors are**
+  (`window_rule`). Three kits have them, `stone`, `timber` and `interior`
+  (`kinds[kind].windows`; `rock` and `stone_low` have an empty table), four
+  pieces each: `window_ew_dark`, `window_ew_lit`, `window_edge_s_dark`,
+  `window_edge_s_lit`. Mark a wall cell as a window; where `lookup` answers
+  the window's `replaces` (`straight_ew` or `edge_s`), draw the window
+  instead, and anywhere else fall back to the plain piece. The neighbours see
+  a window cell as wall, so nothing around it changes.
+  - A window **always blocks** (`passable: false`), like the wall it is in.
+  - `state` is whether light comes through the glass at the viewer, and
+    `seen_from` says which way that is. `"outside"` (stone, timber): `lit` is
+    a lamp indoors, for night, and `dark` is the day. `"inside"` (interior):
+    `lit` is daylight and `dark` is the night sky. There is no strip: swap
+    the picture.
+  - `glass_px` is the pane in cell pixels, `[25, 33, 39, 48]` for stone,
+    `[25, 32, 39, 45]` for timber, `[25, 24, 39, 38]` for interior, for an
+    engine that adds its own glow.
+  - A window is in the south face, so only a wall the viewer sees the face of
+    has one. Corner pieces and north, east and west edges have none.
 - **Any piece fits any neighbour the table would give it**, exactly: a map
   rendered whole and the same map assembled from pieces differ by 0
   (`make_walls.py`'s `wallcheck`, per kind).
@@ -691,8 +792,11 @@ with proper ends, corners, tees and crossings.
   `stairs_wall_*` flight (§2.4, `climbs.onto: "wall"`). A unit on a wall cell
   is drawn after the wall pieces, lifted by the flight's `rise_px` (30).
 - `tilekit.wall_piece(wall, x, y, kind)`, `door_piece(piece, what, state, kind)`,
+  `window_piece(piece, state, kind)`,
   `wall_joints(kinds, x, y)`, `wall_overlays(kinds, x, y, bonded)` and
-  `render_walls(img, cells, kind, doors, bonded)` are the reference;
+  `render_walls(img, cells, kind, doors, bonded, windows)` are the reference
+  (`windows` maps a wall cell to `"dark"` or `"lit"`; `demo_street.png` and
+  `demo_room.png`);
   `render_walls` takes a set of cells of one kind, or a dict `{(x, y): kind}`
   for a plan of several (`demo_walls_mixed.png`, and the same plan with
   `bonded=True` in `demo_walls_bonded.png`).
