@@ -132,6 +132,34 @@
     "bog_toadstools": "a toadstool ring and fireflies"
    }
   },
+  "flagstones": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 1.0,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "flags_cracked": "a slab broken across, a corner gone",
+    "flags_moss": "moss in the joints",
+    "flags_grate": "an iron drain grate",
+    "flags_worn": "a sunk slab holding a puddle"
+   }
+  },
+  "floorboards": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 1.0,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "planks_knots": "knotty boards",
+    "planks_stain": "an old dark stain",
+    "planks_patch": "a new board let in and a loose one",
+    "planks_trapdoor": "a trapdoor with an iron ring"
+   }
+  },
   "dirt": {
    "gameplay_suggested": {
     "walkable": true,
@@ -158,6 +186,20 @@
     "furrows_pumpkins": "a pumpkin patch",
     "furrows_scarecrow": "a scarecrow and a crow",
     "furrows_cabbages": "rows of cabbages"
+   }
+  },
+  "farmland_ns": {
+   "gameplay_suggested": {
+    "walkable": true,
+    "speed": 0.9,
+    "blocks_projectiles": false,
+    "blocks_sight": false
+   },
+   "variants": {
+    "furrows_ns_wheat": "files of ripe wheat",
+    "furrows_ns_pumpkins": "a pumpkin patch",
+    "furrows_ns_scarecrow": "a scarecrow and a crow",
+    "furrows_ns_cabbages": "files of cabbages"
    }
   },
   "snow": {
@@ -273,8 +315,11 @@
    "sand",
    "desert",
    "swamp",
+   "flagstones",
+   "floorboards",
    "dirt",
    "farmland",
+   "farmland_ns",
    "snow",
    "roads",
    "grass",
@@ -289,6 +334,9 @@
    "desert",
    "dirt",
    "farmland",
+   "farmland_ns",
+   "flagstones",
+   "floorboards",
    "forest",
    "grass",
    "ice",
@@ -307,6 +355,9 @@
    "desert",
    "dirt",
    "farmland",
+   "farmland_ns",
+   "flagstones",
+   "floorboards",
    "forest",
    "grass",
    "ice",
@@ -325,6 +376,9 @@
    "desert",
    "dirt",
    "farmland",
+   "farmland_ns",
+   "flagstones",
+   "floorboards",
    "forest",
    "grass",
    "ice",
@@ -335,74 +389,395 @@
    "sand",
    "snow",
    "swamp"
-  ]
+  ],
+  "cliff": [
+   "ash",
+   "desert",
+   "dirt",
+   "grass",
+   "sand",
+   "snow"
+  ],
+  "alternates": {
+   "overlay": [
+    "ash",
+    "cave",
+    "desert",
+    "dirt",
+    "farmland",
+    "farmland_ns",
+    "flagstones",
+    "floorboards",
+    "forest",
+    "grass",
+    "ice",
+    "lava",
+    "mountain",
+    "peaks",
+    "roads",
+    "rock",
+    "sand",
+    "snow",
+    "swamp"
+   ],
+   "shore": [
+    "ash",
+    "cave",
+    "desert",
+    "dirt",
+    "farmland",
+    "farmland_ns",
+    "flagstones",
+    "floorboards",
+    "forest",
+    "grass",
+    "ice",
+    "lava",
+    "mountain",
+    "peaks",
+    "roads",
+    "rock",
+    "sand",
+    "snow",
+    "swamp"
+   ],
+   "scorch": [
+    "ash",
+    "cave",
+    "desert",
+    "dirt",
+    "farmland",
+    "farmland_ns",
+    "flagstones",
+    "floorboards",
+    "forest",
+    "grass",
+    "ice",
+    "mountain",
+    "peaks",
+    "roads",
+    "rock",
+    "sand",
+    "snow",
+    "swamp"
+   ]
+  }
  },
  "walls": {
-  "rock": {
-   "pieces": [
-    "single",
-    "end_w",
-    "end_s",
-    "end_n",
-    "end_e",
-    "bend_sw",
-    "corner_sw",
-    "bend_nw",
-    "corner_nw",
-    "straight_ew",
-    "corner_se",
-    "straight_ns",
-    "bend_se",
-    "corner_ne",
-    "bend_ne",
-    "edge_s",
-    "edge_w_notch_se",
-    "edge_w",
-    "edge_s_notch_nw",
-    "edge_s_notch_ne",
-    "tee_w",
-    "edge_w_notch_ne",
-    "tee_s",
-    "edge_n",
-    "edge_n_notch_sw",
-    "edge_n_notch_se",
-    "tee_n",
-    "edge_e",
-    "edge_e_notch_sw",
-    "edge_e_notch_nw",
-    "tee_e",
-    "solid",
-    "inner_sw",
-    "inner_se",
-    "solid_notch_se_sw",
-    "inner_nw",
-    "solid_notch_sw_nw",
-    "solid_notch_se_nw",
-    "solid_notch_se_sw_nw",
-    "inner_ne",
-    "solid_notch_ne_sw",
-    "solid_notch_ne_se",
-    "solid_notch_ne_se_sw",
-    "solid_notch_ne_nw",
-    "solid_notch_ne_sw_nw",
-    "solid_notch_ne_se_nw",
-    "cross"
-   ],
-   "naming": {
-    "single": "a lone pillar",
-    "end_<side>": "the <side> end of a one-cell-wide wall",
-    "straight_ns / straight_ew": "a one-cell-wide run",
-    "bend_<corner>": "a one-cell-wide wall turning; <corner> is the outside of the turn",
-    "corner_<corner>": "the <corner> corner of a solid block",
-    "edge_<side>": "the <side> edge of a solid block (edge_s shows the face)",
-    "tee_<side>": "a one-cell-wide T; <side> is the side with no branch",
-    "inner_<diagonal>": "solid, with the <diagonal> neighbour missing (an inside corner)",
-    "cross": "a one-cell-wide crossing",
-    "solid": "interior: the rock top, no edge",
-    "*_notch_<diagonals>": "the same piece with inside corners at those diagonals"
+  "naming": {
+   "single": "a lone pillar",
+   "end_<side>": "the <side> end of a one-cell-wide wall",
+   "straight_ns / straight_ew": "a one-cell-wide run",
+   "bend_<corner>": "a one-cell-wide wall turning; <corner> is the outside of the turn",
+   "corner_<corner>": "the <corner> corner of a solid block",
+   "edge_<side>": "the <side> edge of a solid block (edge_s shows the face)",
+   "tee_<side>": "a one-cell-wide T; <side> is the side with no branch",
+   "inner_<diagonal>": "solid, with the <diagonal> neighbour missing (an inside corner)",
+   "cross": "a one-cell-wide crossing",
+   "solid": "interior: the top, no edge",
+   "*_notch_<diagonals>": "the same piece with inside corners at those diagonals",
+   "door_<where>_<state> / gate_<where>_<state>": "a door (18 px) or gate (38 px) in a south face; <where> is ew (replaces straight_ew) or edge_s (replaces edge_s)"
+  },
+  "frames": 1,
+  "kinds": {
+   "interior": {
+    "pieces": [
+     "single",
+     "end_w",
+     "end_s",
+     "end_n",
+     "end_e",
+     "bend_sw",
+     "corner_sw",
+     "bend_nw",
+     "corner_nw",
+     "straight_ew",
+     "corner_se",
+     "straight_ns",
+     "bend_se",
+     "corner_ne",
+     "bend_ne",
+     "edge_s",
+     "edge_w_notch_se",
+     "edge_w",
+     "edge_s_notch_nw",
+     "edge_s_notch_ne",
+     "tee_w",
+     "edge_w_notch_ne",
+     "tee_s",
+     "edge_n",
+     "edge_n_notch_sw",
+     "edge_n_notch_se",
+     "tee_n",
+     "edge_e",
+     "edge_e_notch_sw",
+     "edge_e_notch_nw",
+     "tee_e",
+     "solid",
+     "inner_sw",
+     "inner_se",
+     "solid_notch_se_sw",
+     "inner_nw",
+     "solid_notch_sw_nw",
+     "solid_notch_se_nw",
+     "solid_notch_se_sw_nw",
+     "inner_ne",
+     "solid_notch_ne_sw",
+     "solid_notch_ne_se",
+     "solid_notch_ne_se_sw",
+     "solid_notch_ne_nw",
+     "solid_notch_ne_sw_nw",
+     "solid_notch_ne_se_nw",
+     "cross"
+    ],
+    "doors": [
+     "door_ew_closed",
+     "door_ew_open",
+     "door_edge_s_closed",
+     "door_edge_s_open"
+    ],
+    "inset_px": 8,
+    "face_px": 36
    },
-   "inset_px": 8,
-   "face_px": 24
+   "rock": {
+    "pieces": [
+     "single",
+     "end_w",
+     "end_s",
+     "end_n",
+     "end_e",
+     "bend_sw",
+     "corner_sw",
+     "bend_nw",
+     "corner_nw",
+     "straight_ew",
+     "corner_se",
+     "straight_ns",
+     "bend_se",
+     "corner_ne",
+     "bend_ne",
+     "edge_s",
+     "edge_w_notch_se",
+     "edge_w",
+     "edge_s_notch_nw",
+     "edge_s_notch_ne",
+     "tee_w",
+     "edge_w_notch_ne",
+     "tee_s",
+     "edge_n",
+     "edge_n_notch_sw",
+     "edge_n_notch_se",
+     "tee_n",
+     "edge_e",
+     "edge_e_notch_sw",
+     "edge_e_notch_nw",
+     "tee_e",
+     "solid",
+     "inner_sw",
+     "inner_se",
+     "solid_notch_se_sw",
+     "inner_nw",
+     "solid_notch_sw_nw",
+     "solid_notch_se_nw",
+     "solid_notch_se_sw_nw",
+     "inner_ne",
+     "solid_notch_ne_sw",
+     "solid_notch_ne_se",
+     "solid_notch_ne_se_sw",
+     "solid_notch_ne_nw",
+     "solid_notch_ne_sw_nw",
+     "solid_notch_ne_se_nw",
+     "cross"
+    ],
+    "doors": [
+     "door_ew_closed",
+     "door_ew_open",
+     "door_edge_s_closed",
+     "door_edge_s_open"
+    ],
+    "inset_px": 8,
+    "face_px": 24
+   },
+   "stone": {
+    "pieces": [
+     "single",
+     "end_w",
+     "end_s",
+     "end_n",
+     "end_e",
+     "bend_sw",
+     "corner_sw",
+     "bend_nw",
+     "corner_nw",
+     "straight_ew",
+     "corner_se",
+     "straight_ns",
+     "bend_se",
+     "corner_ne",
+     "bend_ne",
+     "edge_s",
+     "edge_w_notch_se",
+     "edge_w",
+     "edge_s_notch_nw",
+     "edge_s_notch_ne",
+     "tee_w",
+     "edge_w_notch_ne",
+     "tee_s",
+     "edge_n",
+     "edge_n_notch_sw",
+     "edge_n_notch_se",
+     "tee_n",
+     "edge_e",
+     "edge_e_notch_sw",
+     "edge_e_notch_nw",
+     "tee_e",
+     "solid",
+     "inner_sw",
+     "inner_se",
+     "solid_notch_se_sw",
+     "inner_nw",
+     "solid_notch_sw_nw",
+     "solid_notch_se_nw",
+     "solid_notch_se_sw_nw",
+     "inner_ne",
+     "solid_notch_ne_sw",
+     "solid_notch_ne_se",
+     "solid_notch_ne_se_sw",
+     "solid_notch_ne_nw",
+     "solid_notch_ne_sw_nw",
+     "solid_notch_ne_se_nw",
+     "cross"
+    ],
+    "doors": [
+     "door_ew_closed",
+     "door_ew_open",
+     "door_edge_s_closed",
+     "door_edge_s_open",
+     "gate_ew_closed",
+     "gate_ew_open",
+     "gate_edge_s_closed",
+     "gate_edge_s_open"
+    ],
+    "inset_px": 8,
+    "face_px": 30
+   },
+   "stone_low": {
+    "pieces": [
+     "single",
+     "end_w",
+     "end_s",
+     "end_n",
+     "end_e",
+     "bend_sw",
+     "corner_sw",
+     "bend_nw",
+     "corner_nw",
+     "straight_ew",
+     "corner_se",
+     "straight_ns",
+     "bend_se",
+     "corner_ne",
+     "bend_ne",
+     "edge_s",
+     "edge_w_notch_se",
+     "edge_w",
+     "edge_s_notch_nw",
+     "edge_s_notch_ne",
+     "tee_w",
+     "edge_w_notch_ne",
+     "tee_s",
+     "edge_n",
+     "edge_n_notch_sw",
+     "edge_n_notch_se",
+     "tee_n",
+     "edge_e",
+     "edge_e_notch_sw",
+     "edge_e_notch_nw",
+     "tee_e",
+     "solid",
+     "inner_sw",
+     "inner_se",
+     "solid_notch_se_sw",
+     "inner_nw",
+     "solid_notch_sw_nw",
+     "solid_notch_se_nw",
+     "solid_notch_se_sw_nw",
+     "inner_ne",
+     "solid_notch_ne_sw",
+     "solid_notch_ne_se",
+     "solid_notch_ne_se_sw",
+     "solid_notch_ne_nw",
+     "solid_notch_ne_sw_nw",
+     "solid_notch_ne_se_nw",
+     "cross"
+    ],
+    "doors": [],
+    "inset_px": 8,
+    "face_px": 12
+   },
+   "timber": {
+    "pieces": [
+     "single",
+     "end_w",
+     "end_s",
+     "end_n",
+     "end_e",
+     "bend_sw",
+     "corner_sw",
+     "bend_nw",
+     "corner_nw",
+     "straight_ew",
+     "corner_se",
+     "straight_ns",
+     "bend_se",
+     "corner_ne",
+     "bend_ne",
+     "edge_s",
+     "edge_w_notch_se",
+     "edge_w",
+     "edge_s_notch_nw",
+     "edge_s_notch_ne",
+     "tee_w",
+     "edge_w_notch_ne",
+     "tee_s",
+     "edge_n",
+     "edge_n_notch_sw",
+     "edge_n_notch_se",
+     "tee_n",
+     "edge_e",
+     "edge_e_notch_sw",
+     "edge_e_notch_nw",
+     "tee_e",
+     "solid",
+     "inner_sw",
+     "inner_se",
+     "solid_notch_se_sw",
+     "inner_nw",
+     "solid_notch_sw_nw",
+     "solid_notch_se_nw",
+     "solid_notch_se_sw_nw",
+     "inner_ne",
+     "solid_notch_ne_sw",
+     "solid_notch_ne_se",
+     "solid_notch_ne_se_sw",
+     "solid_notch_ne_nw",
+     "solid_notch_ne_sw_nw",
+     "solid_notch_ne_se_nw",
+     "cross"
+    ],
+    "doors": [
+     "door_ew_closed",
+     "door_ew_open",
+     "door_edge_s_closed",
+     "door_edge_s_open",
+     "gate_ew_closed",
+     "gate_ew_open",
+     "gate_edge_s_closed",
+     "gate_edge_s_open"
+    ],
+    "inset_px": 8,
+    "face_px": 28
+   }
   }
  },
  "structures": {
@@ -708,6 +1083,72 @@
    ],
    "description": "A log hut with a door a person fits. `open` swings the door in on its left hinge; frame 0 is idle, and an engine holds frame 5 while it is open."
   },
+  "table": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "A plank table laid for one: a mug, a loaf and a candle."
+  },
+  "bed": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "A bed with its head to the north wall, one tile wide and two long."
+  },
+  "shelf": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "A dresser against the wall: books above, jars and a pot, a cupboard below. The back is dark so that what stands on the boards shows."
+  },
+  "barrel": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "A coopered barrel standing on end."
+  },
+  "crate": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "A slatted packing crate: raw planks in a frame, one diagonal brace."
+  },
+  "hearth": {
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [],
+   "description": "A stone fireplace with a fire in it, against the north wall."
+  },
   "volcano": {
    "footprint_tiles": [
     3,
@@ -850,6 +1291,76 @@
    "walk_behind": false,
    "states": [],
    "description": "Needles of black glass, two tiles tall: the Obsidian Wastes, the Valley of Shadows."
+  },
+  "house": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [
+    "open"
+   ],
+   "description": "A half-timbered cottage under red tiles, with a front gable."
+  },
+  "inn": {
+   "footprint_tiles": [
+    3,
+    2
+   ],
+   "scale": "local",
+   "passable": false,
+   "walk_behind": true,
+   "states": [
+    "open"
+   ],
+   "description": "An inn, six tiles: two storeys, a hanging sign, a counter under an awning."
+  },
+  "tower_legend": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "The Tower of Legend, two tiles tall: a shaft that widens as it climbs."
+  },
+  "lighthouse": {
+   "footprint_tiles": [
+    1,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A lighthouse on its own rock, two tiles tall. The lamp is the animation."
+  },
+  "mountain_fortress": {
+   "footprint_tiles": [
+    3,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A fortress built up the face of a mountain, six tiles."
+  },
+  "temple": {
+   "footprint_tiles": [
+    2,
+    2
+   ],
+   "scale": "map",
+   "passable": false,
+   "walk_behind": false,
+   "states": [],
+   "description": "A temple, four tiles: steps, a colonnade, a pediment, and a god at home."
   }
  },
  "monsters": {
@@ -955,9 +1466,27 @@
     "attack",
     "hurt",
     "die",
+    "ember",
     "poof"
    ],
    "description": "A goblin's worth of devil: horns up, wings out, a tail with a coal on it."
+  },
+  "serpent": {
+   "tier": 1,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "A marsh adder: two coils on the ground and a neck standing out of them."
   },
   "goblin": {
    "tier": 2,
@@ -1078,9 +1607,44 @@
     "attack",
     "hurt",
     "die",
+    "warcry",
     "poof"
    ],
    "description": "The Dominion's foot soldier: a bull's head on an orc's shoulders."
+  },
+  "scorpion": {
+   "tier": 2,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "A desert scorpion: a low plated body, two claws out in front, and a tail arched over all of it with a barb on the end."
+  },
+  "merrow": {
+   "tier": 2,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "A fish-man out of the surf: a fin crest on the skull, fins for ears, flippers for feet, a pale belly and a trident carried like a staff."
   },
   "orc": {
    "tier": 3,
@@ -1166,9 +1730,44 @@
     "attack",
     "hurt",
     "die",
+    "slam",
     "poof"
    ],
    "description": "A golem: stacked grey blocks, two boulder fists and a rune that is lit."
+  },
+  "frostshard": {
+   "tier": 3,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "An ice elemental: one big crystal hanging in the air with two cold eyes in it, and four splinters hanging round it. Nothing touches the ground."
+  },
+  "ashfiend": {
+   "tier": 3,
+   "rank": "normal",
+   "footprint_tiles": [
+    1,
+    1
+   ],
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ],
+   "description": "An ash elemental: a whirling column of cinders rooted where it stands, two coals for eyes and two arms of smoke."
   },
   "ogre": {
    "tier": 4,
@@ -1200,6 +1799,7 @@
     "attack",
     "hurt",
     "die",
+    "roots",
     "poof"
    ],
    "description": "A treant: a walking trunk a tile wide and two tall, leaves for a head."
@@ -1508,6 +2108,142 @@
     "attack",
     "hurt",
     "die",
+    "slam",
+    "poof"
+   ]
+  },
+  "serpent_elite": {
+   "tier": 1,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "scorpion_elite": {
+   "tier": 2,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "merrow_elite": {
+   "tier": 2,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "frostshard_elite": {
+   "tier": 3,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "ashfiend_elite": {
+   "tier": 3,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "imp_elite": {
+   "tier": 1,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "ember",
+    "poof"
+   ]
+  },
+  "beastman_elite": {
+   "tier": 2,
+   "rank": "normal",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "warcry",
+    "poof"
+   ]
+  },
+  "ogre_elite": {
+   "tier": 4,
+   "rank": "miniboss",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "poof"
+   ]
+  },
+  "treant_elite": {
+   "tier": 4,
+   "rank": "miniboss",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "roots",
+    "poof"
+   ]
+  },
+  "dragon_elite": {
+   "tier": 5,
+   "rank": "boss",
+   "elite": true,
+   "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "die",
+    "fly",
+    "fire_breath",
     "poof"
    ]
   }
@@ -2214,20 +2950,46 @@
    ]
   }
  },
- "ui": [
-  "panel",
-  "button",
-  "button_hover",
-  "button_pressed",
-  "frame"
- ],
+ "ui": {
+  "pieces": [
+   "panel",
+   "button",
+   "button_hover",
+   "button_pressed",
+   "frame",
+   "slot",
+   "slot_selected"
+  ],
+  "bar_fills": [
+   "health",
+   "stamina",
+   "mana"
+  ],
+  "cursors": [
+   "cursor",
+   "cursor_target"
+  ],
+  "fonts": [
+   "hand_22",
+   "hand_34"
+  ],
+  "monster_portraits": [
+   "ghorakhar",
+   "rangoskhar",
+   "ramulos",
+   "darkhorn"
+  ]
+ },
  "loot": [
   "gold",
   "gem_ruby",
   "gem_sapphire",
   "gem_emerald",
   "drop_sword",
-  "drop_axe"
+  "drop_axe",
+  "potion_health",
+  "potion_mana",
+  "key"
  ],
  "fx": [
   "arrow",
@@ -2382,56 +3144,48 @@
   ]
  },
  "counts": {
-  "terrain tiles": 93,
-  "structures": 39,
-  "creatures": 25,
-  "elites": 16,
+  "terrain tiles": 108,
+  "structures": 51,
+  "creatures": 30,
+  "elites": 26,
   "bodies": 12,
   "wardrobe items": 119,
   "NPC looks": 39,
   "icons": 124,
-  "wall pieces": 47
+  "wall pieces": 259
  },
  "known_gaps": [
   {
-   "title": "Local-scale buildings",
-   "detail": "One hut is the only house a person can stand beside. A village scene needs a second house, an inn or shop front, and a door-in-a-wall piece for the rock kit (a cave or cellar entrance). Every other building is a world-map landmark."
+   "title": "Local scenes are still thin",
+   "detail": "Two houses, an inn, six pieces of furniture, two floors and five wall kits. No stairs, windows as pieces, rugs, signs, market stalls or street lamps at a person's scale; kinds of wall do not join each other."
   },
   {
-   "title": "Interiors",
-   "detail": "No floorboards or flagstones as terrain, no interior wall kit, no furniture (table, bed, shelf, barrel, crate, hearth)."
+   "title": "Cliffs",
+   "detail": "A height step has a drawn bank on its south-facing edge only; north, west and east edges are a rim and a shadow. No ramp or stair art, no foam where a cliff stands in water, and only six terrains have one."
   },
   {
-   "title": "Map landmarks named on the world map and not drawn",
-   "detail": "The Tower of Legend, a lighthouse or sea tower, a mountain fortress, a temple or shrine."
+   "title": "Landmarks",
+   "detail": "One design and no state each (no ruined, raided or lit variant) for the great landmarks."
   },
   {
-   "title": "Monsters by region",
-   "detail": "No sea creature that fights (the sea serpent is a prop), no desert creature (scorpion or snake), nothing for the swamp beyond the frog, nothing for snow beyond the yeti, no elemental for ash."
+   "title": "Monsters",
+   "detail": "The regional monsters have no signature state. The four lords have no elite. Monster portraits exist for the lords only."
   },
   {
-   "title": "Signatures, elites, portraits",
-   "detail": "The imp and beastman have no signature state or elite; golem and treant have no signature; ogre, treant and dragon have no elite; the four boss lords have no dialogue portrait."
-  },
-  {
-   "title": "A second wall material",
-   "detail": "The wall kit is rock only: no timber palisade or dressed stone, no gate or door piece, no second height."
+   "title": "Portraits",
+   "detail": "Stills, facing the viewer, one expression per body. No talking or blinking frames."
   },
   {
    "title": "UI",
-   "detail": "Five parchment pieces only: no health or stamina bars, inventory slots, cursor or font."
-  },
-  {
-   "title": "Loot",
-   "detail": "Gold, three gems, a sword and an axe. Potions and keys exist as icons but not as dropped loot."
+   "detail": "No icons for status effects, no minimap frame, no scroll bar, no second language: the font covers ASCII 32-126 only."
   },
   {
    "title": "Faces",
-   "detail": "At 64 px a face is two eyes and a brow. Portraits carry the detail; sprites do not. More facial detail is under consideration, not built."
+   "detail": "Sprites keep two eyes and a brow at 64 px by design; all face detail is in the portraits."
   },
   {
    "title": "Terrain",
-   "detail": "No cliffs within one terrain (a height step of grass over grass); farmland furrows only run east-west; edge textures have one seed each."
+   "detail": "Farmland runs east-west or north-south, not diagonally. Alternates change 7 to 29 percent of an edge tile: they break a rhythm, they do not hide it."
   },
   {
    "title": "Gameplay data",
@@ -2441,10 +3195,10 @@
  "sheets": [
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/terrain.png",
-   "title": "Terrain: 17 bases then 76 variants (frame 0, 2x)",
+   "title": "Terrain: 20 bases then 88 variants (frame 0, 2x)",
    "size": [
     1666,
-    1394
+    1562
    ]
   },
   {
@@ -2520,16 +3274,64 @@
    ]
   },
   {
-   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls.png",
-   "title": "Rock wall kit: 47 labelled pieces (2x)",
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_cliffs_sheet.png",
+   "title": "Transitions: cliffs: a height step in each of six terrains",
+   "size": [
+    1376,
+    1226
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_cliff_grass.png",
+   "title": "Transitions: cliff: grass plateaus over grass, dirt and sand",
+   "size": [
+    1536,
+    1152
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/transition_alternates.png",
+   "title": "Transitions: alternates: the same border with one seed and with two",
+   "size": [
+    784,
+    3860
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_interior.png",
+   "title": "Interior wall kit: 51 labelled pieces and doors (2x)",
    "size": [
     1390,
-    890
+    1058
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_interior_demo.png",
+   "title": "Walls: interior: a yard, a maze and a line built from the kit",
+   "size": [
+    1152,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_interior_pieces.png",
+   "title": "Walls: interior: the pieces in place, labelled",
+   "size": [
+    1132,
+    1062
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_rock.png",
+   "title": "Rock wall kit: 51 labelled pieces and doors (2x)",
+   "size": [
+    1390,
+    1058
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_rock_demo.png",
-   "title": "Walls: a yard, a maze and a cliff line built from the kit",
+   "title": "Walls: rock: a yard, a maze and a line built from the kit",
    "size": [
     1152,
     768
@@ -2537,18 +3339,90 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_rock_pieces.png",
-   "title": "Walls: the pieces in place, labelled",
+   "title": "Walls: rock: the pieces in place, labelled",
+   "size": [
+    1132,
+    1062
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_stone.png",
+   "title": "Stone wall kit: 55 labelled pieces and doors (2x)",
+   "size": [
+    1390,
+    1058
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_stone_demo.png",
+   "title": "Walls: stone: a yard, a maze and a line built from the kit",
+   "size": [
+    1152,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_stone_pieces.png",
+   "title": "Walls: stone: the pieces in place, labelled",
+   "size": [
+    1132,
+    1062
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_stone_low.png",
+   "title": "Stone_low wall kit: 47 labelled pieces and doors (2x)",
+   "size": [
+    1390,
+    890
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_stone_low_demo.png",
+   "title": "Walls: stone_low: a yard, a maze and a line built from the kit",
+   "size": [
+    1152,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_stone_low_pieces.png",
+   "title": "Walls: stone_low: the pieces in place, labelled",
    "size": [
     1132,
     912
    ]
   },
   {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_timber.png",
+   "title": "Timber wall kit: 55 labelled pieces and doors (2x)",
+   "size": [
+    1390,
+    1058
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_timber_demo.png",
+   "title": "Walls: timber: a yard, a maze and a line built from the kit",
+   "size": [
+    1152,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/walls_timber_pieces.png",
+   "title": "Walls: timber: the pieces in place, labelled",
+   "size": [
+    1132,
+    1062
+   ]
+  },
+  {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/structures.png",
-   "title": "Structures: 39 props and their states (1x)",
+   "title": "Structures: 51 props and their states (1x)",
    "size": [
     1626,
-    1058
+    1394
    ]
   },
   {
@@ -2596,7 +3470,15 @@
    "title": "Monster imp: every state x 6 frames, facing right",
    "size": [
     1222,
-    384
+    448
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_serpent.png",
+   "title": "Monster serpent: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    768
    ]
   },
   {
@@ -2652,6 +3534,22 @@
    "title": "Monster beastman: every state x 6 frames, facing right",
    "size": [
     1606,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_scorpion.png",
+   "title": "Monster scorpion: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_merrow.png",
+   "title": "Monster merrow: every state x 6 frames, facing right",
+   "size": [
+    1606,
     768
    ]
   },
@@ -2692,6 +3590,22 @@
    "title": "Monster golem: every state x 6 frames, facing right",
    "size": [
     1606,
+    896
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_frostshard.png",
+   "title": "Monster frostshard: every state x 6 frames, facing right",
+   "size": [
+    1606,
+    768
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/monster_ashfiend.png",
+   "title": "Monster ashfiend: every state x 6 frames, facing right",
+   "size": [
+    1606,
     768
    ]
   },
@@ -2708,7 +3622,7 @@
    "title": "Monster treant: every state x 6 frames, facing right",
    "size": [
     1222,
-    768
+    896
    ]
   },
   {
@@ -2753,10 +3667,10 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/monsters.png",
-   "title": "Monsters: 25 creatures by tier, then 16 elites (idle, facing down, 2x)",
+   "title": "Monsters: 30 creatures by tier, then 26 elites (idle, facing down, 2x)",
    "size": [
     1872,
-    1826
+    2418
    ]
   },
   {
@@ -2804,20 +3718,28 @@
    "title": "Dialogue portraits: a sample (1x). Any body x any outfit composes.",
    "size": [
     1340,
-    490
+    710
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/ui.png",
-   "title": "UI: nine-slice pieces and each one sliced to a box (2x)",
+   "title": "UI: nine-slice pieces sliced to a box, bars, cursors (2x)",
    "size": [
-    1660,
-    514
+    1860,
+    978
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/font.png",
+   "title": "Handwriting font: two sizes, ink and chalk (1x)",
+   "size": [
+    932,
+    322
    ]
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/items.png",
-   "title": "Loot (6), effects (4), icons (124) (2x)",
+   "title": "Loot (9), effects (4), icons (124) (2x)",
    "size": [
     1666,
     2066
@@ -2841,10 +3763,26 @@
   },
   {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_dialogue.png",
-   "title": "Scene: a dialogue box: nine-slice panel and a composed portrait",
+   "title": "Scene: a dialogue box: nine-slice panel, composed portraits, handwritten text",
    "size": [
-    620,
+    890,
     262
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_hud.png",
+   "title": "Scene: a HUD: bars, inventory slots, cursors, all from the package",
+   "size": [
+    420,
+    200
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_cliff.png",
+   "title": "Scene: a grass plateau with a knoll: heights per cell, cliff atlases, alternates on",
+   "size": [
+    640,
+    448
    ]
   },
   {

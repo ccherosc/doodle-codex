@@ -53,8 +53,11 @@ game/
   terrain/transitions/shore/<upper>.png           16x6 atlas, RGBA overlay over water
   terrain/transitions/scorch/<upper>.png          16x6 atlas, RGBA overlay over lava (not for lava itself)
   terrain/transitions/pair/<lower>__<upper>.png   16x6 atlas, opaque, pre-composited
-  terrain/walls/walls.json                        the hand-placeable wall kit: pieces, lookup, rule
-  terrain/walls/<kind>/<label>.png                384x64 cut-out strip, one of 47 labelled pieces
+  terrain/transitions/cliff/<terrain>.png         16x6 atlas, RGBA: a height step of one terrain (6 terrains)
+  terrain/transitions/overlay_b|shore_b|scorch_b/<upper>.png   second-seed alternates of the three overlay kinds
+  terrain/walls/walls.json                        the hand-placeable wall kits: pieces, doors, lookup, rule
+  terrain/walls/<kind>/<label>.png                one still 64x64 cut-out: 47 labelled pieces per kind
+  terrain/walls/<kind>/<door|gate>_<where>_<state>.png   a door or gate piece, closed and open
   structures/structures.json
   structures/<name>.png                           cut-out strip, frame = footprint*64
   structures/<name>_<state>.png                   the same frame in another state (open, raided)
@@ -69,15 +72,20 @@ game/
   accessories/accessories.json                    119 wearable items
   accessories/<slot>/<item>/<body>/<band>_<facing>.png
   loot/loot.json                                  drops + a suggested drop table
-  loot/<item>.png                                 gold, gem_ruby|sapphire|emerald, drop_sword|axe
+  loot/<item>.png                                 gold, gem_ruby|sapphire|emerald, drop_sword|axe,
+                                                  potion_health|mana, key
   fx/fx.json                                      projectiles and the hit spark
   fx/<effect>_<facing>.png                        arrow|bolt|firebolt per facing; spark_any
   icons/icons.json                                124 inventory icons: wardrobe slot per icon
   icons/<name>.png                                one still 64x64 frame; no facing, no state
-  ui/ui.json                                      nine-slice parchment: sizes, corners, the slicing rule
-  ui/<piece>.png                                  panel, button, button_hover, button_pressed, frame (stills)
+  ui/ui.json                                      nine-slice parchment, slots, bars, cursors, fonts: every rule
+  ui/<piece>.png                                  panel, button[_hover|_pressed], frame, slot[_selected] (nine-slice stills)
+  ui/bar.png, ui/bar_fill_<what>.png              a bar's track and its health|stamina|mana fills
+  ui/cursor_<name>.png                            32x32 pointers, with a hotspot
+  ui/font/<font>_<ink|chalk>.png, <font>.fnt      the handwriting: fixed-cell atlases + BMFont files
   portraits/portraits.json                        dialogue portraits: layered like the paperdoll
   portraits/<body>/<piece>.png                    one still 160x160 per piece, facing down
+  portraits/monsters/<name>.png                   one still 160x160 for a monster that speaks (the lords)
   reference/tilekit.py                            reference implementation
 ```
 
@@ -90,8 +98,10 @@ Every path inside any JSON is relative to `game/`.
 ### 2.1 Base tiles
 
 `terrain.json:base[<terrain>]` → `{file, frame_w:64, frame_h:64, loops, seamless, elevation, gameplay_suggested, weight, variants}`.
-The 17 terrains are `water, lava, ice, cave, ash, sand, desert, swamp, dirt,
-farmland, snow, roads, grass, forest, mountain, peaks, rock`. Each tiles
+The 20 terrains are `water, lava, ice, cave, ash, sand, desert, swamp,
+flagstones, floorboards, dirt, farmland, farmland_ns, snow, roads, grass,
+forest, mountain, peaks, rock` (that is also their elevation order, low to
+high). Each tiles
 seamlessly with itself, so fill a region by repeating the strip's current frame.
 
 `gameplay_suggested` = `{walkable, speed, blocks_projectiles, blocks_sight}`
@@ -117,6 +127,9 @@ prototyping default and not part of the art:
 | rock | no | 0 | yes | yes |
 | ash | yes | 0.9 | no | no |
 | snow | yes | 0.75 | no | no |
+| flagstones | yes | 1.0 | no | no |
+| floorboards | yes | 1.0 | no | no |
+| farmland_ns | yes | 0.9 | no | no |
 
 `mountain` and `peaks` are **map-scale** pictures: a whole range in one tile.
 `rock` is the **local-scale** wall: one tile of solid boulder face, for a cave
@@ -128,6 +141,12 @@ the `rock` terrain.
 `ash` is burnt ground, grey with ember flecks: the land around a volcano and
 the floor of a ruined, cursed country. `snow` is deep lying snow, the walkable
 ground of the cold regions (`ice` is a frozen lake, `peaks` a range).
+
+`flagstones` and `floorboards` are **indoor floors**: a cellar, a hall, a
+room. Both hold almost still. Wall a room with the `interior` wall kit (§2.5)
+and furnish it with the local-scale structures (§2.4). `farmland_ns` is
+`farmland` with its furrows running north-south, so a field can follow
+either road; the two are separate terrains with their own variants.
 
 Gameplay reads the **logical cell's** terrain, never the display tile's pixels.
 
@@ -252,10 +271,49 @@ of shore's foam. There is no scorch for lava itself (lava is never the
 terrain drawn over lava). Lava meeting water still uses `shore/lava`, not
 scorch — scorch only applies when lava is the *lower* terrain of the pair.
 
-**Pair atlases** (`pair/<lower>__<upper>.png`, all 136 pairs): opaque, already
+**Pair atlases** (`pair/<lower>__<upper>.png`, all 190 pairs): opaque, already
 composited `base[lower] + (shore, scorch or overlay)[upper]`. Use them when a
 tile never mixes more than two terrains, which is what editor terrain systems
 want. Row 0 = all lower, row 15 = all upper.
+
+**Cliffs: a height step** (`transitions.cliff`, `cliff_rule`). Optional. A map
+may give each logical cell an integer height beside its terrain; without
+heights nothing changes. `cliff/<T>.png` exists for **grass, dirt, sand,
+desert, snow and ash** and is laid out like an overlay (row = mask, where a
+set bit is a corner on the *upper* level). It draws the upper level's ground,
+a bank `cliff_face_px` (16) tall where the edge faces **south**, and a cast
+shadow; the lower side is transparent, so a grass plateau stands on dirt or
+sand as readily as on grass. Per display tile:
+
+1. `levels` = the distinct heights of the four corners, low first. One level:
+   draw as above and stop.
+2. Ground: `under` = the lowest-elevation terrain among the corners on
+   `levels[0]`. Treat every higher corner as `under` and draw the tile by the
+   ordinary rule (shore and scorch included).
+3. For each level `L` above the lowest: `on` = corners with height >= `L`,
+   `T` = the lowest-elevation terrain among them; draw `cliff[T]` at row
+   `mask(on)`. Then for each other terrain `U` among the `on` corners, low
+   first, draw `overlay[U]` at the mask of corners that are `on` *and* at or
+   above `U`.
+
+Limits, measured on the proofs and not to be designed around: only a
+south-facing edge has a face. North, west and east edges are a rim line and a
+soft shadow, which is correct for the camera and faint at 1x. There is **no
+ramp or stair art**; where a unit may change height is the map's decision. A
+cliff standing in water gets no foam. A terrain not in `transitions.cliff`
+has no step (`tilekit` raises); for rock, build with the wall kit (§2.5). On
+masks 6 and 9 the lower level joins, like every other terrain.
+`tilekit.Kit.render_map(grid, frame, heights=...)` is the reference.
+
+**Alternates: a second seed** (`transitions.alternates`). Optional. Each
+`overlay`, `shore` and `scorch` atlas has a twin under `overlay_b/`,
+`shore_b/`, `scorch_b/`: other strokes and another contour between the same
+edge crossings, to break up a long border that would otherwise repeat every
+64 px. Choose per display tile by a stable hash of its (x, y) (the reference
+uses the variant hash `& 1`) and use that one choice for every layer of the
+tile. Any mix is seamless: an alternate's outer 2 px ring is its primary's
+pixels in every mask and frame. Pair and cliff atlases have no alternate.
+`render_map(..., alternates=True)` is the reference.
 
 ### 2.3 Engine recipes
 
@@ -296,7 +354,7 @@ layers ordered by elevation.
 
 `structures.json:structures[name]` -> `{file, footprint_tiles:[cols,rows], blocked_cells_suggested, passable, scale, frame_w, frame_h, loops, variant_of?, ground_suggested?, perch?, states?, solid_px_suggested?, sort_y_px?, walk_behind?}`.
 
-Thirty-nine structures:
+Fifty-one structures:
 
 | group | names |
 | --- | --- |
@@ -308,14 +366,27 @@ Thirty-nine structures:
 | great landmarks, 3x2 | `volcano`, `stronghold`, `city`, `castle_ruin` |
 | great landmarks, 2x2 | `palace`, `bastion`, `fort`, `great_tree` |
 | great landmarks, 2x1 and 1x2 | `ship`, `cave_mouth`, `sea_serpent`, `stilt_village` (2x1), `spires` (1x2) |
-| local scale | `tree_oak`, `tree_pine`, `tree_birch` (1x2), `chest` (1x1), `hut` (2x2) |
+| great landmarks, added | `tower_legend`, `lighthouse` (1x2), `temple` (2x2), `mountain_fortress` (3x2) |
+| local scale, outdoors | `tree_oak`, `tree_pine`, `tree_birch` (1x2), `chest` (1x1), `hut`, `house` (2x2), `inn` (3x2) |
+| local scale, furniture | `table`, `shelf`, `barrel`, `crate`, `hearth` (1x1), `bed` (1x2) |
 
 - **`scale` is `"map"` or `"local"`.** A map structure is a landmark on an
   overworld: a whole castle is two tiles wide and a person beside it is a
   marker. A local structure is drawn at a person's own scale (the hut's door is
   as tall as the people who use it) for a scene people walk around in. The
-  five in the last row are local; the other thirty-four are map. Do not put a
-  map building and a local building in one scene.
+  thirteen in the last two rows are local; the other thirty-eight are map. Do
+  not put a map building and a local building in one scene.
+- **`house` and `inn` are buildings a person walks behind.** They block only
+  their bottom row of cells (`blocked_cells_suggested`), and like the trees
+  they carry `walk_behind`, `solid_px_suggested` (`[19, 89, 90, 24]` for the
+  house, `[37, 89, 138, 24]` for the inn) and `sort_y_px` (`112`): someone
+  standing north of that line is hidden by the roof. The inn has a shop front
+  and a hanging sign; both have `open` (the door).
+- **Furniture** blocks its footprint and also carries `solid_px_suggested`
+  and `sort_y_px`, so a free-moving person can step close to a table and be
+  sorted against it properly. `hearth` loops a fire; the rest only boil.
+  `lighthouse` loops its lamp. Furniture is drawn for `flagstones` or
+  `floorboards` but is an ordinary cut-out and stands anywhere.
 
 - A structure is a cut-out (transparent background) that stands **on** terrain.
   The frame is exactly its footprint. Draw it with the frame's top-left at the
@@ -369,43 +440,62 @@ Thirty-nine structures:
 - `windmill` turns its sails 90 degrees per loop (four sails, so the loop
   closes); `camp` has a fire and `graveyard` a wisp, both looping.
 
-**Structure states.** `states` is present on eight structures and maps a state
+**Structure states.** `states` is present on ten structures and maps a state
 name to `{file, frame_w, frame_h, loops, label}`. `file` at the top level is
 idle. A state's frame has the same size and position as idle's.
 
 | state | on | loops | how to play it |
 | --- | --- | --- | --- |
 | `open` | `castle`, `castle_citadel` | `false` | Frame 0 is the closed gate: idle's frame 0, pixel for pixel (measured on both castles). Play 0->5 once and **hold frame 5**: the gate stays up. To close it, play the strip backwards. |
-| `open` | `chest`, `hut` | `false` | The same contract (frame 0 measured identical to idle's on both): the chest's lid tilts back on its rear hinge, one connected shape in every frame, onto gold; the door swings in. Hold frame 5; play backwards to close. An opened chest stays on frame 5. |
+| `open` | `chest`, `hut`, `house`, `inn` | `false` | The same contract (frame 0 measured identical to idle's on each): the chest's lid tilts back on its rear hinge, one connected shape in every frame, onto gold; the door swings in. Hold frame 5; play backwards to close. An opened chest stays on frame 5. |
 | `raided` | the four `town_*` | `true` | The settlement on fire. Swap it in for idle for as long as the raid lasts; it loops on the global clock. |
 
 `tilekit.structure_frame(name, frame, state)` is the reference.
 
-### 2.5 Walls: the hand-placeable kit (47 labelled pieces)
+### 2.5 Walls: the hand-placeable kits (47 labelled pieces each)
 
 `terrain/walls/walls.json`. A wall here is **a cell that is wall**, on the
 logical grid, not the dual grid: the `rock` *terrain* (§2.2) grows a cliff
-edge between cells and is right for a painted cave or a mountainside; the
+edge between cells and is right for a painted cave or a mountainside; a
 *kit* is for walls a designer places cell by cell, one tile wide if wanted,
 with proper ends, corners, tees and crossings.
 
+**Walls do not animate.** Every piece is one still 64x64 PNG, not a strip
+(`frames: 1`). Do not put walls on the global frame clock.
+
 ```json
-{ "grid": "primary", "neighbour_bits": {"n":1,"ne":2,"e":4,"se":8,"s":16,"sw":32,"w":64,"nw":128},
-  "rule": "...", "naming": {...}, "blocks": "...", "draw": "...",
-  "kinds": { "rock": {
-      "inset_px": 8, "face_px": 24, "gameplay_suggested": {...},
+{ "frames": 1, "still": "...", "grid": "primary",
+  "neighbour_bits": {"n":1,"ne":2,"e":4,"se":8,"s":16,"sw":32,"w":64,"nw":128},
+  "rule": "...", "door_rule": "...", "naming": {...}, "blocks": "...", "draw": "...",
+  "kinds": { "<kind>": {
+      "note", "inset_px": 8, "inset_px_by_side": {"n","s","e","w"}, "face_px",
+      "gameplay_suggested": {...},
       "pieces": { "<label>": { "file", "wall_neighbours": [...], "open_sides": [...], "has_face": bool } },
+      "doors":  { "<name>":  { "file", "replaces", "what", "state", "passable", "opening_px": [x0,y0,x1,y1] } },
       "lookup": [ 256 labels ] } } }
 ```
 
-- **One kind so far, `rock`**: 47 pieces, each a 384x64 cut-out strip (six
-  frames, the global clock), drawn in its own cell and nowhere else.
+- **Five kinds**, the same 47 labels and the same `lookup` in each, so a map
+  can change material by changing one string:
+
+  | kind | what it is | face_px | doors |
+  | --- | --- | --- | --- |
+  | `rock` | living rock: a cliff or cave wall placed by hand | 24 | door (a cave or cellar mouth) |
+  | `stone` | dressed stone in courses: a keep, a town wall, a cellar | 30 | door, gate |
+  | `stone_low` | the same stone at half height: a garden wall, a parapet | 12 | none |
+  | `timber` | a palisade of upright logs, one log thick | 28 | door, gate |
+  | `interior` | a room's wall, cut away: hatched top, plaster over a wainscot | 36 | door |
+
+  Kinds do not join each other: a `stone` cell beside a `timber` cell counts
+  as not-wall for the other. `stone_low` and `timber` stand further in from
+  their open sides than the rest (`inset_px_by_side`); they still block the
+  whole cell.
 - **Automatic placement.** For a wall cell, OR together `neighbour_bits` of the
-  eight neighbours that are also wall, and draw `lookup[bits]`. All 256
-  combinations are in the table; a diagonal neighbour only changes the piece
-  when both orthogonal neighbours beside it are wall, and the table already
-  folds that in. Cells off the map count as not-wall (or as wall, if the map
-  edge should read as solid).
+  eight neighbours that are also wall (of the same kind), and draw
+  `lookup[bits]`. All 256 combinations are in the table; a diagonal neighbour
+  only changes the piece when both orthogonal neighbours beside it are wall,
+  and the table already folds that in. Cells off the map count as not-wall (or
+  as wall, if the map edge should read as solid).
 - **Hand placement.** The labels say what a piece is:
 
   | label | what it is |
@@ -419,24 +509,41 @@ with proper ends, corners, tees and crossings.
   | `corner_ne`, `corner_se`, `corner_sw`, `corner_nw` | that corner of a solid block |
   | `edge_n`, `edge_e`, `edge_s`, `edge_w` | that edge of a solid block (`edge_s` shows the face) |
   | `inner_ne`, `inner_se`, `inner_sw`, `inner_nw` | solid, with that diagonal neighbour missing: an inside corner |
-  | `solid` | interior: the rock top, no edge |
+  | `solid` | interior: the top, no edge |
   | `<piece>_notch_<diagonals>` | the same piece with inside corners at those diagonals |
 
   `pieces[label].wall_neighbours` lists the neighbours the piece expects and
   `open_sides` the sides it faces open ground on, so an editor can check a
   hand-placed piece.
+- **Doors and gates are wall cells with the piece swapped.** A door is an
+  18 px opening in a south face, a gate 38 px. Each comes in two places and
+  two states: `door_ew_closed`, `door_ew_open`, `door_edge_s_closed`,
+  `door_edge_s_open` (and `gate_...` the same). Mark a wall cell as a door;
+  where `lookup` answers the door's `replaces` (`straight_ew` for `_ew`,
+  `edge_s` for `_edge_s`), draw the door piece instead. Anywhere else the
+  cell cannot hold a door: fall back to the plain piece. The neighbours see a
+  door cell as wall, so nothing around it changes.
+  - **Closed** (`passable: false`) blocks like any wall.
+  - **Open** (`passable: true`): the cell is walkable. There is no opening
+    strip; swap the picture. `opening_px` is the hole in the piece, so an
+    engine can limit walking to it.
+  - An `_ew` door leads through a one-cell-wide wall, north to south. An
+    `_edge_s` door leads *into* a solid block: it is the mouth of a cave or
+    cellar, and what is behind it is another scene.
 - **Any piece fits any neighbour the table would give it**, exactly: a map
-  rendered whole and the same map assembled from pieces differ by 0 in every
-  frame (`make_walls.py`'s `wallcheck`).
+  rendered whole and the same map assembled from pieces differ by 0
+  (`make_walls.py`'s `wallcheck`, per kind).
 - **Collision is the cell.** A wall cell blocks all of its 64x64. The art
-  stands `inset_px` (8) in from every open side and shows `face_px` (24) of
-  cliff face under every south-facing edge, all inside the cell, with a short
-  cast shadow to the south-east that also stays inside it.
+  stands `inset_px_by_side` in from each open side and shows `face_px` of face
+  under every south-facing edge, all inside the cell, with a short cast shadow
+  that also stays inside it.
 - **Draw walls over the terrain and before anything y-sorted.** Because the
   face is inside the wall's own blocked cell, a wall never needs to hide a
-  person. Put any terrain under it; it is a cut-out.
-- `tilekit.wall_piece(wall, x, y)` and `render_walls(img, cells, frame)` are
-  the reference.
+  person. The one exception is an **open** door or gate: draw that piece after
+  (over) whoever stands in its cell, so the lintel covers their head. Put any
+  terrain under a wall; it is a cut-out.
+- `tilekit.wall_piece(wall, x, y, kind)`, `door_piece(piece, what, state, kind)` and
+  `render_walls(img, cells, kind, doors)` are the reference.
 
 ---
 
@@ -446,8 +553,9 @@ with proper ends, corners, tees and crossings.
 
 ```json
 { "tier": 1..5,                        // int: 1-3 regular, 4 miniboss (ogre, treant), 5 boss (dragon and the four lords)
-                                        // 1: slime rat bat frog crab imp; 2: goblin skeleton wolf boar zombie harpy beastman;
-                                        // 3: orc spider wraith yeti golem
+                                        // 1: slime rat bat frog crab imp serpent;
+                                        // 2: goblin skeleton wolf boar zombie harpy beastman scorpion merrow;
+                                        // 3: orc spider wraith yeti golem frostshard ashfiend
   "rank": "normal" | "miniboss" | "boss",
   "footprint_tiles": [cols, rows],      // ogre, treant and the four lords [1,2], dragon [2,2], others [1,1]
   "box": [w_px, h_px],                  // footprint * 64: the idle box
@@ -455,14 +563,15 @@ with proper ends, corners, tees and crossings.
   "states": { "<state>": {
       "loops": bool, "follows": null | "<state>", "cyclic": bool, "hover_px": number,
       "impact_frame": int,              // offensive states only (attack, cast, web, tongue, split, fire_breath,
-                                        //   bubble, charge, spew, roar)
+                                        //   bubble, charge, spew, roar, ember, warcry, slam, roots)
       "facings": { "<facing>": { "file", "frame_w", "frame_h", "anchor": [ax, ay],
                                  "body_bbox": [x0, y0, x1, y1] } } } } }   // body_bbox: idle only
 ```
 
-There are twenty-five creatures and sixteen elites, 41 entries in all. Every
-one has `idle, walk, attack, hurt, die, poof`. Signature states (the other twelve
-have none):
+There are thirty creatures and twenty-six elites, 56 entries in all. Every
+one has `idle, walk, attack, hurt, die, poof`. Signature states (the other
+thirteen have none: `rat`, `goblin`, `wolf`, `orc`, `ogre`, three of the lords
+and the five regional monsters below):
 - `slime` has `split`;
 - `frog` has `tongue`, a lash that reaches 33 px past its body facing left or right and 24 px
   facing up, but only 6 px below its feet facing down (measured);
@@ -470,23 +579,37 @@ have none):
   `yeti` has `roar`, a cone of frost. All three are effects thrown ahead of the
   body, like `web`;
 - `boar` has `charge`: the body itself lunges a long way forward, trailing dust;
+- `imp` has `ember`, a coal thrown from its fork; `beastman` has `warcry`, a
+  bellow that shakes the air in front of it; `golem` has `slam`, both fists
+  into the ground and a shock ring along it; `treant` has `roots`, thorns
+  breaking out of the ground ahead. All four are effects like `web`, impact
+  frame 3. Measured reach past the idle ink, facing right: 20, 14, 26 and
+  35 px. Facing down or up the `slam` and `roots` spread sideways across the
+  whole 64 px frame instead (9-11 px and 5-6 px past the body each side);
 - `bat` and `harpy` have `fly`;
 - `skeleton`, `wraith` and `darkhorn` have `cast`;
 - `spider` has `web`;
 - `dragon` has `fly` and `fire_breath`.
 
-**Elites.** Every 1x1 creature has an elite: `<creature>_elite`, with
+**Elites.** Every creature but the four lords has an elite: `<creature>_elite`, with
 `elite: true` and `elite_of: "<creature>"`. It is the same drawing in another
 palette, shipped as its own strips, so no runtime recolouring is needed. Its
 states, frame sizes, anchors, `impact_frame`s and tier are its base's, so it
 can stand in for its base anywhere; what makes it stronger is the engine's
-business. The `ogre`, `treant`, `dragon`, the four lords, `imp` and `beastman`
-have no elite.
+business. That includes the `ogre`, the `treant` and the `dragon`, whose
+elites are as big as they are. Only the four lords have none. An elite's
+*effects* are not recoloured: an elite imp throws the same orange coal.
 
 **Regional rank and file.** `imp` (tier 1) is a small red horned devil with
 bat wings, a coal-tipped tail and a fork, for volcanic and ashen ground;
 `beastman` (tier 2) is a bull-headed, hooved soldier with a two-handed axe,
-the foot soldier of the horned lords. Both are ordinary 1x1 creatures with the six common states.
+the foot soldier of the horned lords. Five more belong to a region each:
+`serpent` (tier 1, a coiled desert snake) and `scorpion` (tier 2) for sand and
+desert; `merrow` (tier 2), a fish-man with a trident who comes ashore, for
+coasts and swamp; `frostshard` (tier 3), a hovering ice crystal, for snow and
+ice; `ashfiend` (tier 3), an elemental of cinders, for ash and lava banks.
+All seven are ordinary 1x1 creatures. The five regional ones have the six
+common states and no signature.
 
 **The lords.** `ghorakhar` (a horned warlord in black plate, spear),
 `rangoskhar` (his horned reaver, poleaxe), `ramulos` (the lion lord,
@@ -496,7 +619,8 @@ attack, impact frame as listed) are named characters, `rank: "boss"`,
 every mechanical sense, the same states, anchors and rules as the rest, and
 like any creature they `poof` when killed; hold `die` frame 5 instead if the
 story wants the body to stay. They are not paperdoll people: nothing they
-wear can be swapped, and they have no portrait pieces.
+wear can be swapped. Each has one dialogue portrait, a single picture rather
+than layers (§4.7, `portraits.json:monsters`).
 
 **Placement.** The creature's position is its *box*, a `box` sized rectangle
 whose bottom edge is the ground line and whose bottom-centre is the feet.
@@ -528,9 +652,9 @@ whose bottom edge is the ground line and whose bottom-centre is the feet.
    its shadow stays on the ground line, so the box does not move.
 4. `die` does **not** loop: hold frame 5 (a corpse), or chain `poof`.
 5. `poof` has `follows: "die"`. Its frame 0 is die's frame 5 pixel for pixel
-   (verified on all 164 pairs, anchors applied).
+   (verified on all 224 strips, anchors applied).
    The cloud is gone by frame 4. Frame 5 holds only a few fading sparkles
-   (36–50 opaque px, measured on all 156 strips), and the dropped weapon and the
+   (36–50 opaque px, measured on all 224 strips), and the dropped weapon and the
    shadow fade out with it. So when frame 5 ends, delete the entity; nothing
    pops. Never play `poof` without
    `die`.
@@ -562,20 +686,25 @@ frame. Attack reach: the side the state's frame is padded on
 
 ### 3.1 Loot: what a monster leaves behind
 
-`loot.json:loot[item]` → `{file, frame_w, frame_h, loops, kind}`, `kind` being
-`gold`, `gem` or `weapon`. Items: `gold`, `gem_ruby`, `gem_sapphire`,
-`gem_emerald`, `drop_sword`, `drop_axe`.
+`loot.json:loot[item]` → `{file, frame_w, frame_h, loops, kind, icon}`. `kind`
+is `gold`, `gem`, `weapon`, `potion` or `key`. Items: `gold`, `gem_ruby`,
+`gem_sapphire`, `gem_emerald`, `drop_sword`, `drop_axe`, `potion_health`,
+`potion_mana`, `key`.
 
 - A 1×1 cut-out with its own ground shadow, drawn low and centred: put the
   frame's bottom-centre on the dead creature's box bottom-centre (its feet).
 - It loops (a glint travels over it) until picked up. Y-sort like anything on
   the ground.
+- `icon` names the inventory picture of the same thing in `icons.json` (§4.5),
+  or is `null`. The potions and the key have one, so what is picked up off the
+  ground and what appears in the bag are the same object; gold, gems and the
+  dropped weapons do not.
 - **When:** spawn drops when `poof` ends, at the spot where the creature's box
   was. The smoke covers the moment, so the swap never shows.
 - **What:** `drops_suggested` is a suggestion, not a rule. Roll each entry
   independently: `chance` is its probability and `pick` chooses uniformly.
-  The default is gold always, a gem 60% of the time, a weapon 8%. Scatter
-  several drops a few px apart so they don't stack.
+  Scatter several drops a few px apart so they don't stack. **An entry with
+  chance 0 is never rolled** (the key): a quest or a chest places it.
 
 ---
 
@@ -793,18 +922,23 @@ the picture in an inventory slot or shop listing, not a sprite.
   armor torso tabard cloak beard hair head legs feet body`) — which is all
   but the names in `icons_without_item`.
 - `icons_without_item` (also mirrored at `catalog.json:categories.icons.
-  without_item`) lists the icons with no backing world asset: `chest`,
-  `key`, `potion_health`, `potion_mana` (inventory concepts — `loot.json`
-  only ships gold, three gems and two dropped weapons, §3.1) and
-  `skirt_purple` (an icon exists but no `wardrobe.py` garment backs it; the
-  wardrobe only has `skirt_red`/`skirt_blue`/`skirt_green`). Treat all five
-  as pictures only — nothing to equip or drop for them yet.
+  without_item`) lists the icons that are not wardrobe items: `key`,
+  `potion_health` and `potion_mana` (not worn; each has a dropped twin of the
+  same name in `loot.json`, whose `icon` field points back here, §3.1),
+  `chest` (the picture of the chest structure) and `skirt_purple` (an icon
+  with no `wardrobe.py` garment behind it; the wardrobe only has
+  `skirt_red`/`skirt_blue`/`skirt_green`, so treat it as not wearable).
 - `tilekit.Kit.icon_image(name)` is the reference: it just opens `file`.
 
-### 4.6 UI: nine-slice parchment
+### 4.6 UI: parchment, slots, bars, cursors and handwriting
 
-`ui.json:pieces[name]` → `{file, size, corner, mid, use}`. Five stills, never
-animated, never placed in the world:
+`ui.json`. Everything here is a still drawn in the same pencil as the world:
+never animated, never placed in the world. **All text in the game is the
+handwriting font below**; do not set a system font beside it.
+
+#### Nine-slice pieces
+
+`ui.json:pieces[name]` → `{file, size, corner, mid, use}`.
 
 | piece | size | corner | mid | use |
 | --- | --- | --- | --- | --- |
@@ -813,6 +947,8 @@ animated, never placed in the world:
 | `button_hover` | 48 | 12 | 24 | the same button under the pointer or with focus |
 | `button_pressed` | 48 | 12 | 24 | held down: no drop shadow; nudge the label 1 px down-right |
 | `frame` | 64 | 16 | 32 | the portrait frame (§4.7) |
+| `slot` | 72 | 12 | 48 | an inventory or hotbar slot, empty |
+| `slot_selected` | 72 | 12 | 48 | the same slot, selected |
 
 Each piece is a square of `corner + mid + corner` px. Cut it into nine with
 two lines `corner` px in from each side (`ui.json:nine_slice`):
@@ -820,13 +956,80 @@ two lines `corner` px in from each side (`ui.json:nine_slice`):
 - corners: drawn once, unscaled;
 - edges: **tiled** along their length, the last repeat cut short. Never
   stretch an edge: a stretched pencil line goes soft. The edge slices are
-  drawn to repeat (the step across a repeat measures 0.20–0.28 of the step
-  between neighbouring pixels inside the slice);
+  drawn to repeat (the step across a repeat is smaller than the step between
+  neighbouring pixels inside the slice);
 - centre: flat paper, stretch or tile it.
 
 The smallest box is `2*corner` square. Keep content `corner/2` px inside.
 Godot: `NinePatchRect` or `StyleBoxTexture`, all four margins = `corner`, both
 axis stretch modes = Tile. `tilekit.Kit.ui_box(name, w, h)` is the reference.
+
+#### Slots
+
+`ui.json:slots` → `{rule, empty, selected, icon_offset}`. A slot at its drawn
+size, 72×72, holds one 64×64 icon (§4.5) at `icon_offset` `[4, 4]`. Selecting
+a slot swaps `slot` for `slot_selected`; the icon never moves. Lay a hotbar
+out as slots side by side. `tilekit.slot(icon, selected)` is the reference.
+
+#### Bars
+
+`ui.json:bars` → `{rule, tracks, fills}`. `tracks.bar` →
+`{file, w, h, cap, mid, inset:[left, top, right, bottom], use}`;
+`fills.health | stamina | mana` → `{file, w, h, use}`.
+
+1. The track is three slices along x: `cap` px, a `mid` that **tiles**, `cap`
+   px. It is `h` px tall and never scaled in y. A bar W px wide is the left
+   cap, `mid` repeated over `W - 2*cap` px (the last repeat cut short), the
+   right cap.
+2. The fill goes inside the track's `inset`: at 100% it is
+   `inner_w = W - left - right` px wide and starts at `(left, top)`.
+3. Tile the fill from the left and cut it at `round(inner_w * fraction)`. The
+   fill is opaque and tiles on x; its right end is a plain cut.
+4. A number or label on a bar is `hand_22` in `chalk` over a fill, in `ink`
+   over the empty track.
+
+`tilekit.bar(fill, fraction, w)` is the reference.
+
+#### Cursors
+
+`ui.json:cursors.cursors[name]` → `{file, w, h, hotspot:[x, y], use}`. 32×32
+stills; `hotspot` is the pixel that points. Godot:
+`Input.set_custom_mouse_cursor(texture, shape, hotspot)`.
+
+#### Handwriting
+
+`ui.json:fonts` → `{rule, chars, colors, fonts}`; `fonts[name]` →
+`{files:{ink, chalk}, fnt, use, cell_w, cell_h, pad, line_height, baseline,
+cap_height, x_height, glyphs:{ch:{x, y, advance}}}`.
+
+| font | cell | line_height | use |
+| --- | --- | --- | --- |
+| `hand_22` | 22 × 27 | 25 | body text: dialogue, labels, numbers |
+| `hand_34` | 31 × 39 | 37 | names and headings |
+
+It is a schoolchild's pencil hand: every letter is a few strokes with its own
+lean and size, so a line never sits quite straight. ASCII 32–126 (`chars`),
+16 columns, in two pencils with identical strokes and alpha: **`ink`** for
+paper and **`chalk`** for anything dark.
+
+- **Drawing a line.** Start `pen_x` at the left and `line_top` at the top. For
+  each character blit its whole cell (`cell_w × cell_h` at `glyphs[ch].x, .y`)
+  to `(pen_x - pad, line_top)`, then `pen_x += glyphs[ch].advance`. Cells
+  overlap by `2*pad`, so alpha-blend; never copy.
+- A new line is `line_top += line_height`. `baseline` is the row of the
+  writing line inside a cell; `cap_height` and `x_height` are measured up
+  from it.
+- A line's width is the sum of its advances. Wrap on spaces.
+- **Never scale the atlas by a fraction.** Use the other size, or an integer
+  multiple.
+- A character outside `chars` is drawn as `?`.
+- `fnt` is the same data as an AngelCode BMFont text file whose page is the
+  ink atlas. Godot 4 imports it as a `FontFile`; for chalk, modulate the label
+  or swap the page texture.
+
+`tilekit.measure(text, font)`, `wrap(text, width, font)` and
+`text(text, font, color)` are the reference; `--demo` writes
+`demo_dialogue.png` and `demo_hud.png` with every piece above in use.
 
 ### 4.7 Dialogue portraits
 
@@ -851,6 +1054,17 @@ whatever the character is wearing:
 
 - **Headgear only:** keep the slots `body`, `hair`, `beard`, `head` and the
   shoulders are bare. `slot` is on every piece for this.
+- **The face is drawn for the portrait.** At 64 px a sprite's face is two
+  eyes and a brow. The portrait's `body_<tone>` piece carries whites, iris,
+  pupil, lids, a nose, lips, and each body's own marks (freckles, stubble,
+  wrinkles, a scar), in every skin tone. Nothing else differs from the
+  sprite, and the sprite itself is unchanged. It is all on the skin piece:
+  there is nothing extra to layer.
+- **Monsters that speak** (`portraits.json:monsters[name]` →
+  `{file, source_crop}`) have **one** still, not a stack: the four lords,
+  `ghorakhar`, `rangoskhar`, `ramulos`, `darkhorn`, each its down-facing idle
+  frame 0 enlarged the same way. Frame it exactly like a person's.
+  `tilekit.monster_portrait(name, framed=True)` is the reference.
 - A portrait is a still. `source_crop` is the rectangle of the body's 64×64
   down-facing frame it enlarges; an engine that wants a breathing portrait can
   crop and scale the live sprite there instead (magnified, not re-inked).
