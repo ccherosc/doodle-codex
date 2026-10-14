@@ -205,7 +205,7 @@ scene people walk through, or from `mountain` on a map.
 | swamp | bog_cattails (2), bog_snag (1), bog_lilies (1), bog_toadstools (1) | 6 |
 | ice | floe_drifts (2), floe_hole (1), floe_rocks (1), floe_ridge (1) | 6 |
 | peaks | summit_spire (1), summit_glacier (1), summit_cairn (1), summit_pines (1) | 6 |
-| sand | beach_shells (1), beach_driftwood (1), beach_tidepool (1), beach_grass (2) | 6 |
+| sand | beach_shells (1), beach_ripples (1), beach_tidepool (1), beach_grass (2) | 6 |
 | desert | dunes_cactus (2), dunes_bones (1), dunes_rocks (1), dunes_oasis (1), dunes_ruin (1) | 6 |
 | farmland | furrows_wheat (2), furrows_pumpkins (1), furrows_scarecrow (1), furrows_cabbages (1) | 6 |
 | cave | cavern_crystals (1), cavern_stalagmites (2), cavern_pool (1), cavern_mushrooms (1) | 6 |
@@ -512,8 +512,16 @@ Seventy-eight structures:
   and a hanging sign; both have `open` (the door).
 - **Furniture** blocks its footprint and also carries `solid_px_suggested`
   and `sort_y_px`, so a free-moving person can step close to a table and be
-  sorted against it properly. `hearth` loops a fire; the rest only boil.
-  `lighthouse` loops its lamp. Furniture is drawn for `flagstones` or
+  sorted against it properly. `hearth` loops a fire; the rest hold still.
+  `lighthouse` loops its lamp.
+- **`pencil` says what moves** (v27), on every structure and decor piece:
+  `"boils"` (the line shivers, as on the terrain: the four trees and their
+  leaves), `"parts"` (the line holds still and only what the recipe moves
+  moves: a flag, a sail, a fire, a lamp, smoke, water), or `"still"` (all
+  frames are one picture; an engine may show frame 0 alone). Living and
+  moving things boil, stone and timber do not. A play-once state of a
+  `parts` or `still` structure holds still on its last frames, and a light
+  gone `dark` may have nothing left that moves. Furniture is drawn for `flagstones` or
   `floorboards` but is an ordinary cut-out and stands anywhere.
 
 - A structure is a cut-out (transparent background) that stands **on** terrain.
@@ -828,7 +836,11 @@ decor/decor.json
 
 - **Every piece is a 64×64, 6-frame strip on the global clock**, like terrain.
   Paste it with `anchor` on the ground point you chose. Mirroring
-  horizontally is allowed and doubles the variety.
+  horizontally is allowed and doubles the variety. `pencil` (v27) says
+  whether it moves: `"boils"` for the living and wet pieces (flowers, ferns,
+  leaves, straw, puddles), `"still"` for stone, wood and bone (frame 0 is the
+  whole of it), `"parts"` for the crystals, whose line holds and whose
+  glimmer moves.
 - **Draw it after the terrain and the wall kit and before anything y-sorted**
   (§5 step 1). It never sorts, never blocks and has no collider. A piece that
   is not `flat` (a log, a stone, a stalagmite) casts a small shadow of its own

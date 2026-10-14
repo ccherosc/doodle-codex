@@ -142,7 +142,7 @@ Seamless 64x64 tiles, 6 frames. Listed low to high in elevation (draw order).
 | ice | walk x1.0, slippery | floe_hole (a fishing hole with a rod); floe_drifts (wind-carved snowdrifts); floe_rocks (snow-capped rocks frozen in); floe_ridge (a pressure ridge of heaved slabs) |
 | cave | walk x1.0 | cavern_crystals (glowing crystal outcrops); cavern_stalagmites (tall stalagmites); cavern_pool (a still black pool with a drip); cavern_mushrooms (glowing fungus) |
 | ash | walk x0.9 | cinders_stumps (three charred trunks); cinders_fissure (a glowing fissure); cinders_stones (black standing stones with a red rune); cinders_vent (a smoking fumarole) |
-| sand | walk x0.85 | beach_shells (shells, a conch and a starfish); beach_driftwood (a bleached driftwood log); beach_tidepool (a tide pool with a starfish); beach_grass (tussocks of marram grass) |
+| sand | walk x0.85 | beach_shells (shells, a conch and a starfish); beach_ripples (wind ripples and a few pebbles); beach_tidepool (a tide pool with a starfish); beach_grass (tussocks of marram grass) |
 | desert | walk x0.8 | dunes_cactus (saguaros and a barrel cactus); dunes_bones (a ribcage and a horned skull); dunes_rocks (red sandstone outcrops); dunes_oasis (an oasis pool with two palms); dunes_ruin (a half-buried colonnade) |
 | swamp | walk x0.6 | bog_cattails (tall stands of cattails); bog_snag (a drowned dead tree); bog_lilies (open water with lilies); bog_toadstools (a toadstool ring and fireflies) |
 | flagstones | walk x1.0 | flags_cracked (a slab broken across, a corner gone); flags_moss (moss in the joints); flags_grate (an iron drain grate); flags_worn (a sunk slab holding a puddle) |
