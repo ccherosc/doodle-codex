@@ -83,8 +83,10 @@ Each of these is a static PNG with every asset labelled:
 - [UI: nine-slice pieces sliced to a box, bars, cursors, status icons, scroll bar, minimap pins (2x)](https://ccherosc.github.io/doodle-codex/sheets/ui.png) (1860x2610)
 - [Handwriting: two faces (hand, cute), two sizes, ink and chalk (1x)](https://ccherosc.github.io/doodle-codex/sheets/font.png) (1134x1186)
 - [Loot (9), effects (4), icons (124) (2x)](https://ccherosc.github.io/doodle-codex/sheets/items.png) (1666x2066)
+- [Ground decor (35) (2x)](https://ccherosc.github.io/doodle-codex/sheets/decor.png) (1666x554)
 - [Scene: a local scene: walled yard, trees a person walks behind, chest, people](https://ccherosc.github.io/doodle-codex/sheets/demo_scene.png) (576x384)
 - [Scene: a map assembled by the reference loader: terrain, transitions, structures, monsters](https://ccherosc.github.io/doodle-codex/sheets/demo_map.png) (896x640)
+- [Scene: the same field without and with the decor layer: stones, flowers, logs and footprints off the grid](https://ccherosc.github.io/doodle-codex/sheets/demo_decor.png) (1296x448)
 - [Scene: a dialogue box: nine-slice panel, composed portraits, handwritten text](https://ccherosc.github.io/doodle-codex/sheets/demo_dialogue.png) (890x262)
 - [Scene: a HUD: bars, status icons, a minimap, a scrolling list, inventory slots, cursors, all from the package](https://ccherosc.github.io/doodle-codex/sheets/demo_hud.png) (640x236)
 - [Scene: a grass plateau with a knoll and its flights: heights per cell, cliff atlases, alternates on](https://ccherosc.github.io/doodle-codex/sheets/demo_cliff.png) (640x448)
@@ -114,6 +116,7 @@ The engine contract (file layout, JSON fields, autotile rule, paperdoll composit
 - wardrobe items: 119
 - NPC looks: 39
 - icons: 124
+- decor pieces: 35
 - wall pieces: 259
 
 ## Known gaps (what the library does not have yet)
@@ -403,3 +406,19 @@ Icons by slot:
 - **cloak**: cape_purple, cape_red, cape_tattered, cape_white, cloak_blue, cloak_brown, cloak_green, cloak_red
 - **other**: chest, key, potion_health, potion_mana, skirt_purple
 - **armor**: cuirass_dark, cuirass_dragon, cuirass_light, cuirass_plate, hauberk_chain, jerkin_leather, jerkin_ranger, mantle_mage
+
+## Ground decor (35 pieces)
+
+
+## Ground decor (35)
+
+Scattered per terrain (weights in `decor/decor.json`), or placed by hand:
+
+- **cave**: drip, pebbles, rubble, rubble_b, crystals, stalagmite, bones, glowcaps
+- **dirt**: puddle, puddle_b, puddle_pair, stones_b, pebbles, tuft, straw, footprints
+- **flagstones**: pebbles, bones, straw
+- **floorboards**: straw
+- **forest**: log, log_bare, branch, stones, toadstools, fern, tuft, leaves, leaves_green
+- **grass**: log, branch, stones, stones_b, pebbles, flowers, flowers_b, flowers_white, toadstools, tuft, tuft_b, leaves_green
+- **placed by hand**: woodchips, timbers, rockfall, spoil, pick, horde_mark
+- **water**: lilypads, reeds

@@ -97,6 +97,8 @@ game/
   loot/loot.json                                  drops + a suggested drop table
   loot/<item>.png                                 gold, gem_ruby|sapphire|emerald, drop_sword|axe,
                                                   potion_health|mana, key
+  decor/decor.json                                35 small ground pieces + scatter weights (§2.6)
+  decor/<piece>.png                               puddle, log, stones, flowers, rubble, spoil...
   fx/fx.json                                      projectiles and the hit spark
   fx/<effect>_<facing>.png                        arrow|bolt|firebolt per facing; spark_any
   icons/icons.json                                124 inventory icons: wardrobe slot per icon
@@ -113,6 +115,8 @@ game/
   portraits/portraits.json                        dialogue portraits: layered like the paperdoll
   portraits/<body>/<piece>.png                    one still 160x160 per piece, facing down
   portraits/monsters/<name>.png                   one still 160x160 for a monster that speaks (the lords)
+  illustrations/illustrations.json                story pictures: file, title, size per picture
+  illustrations/<set>/<name>.png                  one opaque still 736x320 per picture, border drawn in
   reference/tilekit.py                            reference implementation
 ```
 
@@ -802,6 +806,50 @@ with proper ends, corners, tees and crossings.
   `bonded=True` in `demo_walls_bonded.png`).
 
 ---
+
+### 2.6 Decor: the second layer
+
+A terrain variant (§2.1) bakes one feature into a whole tile at a fixed spot,
+so a field of them repeats on the grid. Decor is the other half: 35 small
+cut-outs (puddles, logs, a branch, stones, pebbles, flowers, tufts, ferns,
+toadstools, leaves, straw, footprints, lily pads, reeds, rubble, crystals,
+glowcaps, a stalagmite, bones, and the Horde's `spoil`, `timbers`, `pick`,
+`horde_mark`, `woodchips` and `rockfall`) placed **off the grid**, anywhere in a cell, so
+the ground stops reading as tiles.
+
+```
+decor/decor.json
+  anchor            [32, 38]: the frame px that sits on the ground point
+  placement, scatter_rule   the rules below, in words
+  scatter_suggested {terrain: {piece: weight}}
+  decor.<piece>     file, frame_w, frame_h (64x64), loops (true),
+                    flat, placed_only, on_suggested [terrains]
+```
+
+- **Every piece is a 64×64, 6-frame strip on the global clock**, like terrain.
+  Paste it with `anchor` on the ground point you chose. Mirroring
+  horizontally is allowed and doubles the variety.
+- **Draw it after the terrain and the wall kit and before anything y-sorted**
+  (§5 step 1). It never sorts, never blocks and has no collider. A piece that
+  is not `flat` (a log, a stone, a stalagmite) casts a small shadow of its own
+  and stands a few px proud, and still does not sort: it is low enough that a
+  person always stands in front of it.
+- **Scatter by cell, seeded on the cell.** For each cell of a terrain in
+  `scatter_suggested`, with probability 0.15–0.35, pick a piece by weight and
+  drop it at a hashed point inside the cell. Keep the point 14 px inside a cell
+  whose four neighbours share its terrain and 22 px inside one on a border, or
+  the border's fringe cuts it in half. Seed on the cell, never the frame or the
+  session, so the ground is the same every visit.
+  `tilekit.Kit.decor_at(t, x, y)` is the reference.
+- **Keep it off what must read clean**: doors, exits, spawns, the blocked
+  cells of structures and the cell in front of each, and wherever a person
+  stands or walks.
+- **`placed_only` pieces are never scattered** (`spoil`, `timbers`, `pick`,
+  `horde_mark`, `woodchips`, `rockfall`): they say something about one spot, so a level
+  designer puts them there.
+- **Forest and rock are pictures seen from above** and take no scatter in the
+  reference game; a grass cell that touches forest borrows the forest's weights
+  at half, which puts the deadfall at the wood's edge.
 
 ## 3. Monsters
 
@@ -1571,12 +1619,25 @@ whatever the character is wearing:
 - `tilekit.Kit.portrait_layers(body, items, tone, hair, slots)` and
   `portrait(..., framed=True)` are the reference.
 
+### 4.8 Illustrations: story pictures
+
+`illustrations/illustrations.json:pictures[name]` → `{file, title, size}`.
+Each picture is **one opaque still** (`size` is `[736, 320]`), its hand-ruled
+border drawn in. It is never animated or tiled, and it is not layered: show it
+whole, at its size or scaled by a whole number. A picture is composed from the
+library's own sprites, terrain and props redrawn larger with a finer pencil,
+so whoever appears in one is the same person, creature or place as on the map.
+The set at present is `p1`…`p6` (`prologue/`, the six pages of the Book I
+prologue) and `road_to_lockhorn` (`map/`, the travel map that closes Chapter
+I). They are made by `tools/paint_stills.py illustrations`.
+
 ---
 
 ## 5. Draw order for a frame
 
 1. Terrain display grid: base + overlays per §2.2. It is opaque, so no clear is
-   needed. Then wall-kit pieces (§2.5), on the logical grid.
+   needed. Then wall-kit pieces (§2.5), on the logical grid. Then decor
+   (§2.6) and structures with `layer: "floor"`, unsorted.
 2. Everything standing on the ground (structures, monsters, people), y-sorted
    by ground line (box bottom; a structure with `sort_y_px` uses that row
    instead, §2.4). Ties: x.

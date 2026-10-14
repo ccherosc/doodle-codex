@@ -4394,6 +4394,104 @@
    "mantle_mage"
   ]
  },
+ "decor": {
+  "pieces": [
+   "puddle",
+   "puddle_b",
+   "puddle_pair",
+   "drip",
+   "lilypads",
+   "reeds",
+   "log",
+   "log_bare",
+   "branch",
+   "woodchips",
+   "timbers",
+   "stones",
+   "stones_b",
+   "pebbles",
+   "rubble",
+   "rubble_b",
+   "rockfall",
+   "spoil",
+   "crystals",
+   "stalagmite",
+   "bones",
+   "pick",
+   "horde_mark",
+   "flowers",
+   "flowers_b",
+   "flowers_white",
+   "toadstools",
+   "glowcaps",
+   "fern",
+   "tuft",
+   "tuft_b",
+   "leaves",
+   "leaves_green",
+   "straw",
+   "footprints"
+  ],
+  "scatter_suggested": {
+   "grass": {
+    "flowers": 3,
+    "flowers_b": 3,
+    "flowers_white": 3,
+    "tuft": 4,
+    "tuft_b": 4,
+    "stones": 2,
+    "stones_b": 1,
+    "pebbles": 1,
+    "toadstools": 1,
+    "leaves_green": 1,
+    "branch": 1,
+    "log": 1
+   },
+   "forest": {
+    "fern": 4,
+    "toadstools": 2,
+    "leaves": 3,
+    "leaves_green": 2,
+    "log": 2,
+    "log_bare": 1,
+    "branch": 3,
+    "stones": 1,
+    "tuft": 2
+   },
+   "dirt": {
+    "pebbles": 3,
+    "footprints": 2,
+    "puddle": 1,
+    "puddle_b": 1,
+    "puddle_pair": 1,
+    "stones_b": 1,
+    "straw": 1,
+    "tuft": 1
+   },
+   "water": {
+    "lilypads": 2,
+    "reeds": 1
+   },
+   "cave": {
+    "rubble": 2,
+    "rubble_b": 2,
+    "pebbles": 3,
+    "stalagmite": 1,
+    "drip": 1,
+    "glowcaps": 1,
+    "crystals": 1,
+    "bones": 1
+   },
+   "flagstones": {
+    "straw": 1,
+    "pebbles": 1,
+    "bones": 1
+   },
+   "floorboards": {
+    "straw": 1
+   }
+  }
+ },
  "counts": {
   "terrain tiles": 108,
   "structures": 78,
@@ -4403,6 +4501,7 @@
   "wardrobe items": 119,
   "NPC looks": 39,
   "icons": 124,
+  "decor pieces": 35,
   "wall pieces": 259
  },
  "known_gaps": [
@@ -5045,6 +5144,14 @@
    ]
   },
   {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/decor.png",
+   "title": "Ground decor (35) (2x)",
+   "size": [
+    1666,
+    554
+   ]
+  },
+  {
    "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_scene.png",
    "title": "Scene: a local scene: walled yard, trees a person walks behind, chest, people",
    "size": [
@@ -5058,6 +5165,14 @@
    "size": [
     896,
     640
+   ]
+  },
+  {
+   "url": "https://ccherosc.github.io/doodle-codex/sheets/demo_decor.png",
+   "title": "Scene: the same field without and with the decor layer: stones, flowers, logs and footprints off the grid",
+   "size": [
+    1296,
+    448
    ]
   },
   {

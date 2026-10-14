@@ -762,12 +762,40 @@ for s, v in slots.items():
     MD.append("- **%s**: %s" % (s, ", ".join(v)))
 CAT["loot"], CAT["fx"], CAT["icons"] = list(L), list(X), slots
 
+# --- decor -----------------------------------------------------------------------
+print("decor")
+DC = kit.decor["decor"]
+section("decor", "Ground decor", "%d pieces" % len(DC),
+        "A second layer over the terrain: small things lying on the ground, scattered by the "
+        "engine anywhere in a cell (not at its centre, so the ground stops reading as tiles) or "
+        "placed by hand. Drawn over the terrain and under everything y-sorted; never blocking. "
+        "<i>placed</i> pieces are never scattered: they tell a story about one spot.")
+ent = []
+H.append('<div class="grid">')
+by_ground = {}
+for name, r in DC.items():
+    src = put(r["file"], "decor/%s.png" % name)
+    on = r.get("on_suggested") or []
+    sub = "placed by hand" if r.get("placed_only") else ("on " + ", ".join(on) if on else "")
+    H.append(card(canvas(src, r["frame_w"], r["frame_h"]), name, sub, "flat" if r.get("flat") else ""))
+    ent.append(("decor: " + name, frame0(r["file"])))
+    for t in (on or ["placed by hand"]):
+        by_ground.setdefault(t, []).append(name)
+H.append("</div>")
+p = sheet("decor", "Ground decor (%d) (2x)" % len(DC), ent, 12)
+H.append(sheet_link(p, "every decor piece") + "</section>")
+MD.append("\n## Ground decor (%d)\n\nScattered per terrain (weights in `decor/decor.json`), or placed by hand:\n" % len(DC))
+for t, v in sorted(by_ground.items()):
+    MD.append("- **%s**: %s" % (t, ", ".join(v)))
+CAT["decor"] = {"pieces": list(DC), "scatter_suggested": kit.decor["scatter_suggested"]}
+
 # --- scenes ----------------------------------------------------------------------
 print("scenes")
 SC = []
 if DEMO:
     for fn, cap in (("demo_scene.png", "a local scene: walled yard, trees a person walks behind, chest, people"),
                     ("demo_map.png", "a map assembled by the reference loader: terrain, transitions, structures, monsters"),
+                    ("demo_decor.png", "the same field without and with the decor layer: stones, flowers, logs and footprints off the grid"),
                     ("demo_dialogue.png", "a dialogue box: nine-slice panel, composed portraits, handwritten text"),
                     ("demo_hud.png", "a HUD: bars, status icons, a minimap, a scrolling list, inventory slots, cursors, all from the package"),
                     ("demo_cliff.png", "a grass plateau with a knoll and its flights: heights per cell, cliff atlases, alternates on"),
@@ -804,7 +832,7 @@ GAPS = [
 # --- write -----------------------------------------------------------------------
 counts = [("terrain tiles", len(order) + nvar), ("structures", len(S)), ("creatures", len(base)),
           ("elites", len(elite)), ("bodies", len(bodies)), ("wardrobe items", sum(map(len, by_slot.values()))),
-          ("NPC looks", len(looks)), ("icons", len(IC)), ("wall pieces", sum(len(k["pieces"]) + len(k.get("doors", {})) for k in KINDS.values()))]
+          ("NPC looks", len(looks)), ("icons", len(IC)), ("decor pieces", len(DC)), ("wall pieces", sum(len(k["pieces"]) + len(k.get("doors", {})) for k in KINDS.values()))]
 CAT["counts"] = dict(counts)
 CAT["known_gaps"] = [{"title": a, "detail": b} for a, b in GAPS]
 CAT["sheets"] = [{"url": URL + p, "title": t, "size": list(sz)} for p, t, sz in SHEETS]
@@ -852,7 +880,7 @@ with open(os.path.join(HERE, "llms.txt"), "w", encoding="utf-8", newline="\n") a
 open(os.path.join(HERE, ".nojekyll"), "w").close()
 
 NAV = [("terrain", "Terrain"), ("transitions", "Transitions"), ("walls", "Walls"), ("structures", "Structures"),
-       ("monsters", "Monsters"), ("people", "People"), ("ui", "UI"), ("items", "Items"), ("scenes", "Scenes"),
+       ("monsters", "Monsters"), ("people", "People"), ("ui", "UI"), ("items", "Items"), ("decor", "Decor"), ("scenes", "Scenes"),
        ("gaps", "Gaps")]
 page = open(os.path.join(HERE, "template.html"), encoding="utf-8").read()
 ai = ('<section id="ai" class="ai"><div class="sec-head"><h2>Reading this without JavaScript</h2></div>'
